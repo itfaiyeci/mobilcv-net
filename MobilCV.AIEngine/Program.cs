@@ -34,7 +34,7 @@ namespace MobilCV.AIEngine
                 .Replace("ı", "i")
                 .Replace("ö", "o")
                 .Replace("ç", "c")
-                .Replace("İ", "i")   // <-- Türkçe büyük İ sorununu çözer
+                .Replace("İ", "i")
                 .Replace(" ", "-")
                 .Trim('-');
 
@@ -56,13 +56,11 @@ namespace MobilCV.AIEngine
                 var response = await client.CompleteChatAsync(messages);
                 string htmlContent = response.Value.Content[0].Text;
 
-                // Makale başlığını ve meta açıklamayı ayıkla
                 string title = topic;
                 string metaDescription = topic + " - Kariyer rehberi ve iş dünyası ipuçları.";
 
-                // HTML dosyasını oluştur
                 string fileName = $"{slug}.html";
-                string fullHtml = BuildHtmlPage(title, metaDescription, htmlContent);
+                string fullHtml = BuildHtmlPage(title, metaDescription, htmlContent, slug);
                 
                 string filePath = Path.Combine("..", fileName);
                 File.WriteAllText(filePath, fullHtml);
@@ -76,8 +74,8 @@ namespace MobilCV.AIEngine
             }
         }
 
-        // ===== YENİ MAKALE ŞABLONU (HEADER + FOOTER + CTA BUTONU DAHİL) =====
-        static string BuildHtmlPage(string title, string metaDescription, string htmlBody)
+        // ===== MAKALE ŞABLONU (HEADER + FOOTER + CTA + SOSYAL + NEWSLETTER) =====
+        static string BuildHtmlPage(string title, string metaDescription, string htmlBody, string slug)
         {
             return $@"<!DOCTYPE html>
 <html lang=""tr"">
@@ -165,6 +163,40 @@ namespace MobilCV.AIEngine
         }}
         .page-content li {{ margin-bottom: 8px; }}
 
+        /* ===== SOSYAL PAYLAŞIM ===== */
+        .share-box {{
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }}
+        .share-box p {{
+            font-size: 0.95em;
+            color: #64748b;
+            margin-bottom: 12px;
+        }}
+        .share-buttons {{
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }}
+        .share-btn {{
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: #fff !important;
+            transition: opacity 0.2s;
+        }}
+        .share-btn:hover {{ opacity: 0.8; }}
+        .share-linkedin {{ background: #0a66c2; }}
+        .share-twitter {{ background: #000; }}
+        .share-whatsapp {{ background: #25D366; }}
+
         /* ===== CTA BUTONU ===== */
         .cta-box {{
             text-align: center;
@@ -191,8 +223,52 @@ namespace MobilCV.AIEngine
             font-size: 1.1em;
             transition: background 0.3s ease;
         }}
-        .cta-button:hover {{
-            background: #1d4ed8;
+        .cta-button:hover {{ background: #1d4ed8; }}
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter-box {{
+            text-align: center;
+            margin-top: 30px;
+            padding: 30px;
+            background: #0f172a;
+            border-radius: 16px;
+            color: #fff;
+        }}
+        .newsletter-box p {{
+            color: #94a3b8;
+        }}
+        .newsletter-form {{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            max-width: 440px;
+            margin: 0 auto;
+        }}
+        .newsletter-form input {{
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 18px;
+            border-radius: 40px;
+            border: none;
+            font-size: 0.95em;
+        }}
+        .newsletter-form button {{
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }}
+        .newsletter-form button:hover {{ background: #1d4ed8; }}
+        .newsletter-note {{
+            font-size: 0.75em;
+            color: #64748b;
+            margin-top: 12px;
         }}
 
         /* ===== FOOTER ===== */
@@ -221,6 +297,7 @@ namespace MobilCV.AIEngine
             .page-content h1 {{ font-size: 1.8em; }}
             .cta-box {{ padding: 20px; }}
             .cta-button {{ padding: 12px 24px; font-size: 1em; }}
+            .newsletter-box {{ padding: 20px; }}
         }}
     </style>
 </head>
@@ -248,10 +325,34 @@ namespace MobilCV.AIEngine
             {htmlBody}
         </article>
 
+        <!-- ===== SOSYAL PAYLAŞIM BUTONLARI ===== -->
+        <div class=""share-box"">
+            <p>📤 Bu makaleyi paylaş:</p>
+            <div class=""share-buttons"">
+                <a href=""https://www.linkedin.com/sharing/share-offsite/?url=https://mobilcv.net/{slug}.html"" 
+                   target=""_blank"" class=""share-btn share-linkedin"">LinkedIn</a>
+                <a href=""https://twitter.com/intent/tweet?url=https://mobilcv.net/{slug}.html&text={title}"" 
+                   target=""_blank"" class=""share-btn share-twitter"">X (Twitter)</a>
+                <a href=""https://api.whatsapp.com/send?text={title} - https://mobilcv.net/{slug}.html"" 
+                   target=""_blank"" class=""share-btn share-whatsapp"">WhatsApp</a>
+            </div>
+        </div>
+
         <!-- ===== CTA BUTONU ===== -->
         <div class=""cta-box"">
             <p>✨ CV'ni hemen oluştur!</p>
             <a href=""https://mobilcv.com"" class=""cta-button"">🚀 MobilCV ile CV Oluştur</a>
+        </div>
+
+        <!-- ===== NEWSLETTER FORMU ===== -->
+        <div class=""newsletter-box"">
+            <p style=""font-size: 1.2em; font-weight: 700; color: #fff;"">📩 Haftalık Kariyer İpuçları</p>
+            <p>En yeni makaleler ve kariyer tavsiyeleri e-posta kutunda.</p>
+            <form action=""#"" method=""post"" class=""newsletter-form"">
+                <input type=""email"" placeholder=""E-posta adresiniz"" required>
+                <button type=""submit"">Abone Ol</button>
+            </form>
+            <p class=""newsletter-note"">Spam yok, istediğin zaman ayrılabilirsin.</p>
         </div>
     </div>
 
