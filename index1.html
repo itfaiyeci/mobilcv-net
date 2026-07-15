@@ -1,1 +1,183 @@
-index.html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobilCV Blog</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.7;
+            padding: 20px;
+        }
+        .container { max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); overflow: hidden; }
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+        .logo { font-size: 1.6em; font-weight: 900; color: #0f172a; text-decoration: none; }
+        .logo span { color: #2563eb; }
+        .nav-links { display: flex; list-style: none; gap: 6px; flex-wrap: wrap; }
+        .nav-links a {
+            padding: 10px 20px;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            border-radius: 40px;
+            transition: all 0.3s;
+        }
+        .nav-links a:hover { color: #2563eb; background: #dbeafe; }
+        .nav-links a.active { color: #fff; background: #2563eb; }
+        .nav-links .nav-cta { background: #2563eb; color: #fff !important; padding: 10px 24px; border-radius: 40px; }
+        .hero {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            padding: 60px 50px;
+            color: #fff;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.8em; font-weight: 900; margin-bottom: 12px; }
+        .hero p { font-size: 1.2em; opacity: 0.85; max-width: 600px; margin: 0 auto; }
+        .blog-posts { padding: 40px; }
+        .blog-posts h2 { font-size: 1.8em; font-weight: 700; margin-bottom: 24px; }
+        .post-list { list-style: none; }
+        .post-list li {
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+        .post-list li:hover { border-color: #2563eb; box-shadow: 0 8px 30px rgba(37,99,235,0.08); }
+        .post-list a { display: block; padding: 20px 24px; text-decoration: none; color: #0f172a; }
+        .post-list .post-title { font-size: 1.2em; font-weight: 700; }
+        .post-list .post-meta { font-size: 0.85em; color: #94a3b8; margin-top: 4px; }
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+        .footer {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 30px;
+            text-align: center;
+            color: #94a3b8;
+        }
+        .footer a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        @media (max-width: 640px) {
+            .site-header { flex-direction: column; gap: 12px; padding: 16px; }
+            .nav-links { justify-content: center; }
+            .hero { padding: 30px 20px; }
+            .hero h1 { font-size: 1.8em; }
+            .blog-posts { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="site-header">
+        <a href="https://mobilcv.net" class="logo">Mobil<span>CV</span></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="https://mobilcv.com">Ana Site</a></li>
+                <li><a href="https://mobilcv.net" class="active">Blog</a></li>
+                <li><a href="cv-rehberi.html">CV Rehberi</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="https://mobilcv.net" class="nav-cta">🚀 Keşfet</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>Kariyerini Şekillendir</h1>
+        <p>Uzman ipuçları, güncel trendler ve ilham veren başarı hikayeleri ile kariyer yolculuğunda yanındayız.</p>
+    </section>
+    <section class="blog-posts">
+        <h2>📝 Blog Yazıları</h2>
+        <ul class="post-list" id="postList">
+            <!-- BLOG_POSTS -->
+            <li>
+    <a href="2026nin-en-populer-10-meslegi.html">
+        <div class="post-title">2026'nın En Popüler 10 Mesleği</div>
+        <div class="post-meta"><span class="badge">Yeni</span> 📅 15 Temmuz 2026</div>
+    </a>
+</li>
+<li>
+    <a href="cvde-dikkat-edilmesi-gereken-5-kritik-nokta.html">
+        <div class="post-title">CV'de Dikkat Edilmesi Gereken 5 Kritik Nokta</div>
+        <div class="post-meta"><span class="badge">Yeni</span> 📅 15 Temmuz 2026</div>
+    </a>
+</li>
+<li>
+    <a href="yapay-zeka-is-dunyasini-nasil-donusturuyor.html">
+        <div class="post-title">Yapay Zeka İş Dünyasını Nasıl Dönüştürüyor?</div>
+        <div class="post-meta"><span class="badge">Yeni</span> 📅 15 Temmuz 2026</div>
+    </a>
+</li>
+        </ul>
+    </section>
+
+    <!-- ===== CTA BUTONU (ANA SAYFA) ===== -->
+    <div style="text-align: center; margin: 0 40px 30px 40px; padding: 30px; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 16px; border: 1px solid #e2e8f0;">
+        <p style="font-size: 1.2em; font-weight: 700; color: #0f172a; margin-bottom: 12px;">✨ CV'ni hemen oluştur!</p>
+        <a href="https://mobilcv.com" 
+           style="display: inline-block; background: #2563eb; color: #fff; padding: 14px 36px; border-radius: 40px; text-decoration: none; font-weight: 700; font-size: 1.1em;">
+           🚀 MobilCV ile CV Oluştur
+        </a>
+    </div>
+
+    <!-- ===== SOSYAL PAYLAŞIM BUTONLARI (ANA SAYFA) ===== -->
+    <div style="text-align: center; margin: 0 40px 30px 40px; padding: 20px; background: #f8fafc; border-radius: 12px;">
+        <p style="font-size: 0.95em; color: #64748b; margin-bottom: 12px;">📤 MobilCV'yi paylaş:</p>
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mobilcv.net" 
+               target="_blank" 
+               style="display: inline-block; background: #0a66c2; color: #fff; padding: 8px 18px; border-radius: 40px; text-decoration: none; font-weight: 600; font-size: 0.85em;">
+               LinkedIn
+            </a>
+            <a href="https://twitter.com/intent/tweet?url=https://mobilcv.net&text=MobilCV - Kariyer Rehberi" 
+               target="_blank" 
+               style="display: inline-block; background: #000; color: #fff; padding: 8px 18px; border-radius: 40px; text-decoration: none; font-weight: 600; font-size: 0.85em;">
+               X (Twitter)
+            </a>
+            <a href="https://api.whatsapp.com/send?text=MobilCV - Kariyer Rehberi https://mobilcv.net" 
+               target="_blank" 
+               style="display: inline-block; background: #25D366; color: #fff; padding: 8px 18px; border-radius: 40px; text-decoration: none; font-weight: 600; font-size: 0.85em;">
+               WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== NEWSLETTER FORMU (ANA SAYFA) ===== -->
+    <div style="text-align: center; margin: 0 40px 40px 40px; padding: 30px; background: #0f172a; border-radius: 16px; color: #fff;">
+        <p style="font-size: 1.2em; font-weight: 700; margin-bottom: 8px;">📩 Haftalık Kariyer İpuçları</p>
+        <p style="font-size: 0.95em; color: #94a3b8; margin-bottom: 16px;">En yeni makaleler ve kariyer tavsiyeleri e-posta kutunda.</p>
+        <form action="#" method="post" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 440px; margin: 0 auto;">
+            <input type="email" placeholder="E-posta adresiniz" required 
+                   style="flex: 1; min-width: 200px; padding: 12px 18px; border-radius: 40px; border: none; font-size: 0.95em;">
+            <button type="submit" 
+                    style="background: #2563eb; color: #fff; border: none; padding: 12px 28px; border-radius: 40px; font-weight: 700; font-size: 0.95em; cursor: pointer;">
+                Abone Ol
+            </button>
+        </form>
+        <p style="font-size: 0.75em; color: #64748b; margin-top: 12px;">Spam yok, istediğin zaman ayrılabilirsin.</p>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 MobilCV &mdash; <a href="https://mobilcv.com">mobilcv.com</a></p>
+    </footer>
+</div>
+</body>
+</html>
