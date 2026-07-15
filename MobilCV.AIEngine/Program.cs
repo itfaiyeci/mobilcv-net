@@ -23,20 +23,20 @@ namespace MobilCV.AIEngine
             Random random = new Random();
             string topic = topics[random.Next(topics.Length)];
             string slug = topic
-    .ToLowerInvariant()
-    .Replace("?", "")
-    .Replace(",", "")
-    .Replace(".", "")
-    .Replace("'", "")
-    .Replace("ü", "u")
-    .Replace("ğ", "g")
-    .Replace("ş", "s")
-    .Replace("ı", "i")
-    .Replace("ö", "o")
-    .Replace("ç", "c")
-    .Replace("İ", "i")   // <-- BU SATIRI EKLE
-    .Replace(" ", "-")
-    .Trim('-');
+                .ToLowerInvariant()
+                .Replace("?", "")
+                .Replace(",", "")
+                .Replace(".", "")
+                .Replace("'", "")
+                .Replace("ü", "u")
+                .Replace("ğ", "g")
+                .Replace("ş", "s")
+                .Replace("ı", "i")
+                .Replace("ö", "o")
+                .Replace("ç", "c")
+                .Replace("İ", "i")   // <-- Türkçe büyük İ sorununu çözer
+                .Replace(" ", "-")
+                .Trim('-');
 
             Console.WriteLine($"📝 Konu: {topic}");
 
@@ -76,7 +76,7 @@ namespace MobilCV.AIEngine
             }
         }
 
-        // ===== YENİ MAKALE ŞABLONU (HEADER + FOOTER DAHİL) =====
+        // ===== YENİ MAKALE ŞABLONU (HEADER + FOOTER + CTA BUTONU DAHİL) =====
         static string BuildHtmlPage(string title, string metaDescription, string htmlBody)
         {
             return $@"<!DOCTYPE html>
@@ -165,6 +165,36 @@ namespace MobilCV.AIEngine
         }}
         .page-content li {{ margin-bottom: 8px; }}
 
+        /* ===== CTA BUTONU ===== */
+        .cta-box {{
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }}
+        .cta-box p {{
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }}
+        .cta-button {{
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: background 0.3s ease;
+        }}
+        .cta-button:hover {{
+            background: #1d4ed8;
+        }}
+
         /* ===== FOOTER ===== */
         .footer {{
             background: #f8fafc;
@@ -189,6 +219,8 @@ namespace MobilCV.AIEngine
             .nav-links {{ justify-content: center; }}
             .page-content {{ padding: 24px 18px; }}
             .page-content h1 {{ font-size: 1.8em; }}
+            .cta-box {{ padding: 20px; }}
+            .cta-button {{ padding: 12px 24px; font-size: 1em; }}
         }}
     </style>
 </head>
@@ -215,6 +247,12 @@ namespace MobilCV.AIEngine
             <h1>{title}</h1>
             {htmlBody}
         </article>
+
+        <!-- ===== CTA BUTONU ===== -->
+        <div class=""cta-box"">
+            <p>✨ CV'ni hemen oluştur!</p>
+            <a href=""https://mobilcv.com"" class=""cta-button"">🚀 MobilCV ile CV Oluştur</a>
+        </div>
     </div>
 
     <!-- ===== FOOTER ===== -->
