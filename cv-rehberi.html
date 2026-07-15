@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Nasıl Hazırlanır? | MobilCV Rehberi</title>
+    <meta name="description" content="Adım adım, örneklerle ve uzman ipuçlarıyla CV hazırlama rehberi – MobilCV.net özel.">
+    <style>
+        /* ========== ORTAK CSS (Tüm sayfalarla aynı) ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container { max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); overflow: hidden; }
+
+        /* ===== HEADER (Tüm sayfalarda aynı) ===== */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+        .logo { font-size: 1.6em; font-weight: 900; color: #0f172a; text-decoration: none; }
+        .logo span { color: #2563eb; }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            padding: 10px 20px;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            border-radius: 40px;
+            transition: all 0.25s ease;
+        }
+        .nav-links a:hover { color: #2563eb; background: #dbeafe; }
+        .nav-links a.active { color: #fff; background: #2563eb; }
+        .nav-cta {
+            background: #2563eb;
+            color: #fff !important;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+        }
+        .nav-cta:hover { background: #1d4ed8 !important; }
+
+        /* ===== SAYFA İÇERİĞİ ===== */
+        .page-content {
+            padding: 48px 40px 40px;
+        }
+        .page-content h1 {
+            font-size: 2.6em;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #0f172a, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-content .subtitle {
+            font-size: 1.2em;
+            color: #475569;
+            margin-bottom: 32px;
+            border-left: 4px solid #2563eb;
+            padding-left: 16px;
+        }
+        .page-content h2 {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 12px;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .page-content h2 .step {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            font-size: 0.7em;
+            font-weight: 800;
+            padding: 2px 12px;
+            border-radius: 40px;
+        }
+        .page-content p {
+            color: #334155;
+            margin-bottom: 16px;
+            font-size: 1.05em;
+        }
+        .page-content ul, .page-content ol {
+            margin-left: 24px;
+            margin-bottom: 20px;
+            color: #334155;
+        }
+        .page-content li { margin-bottom: 8px; }
+        .page-content .tip-box {
+            background: #f1f5f9;
+            padding: 20px 24px;
+            border-radius: 14px;
+            border-left: 5px solid #f97316;
+            margin: 24px 0;
+        }
+        .page-content .tip-box strong {
+            color: #f97316;
+        }
+        .page-content .example-box {
+            background: #f8fafc;
+            border: 1px dashed #94a3b8;
+            padding: 20px 24px;
+            border-radius: 14px;
+            margin: 20px 0;
+        }
+        .page-content .example-box strong {
+            color: #2563eb;
+        }
+
+        /* ===== FOOTER (Tüm sayfalarda aynı) ===== */
+        .footer {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 30px;
+            text-align: center;
+            color: #94a3b8;
+        }
+        .footer a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .footer-links a { color: #64748b; font-weight: 500; }
+        .footer-links a:hover { color: #2563eb; }
+
+        @media (max-width: 640px) {
+            .site-header { flex-direction: column; gap: 12px; padding: 16px; }
+            .nav-links { justify-content: center; }
+            .page-content { padding: 24px 18px; }
+            .page-content h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ===== HEADER (Aynı) ===== -->
+    <header class="site-header">
+        <a href="https://mobilcv.net" class="logo">Mobil<span>CV</span></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="https://mobilcv.com">Ana Site</a></li>
+                <li><a href="https://mobilcv.net">Blog</a></li>
+                <li><a href="cv-rehberi.html" class="active">CV Rehberi</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="https://mobilcv.net" class="nav-cta">🚀 Keşfet</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===== İÇERİK ===== -->
+    <div class="page-content">
+        <h1>📄 CV Nasıl Hazırlanır?</h1>
+        <div class="subtitle">Adım adım, örneklerle ve uzman ipuçlarıyla – MobilCV.net özel rehberi</div>
+
+        <!-- ADIM 1 -->
+        <h2><span class="step">1</span> Kişisel Bilgiler ve İletişim</h2>
+        <p>CV'nizin en üst kısmında yer alan bu bölüm, işverenin size ulaşmasını sağlar. <strong>Mutlaka ekle:</strong></p>
+        <ul>
+            <li><strong>Ad Soyad</strong> – Büyük ve okunaklı yazın.</li>
+            <li><strong>Telefon</strong> – Güncel ve ulaşılabilir numaranız.</li>
+            <li><strong>E-posta</strong> – Profesyonel bir adres kullanın (örn. ad.soyad@gmail.com).</li>
+            <li><strong>Şehir / Ülke</strong> – Çalışmak istediğiniz konumu belirtin.</li>
+            <li><strong>LinkedIn veya Portföy linki</strong> – Varsa mutlaka ekleyin.</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 İpucu:</strong> Fotoğraf eklemek zorunlu değildir. Türkiye'de genellikle eklenir, ancak uluslararası başvurularda tercih edilmez.
+        </div>
+
+        <!-- ADIM 2 -->
+        <h2><span class="step">2</span> Kısa Özet (Profil)</h2>
+        <p>3–4 cümlelik bu bölüm, sizi özetler. <strong>Ne yaptığınızı, hangi alanda uzmanlaştığınızı ve ne aradığınızı</strong> belirtin.</p>
+        <div class="example-box">
+            <strong>Örnek:</strong><br>
+            “3 yıl dijital pazarlama deneyimine sahip, veri odaklı stratejiler geliştiren bir uzman. SEO, sosyal medya yönetimi ve içerik pazarlaması alanlarında çalışıyorum. Yenilikçi bir ekipte yer alarak marka bilinirliğini artırmayı hedefliyorum.”
+        </div>
+
+        <!-- ADIM 3 -->
+        <h2><span class="step">3</span> İş Deneyimleri (Kronolojik Sıra)</h2>
+        <p>En son işinizden başlayarak geriye doğru sıralayın. <strong>Her iş için şunları belirtin:</strong></p>
+        <ul>
+            <li>İş ünvanı, şirket adı, çalışma tarihleri</li>
+            <li>Kısa ama etkili görev ve sorumluluklar</li>
+            <li><strong>Başarılarınızı sayılarla destekleyin</strong> (Örn: “Satışları %25 artırdım.”)</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 İpucu:</strong> Stajlar, gönüllü çalışmalar ve projeleri de bu bölüme ekleyebilirsiniz.
+        </div>
+
+        <!-- ADIM 4 -->
+        <h2><span class="step">4</span> Eğitim Bilgileri</h2>
+        <p>En son mezuniyetten başlayarak <strong>okul, bölüm ve yıl</strong> bilgilerini ekleyin. Yüksek lisans, sertifikalar, kurslar veya bootcamp’leri de belirtin.</p>
+        <div class="example-box">
+            <strong>Örnek:</strong><br>
+            🎓 <strong>İstanbul Üniversitesi</strong> – İşletme (2018–2022)
+        </div>
+
+        <!-- ADIM 5 -->
+        <h2><span class="step">5</span> Yetkinlikler (Beceriler)</h2>
+        <p>Teknik ve kişisel becerilerinizi listeleyin. <strong>Yalnızca gerçekten bildiğiniz yetkinlikleri yazın.</strong></p>
+        <ul>
+            <li><strong>Teknik:</strong> Programlama dilleri, araçlar, yazılımlar.</li>
+            <li><strong>Dil:</strong> Ana diliniz ve bildiğiniz diğer diller (seviye belirtin).</li>
+            <li><strong>Kişisel:</strong> Liderlik, iletişim, ekip çalışması, problem çözme.</li>
+        </ul>
+
+        <!-- ADIM 6 -->
+        <h2><span class="step">6</span> Sertifikalar ve Eğitimler</h2>
+        <p>Kurslar, online sertifikalar (Coursera, Udemy, vb.) ve işle ilgili yeterlilikler burada yer alabilir.</p>
+        <div class="tip-box">
+            <strong>💡 İpucu:</strong> Sertifikanızı alanınızla ilgiliyse ekleyin. Gereksiz sertifikalar CV’yi kalabalıklaştırır.
+        </div>
+
+        <!-- ADIM 7 -->
+        <h2><span class="step">7</span> Referanslar</h2>
+        <p>“Talep halinde verilecektir” yazmak genellikle yeterlidir. Eğer referans ismi veriyorsanız, kişinin iznini almayı unutmayın.</p>
+
+        <!-- ADIM 8 -->
+        <h2><span class="step">8</span> Son Kontrol ve Düzenleme</h2>
+        <ul>
+            <li><strong>Yazım ve dilbilgisi</strong> hatalarını kontrol edin.</li>
+            <li><strong>Uzunluk:</strong> CV’niz 1–2 sayfayı geçmesin (deneyiminize göre).</li>
+            <li><strong>PDF formatında</strong> gönderin.</li>
+            <li><strong>Dosya adı:</strong> AdSoyad_CV.pdf (örneğin AhmetYilmaz_CV.pdf).</li>
+        </ul>
+        <div class="example-box">
+            <strong>✨ MobilCV ile CV’nizi hazırlayabilirsiniz!</strong><br>
+            Modern şablonlar, kolay düzenleme ve tek tıkla PDF çıktısı için <a href="https://mobilcv.com" style="color:#2563eb; font-weight:600;">mobilcv.com</a> adresini ziyaret edin.
+        </div>
+
+        <p style="margin-top: 32px; text-align: center; font-style: italic; color: #64748b;">
+            Bu rehber, MobilCV.net okuyucuları için hazırlanmıştır. Başarılar! 🚀
+        </p>
+    </div>
+
+    <!-- ===== FOOTER (Aynı) ===== -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://mobilcv.com">Ana Site</a>
+            <a href="https://mobilcv.net">Blog</a>
+            <a href="cv-rehberi.html">CV Rehberi</a>
+            <a href="iletisim.html">İletişim</a>
+        </div>
+        <p>&copy; 2026 MobilCV &mdash; <a href="https://mobilcv.com">mobilcv.com</a> ile güçlendirilmiştir.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
