@@ -75,36 +75,49 @@ namespace MobilCV.AIEngine
 
             try
             {
-                // ===== PROFESYONEL PROMPT =====
-                var messages = new List<ChatMessage>
-                {
-                    new SystemChatMessage(@"Sen, 10 yıllık deneyime sahip, iş dünyası trendlerini yakından takip eden, 
-                        verilere ve araştırmalara dayalı içerik üreten profesyonel bir kariyer uzmanısın. 
-                        Makalelerin hem bilgilendirici hem de uygulanabilir tavsiyeler içermeli, 
-                        okuyucuya gerçek değer katmalıdır."),
-                    
-                    new UserChatMessage($@"
-                        Aşağıdaki konu hakkında 1000-1200 kelimelik, kapsamlı ve araştırmaya dayalı bir blog makalesi yaz.
+                // ===== PROFESYONEL VE TELİF GÜVENLİ PROMPT =====
+var messages = new List<ChatMessage>
+{
+    new SystemChatMessage(@"Sen, 10 yıllık deneyime sahip, iş dünyası trendlerini yakından takip eden bir kariyer uzmanısın.
 
-                        KONU: {topic}
-                        KATEGORİ: {selectedCategory}
+    **TELİF HAKKI KURALI (KIRMIZI ÇİZGİ):**
+    - Asla başka kaynaklardan birebir alıntı yapma.
+    - İstatistikler, veriler veya örnekler verirken bunları KENDİ CÜMLELERİNLE yorumla ve sentezle.
+    - Kaynakça bölümünde gerçek bir kaynak belirtme, sadece 'Yararlanılan Kaynaklar' başlığı altında genel bir bilgi ver.
+    - Hiçbir şekilde başka bir yazarın, kurumun veya web sitesinin metnini kopyalama.
+    - Oluşturduğun tüm içerik %100 ÖZGÜN ve SANA AİT olmalı.
+    - Eğer bir istatistik veya araştırma sonucu paylaşacaksan, bunu 'araştırmalar gösteriyor ki...' veya 'uzmanların belirttiğine göre...' gibi genel ifadelerle belirt, doğrudan bir kaynağa atıf yapma.
 
-                        Makalede şunlar olsun:
-                        1. Dikkat çekici, SEO uyumlu bir başlık (H1)
-                        2. Konuya ilgi çekici bir giriş (2-3 paragraf)
-                        3. 4-6 alt başlık (H2) ile detaylandırılmış içerik
-                           - Her bölümde güncel istatistikler, veriler veya örnekler kullan
-                           - Gerektiğinde madde işaretli listeler (ul/li)
-                        4. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
-                        5. 150-160 karakterlik meta açıklama
-                        6. Makale sonunda 'Kaynakça' veya 'Yararlanılan Kaynaklar' başlığı (varsayımsal ama gerçekçi kaynaklar belirt)
+    **İÇERİK KALİTESİ:**
+    - Makalelerin hem bilgilendirici hem de uygulanabilir tavsiyeler içermeli.
+    - Okuyucuya gerçek değer katmalı.
+    - Yazım tarzı: Resmi ama samimi, bilgilendirici ve akıcı.
+    - Türkçe dilbilgisi kurallarına tam uygun."),
+    
+    new UserChatMessage($@"
+        Aşağıdaki konu hakkında 1000-1200 kelimelik, kapsamlı, ÖZGÜN ve TELİF HAKKINA UYGUN bir blog makalesi yaz.
 
-                        Yazım tarzı: Resmi ama samimi, bilgilendirici ve akıcı. Türkçe dilbilgisi kurallarına tam uygun. Okuyucuya değer katmayı hedefle.
+        KONU: {topic}
+        KATEGORİ: {selectedCategory}
 
-                        Çıktıyı TAM bir HTML belgesi olarak ver.
-                        Sadece HTML kodunu ver, başka bir açıklama yapma.
-                    ")
-                };
+        Makalede şunlar olsun:
+        1. Dikkat çekici, SEO uyumlu bir başlık (H1)
+        2. Konuya ilgi çekici bir giriş (2-3 paragraf)
+        3. 4-6 alt başlık (H2) ile detaylandırılmış içerik
+           - Her bölümde özgün yorumlar, sentezlenmiş bilgiler ve genel eğilimler kullan
+           - Gerektiğinde madde işaretli listeler (ul/li)
+        4. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
+        5. 150-160 karakterlik meta açıklama
+        6. Makale sonunda 'Yararlanılan Kaynaklar' başlığı altında genel bilgi (örnek: 'Bu makale hazırlanırken çeşitli akademik yayınlar, sektör raporları ve iş dünyası analizlerinden yararlanılmıştır.')
+
+        **UNUTMA:**
+        - Tüm içerik %100 ÖZGÜN olmalı.
+        - Başka kaynaklardan birebir alıntı yapma.
+        - İstatistik ve verileri kendi cümlelerinle yorumla.
+
+        Sadece HTML kodunu ver, başka bir açıklama yapma.
+    ")
+};
 
                 var response = await client.CompleteChatAsync(messages);
                 string htmlContent = response.Value.Content[0].Text;
