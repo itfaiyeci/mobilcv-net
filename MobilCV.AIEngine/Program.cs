@@ -11,17 +11,49 @@ namespace MobilCV.AIEngine
             var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("OPENAI_API_KEY bulunamadı!");
             var client = new ChatClient("gpt-3.5-turbo", apiKey);
 
-            // Rastgele konu seçimi
-            string[] topics = {
-                "CV'de Dikkat Edilmesi Gereken 5 Kritik Nokta",
-                "Mülakatta Başarılı Olmanın 7 Altın Kuralı",
-                "2026'nın En Popüler 10 Mesleği",
-                "Kariyer Değiştirmek İsteyenler İçin Rehber",
-                "Yapay Zeka İş Dünyasını Nasıl Dönüştürüyor?"
+            // ===== KATEGORİ VE KONU HAVUZU =====
+            var topics = new Dictionary<string, List<string>>
+            {
+                ["CV-Rehberi"] = new List<string>
+                {
+                    "CV'de Dikkat Edilmesi Gereken 7 Kritik Nokta",
+                    "Etkili Bir Ön Yazı Nasıl Yazılır?",
+                    "CV'de Fotoğraf Kullanmalı mısınız?",
+                    "Yeni Mezunlar İçin CV Hazırlama Rehberi"
+                },
+                ["Mülakat-Taktikleri"] = new List<string>
+                {
+                    "Mülakatta Başarılı Olmanın 10 Altın Kuralı",
+                    "En Zor Mülakat Sorularına Cevaplar",
+                    "Uzaktan Mülakatlarda Başarılı Olma Taktikleri"
+                },
+                ["Kariyer-Planlama"] = new List<string>
+                {
+                    "Kariyer Planlaması: Adım Adım Rehber",
+                    "30 Yaşından Önce Kariyerinde Yapman Gereken 5 Hamle",
+                    "Sektör Değiştirmek İsteyenler İçin Rehber"
+                },
+                ["İş-Dünyası-Trendleri"] = new List<string>
+                {
+                    "2026'nın En Popüler 10 Mesleği",
+                    "Uzaktan Çalışmanın Geleceği ve Trendler",
+                    "Yapay Zeka Hangi Meslekleri Dönüştürecek?"
+                },
+                ["Başarı-Hikayeleri"] = new List<string>
+                {
+                    "Sektör Değiştirerek Hayalindeki İşe Ulaşanlar",
+                    "Girişimcilik Hikayeleri: Sıfırdan Başarıya",
+                    "Kadın Girişimcilerin Başarı Hikayeleri"
+                }
             };
 
+            // ===== RASTGELE KATEGORİ VE KONU SEÇ =====
             Random random = new Random();
-            string topic = topics[random.Next(topics.Length)];
+            var categoryKeys = topics.Keys.ToList();
+            string selectedCategory = categoryKeys[random.Next(categoryKeys.Count)];
+            string topic = topics[selectedCategory][random.Next(topics[selectedCategory].Count)];
+
+            // ===== SLUG (URL) OLUŞTUR =====
             string slug = topic
                 .ToLowerInvariant()
                 .Replace("?", "")
@@ -38,29 +70,51 @@ namespace MobilCV.AIEngine
                 .Replace(" ", "-")
                 .Trim('-');
 
+            Console.WriteLine($"📂 Kategori: {selectedCategory}");
             Console.WriteLine($"📝 Konu: {topic}");
 
             try
             {
+                // ===== PROFESYONEL PROMPT =====
                 var messages = new List<ChatMessage>
                 {
-                    new SystemChatMessage("Sen bir kariyer uzmanısın."),
+                    new SystemChatMessage(@"Sen, 10 yıllık deneyime sahip, iş dünyası trendlerini yakından takip eden, 
+                        verilere ve araştırmalara dayalı içerik üreten profesyonel bir kariyer uzmanısın. 
+                        Makalelerin hem bilgilendirici hem de uygulanabilir tavsiyeler içermeli, 
+                        okuyucuya gerçek değer katmalıdır."),
+                    
                     new UserChatMessage($@"
-                        Konu: {topic}
-                        500-700 kelimelik SEO uyumlu bir blog makalesi yaz.
-                        Tam bir HTML belgesi olarak ver.
-                        Sadece HTML kodunu ver.
+                        Aşağıdaki konu hakkında 1000-1200 kelimelik, kapsamlı ve araştırmaya dayalı bir blog makalesi yaz.
+
+                        KONU: {topic}
+                        KATEGORİ: {selectedCategory}
+
+                        Makalede şunlar olsun:
+                        1. Dikkat çekici, SEO uyumlu bir başlık (H1)
+                        2. Konuya ilgi çekici bir giriş (2-3 paragraf)
+                        3. 4-6 alt başlık (H2) ile detaylandırılmış içerik
+                           - Her bölümde güncel istatistikler, veriler veya örnekler kullan
+                           - Gerektiğinde madde işaretli listeler (ul/li)
+                        4. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
+                        5. 150-160 karakterlik meta açıklama
+                        6. Makale sonunda 'Kaynakça' veya 'Yararlanılan Kaynaklar' başlığı (varsayımsal ama gerçekçi kaynaklar belirt)
+
+                        Yazım tarzı: Resmi ama samimi, bilgilendirici ve akıcı. Türkçe dilbilgisi kurallarına tam uygun. Okuyucuya değer katmayı hedefle.
+
+                        Çıktıyı TAM bir HTML belgesi olarak ver.
+                        Sadece HTML kodunu ver, başka bir açıklama yapma.
                     ")
                 };
 
                 var response = await client.CompleteChatAsync(messages);
                 string htmlContent = response.Value.Content[0].Text;
 
-                string title = topic;
-                string metaDescription = topic + " - Kariyer rehberi ve iş dünyası ipuçları.";
+                // ===== META AÇIKLAMAYI ÇIKAR =====
+                string metaDescription = topic + " - " + selectedCategory.Replace("-", " ") + " kategorisinde kapsamlı bir rehber.";
 
+                // ===== HTML DOSYASINI OLUŞTUR =====
                 string fileName = $"{slug}.html";
-                string fullHtml = BuildHtmlPage(title, metaDescription, htmlContent, slug);
+                string fullHtml = BuildHtmlPage(topic, metaDescription, htmlContent, slug, selectedCategory);
                 
                 string filePath = Path.Combine("..", fileName);
                 File.WriteAllText(filePath, fullHtml);
@@ -74,8 +128,8 @@ namespace MobilCV.AIEngine
             }
         }
 
-        // ===== MAKALE ŞABLONU (HEADER + FOOTER + CTA + SOSYAL + NEWSLETTER) =====
-        static string BuildHtmlPage(string title, string metaDescription, string htmlBody, string slug)
+        // ===== MAKALE ŞABLONU (HEADER + FOOTER + CTA + SOSYAL + NEWSLETTER + KATEGORİ) =====
+        static string BuildHtmlPage(string title, string metaDescription, string htmlBody, string slug, string category)
         {
             return $@"<!DOCTYPE html>
 <html lang=""tr"">
@@ -137,6 +191,16 @@ namespace MobilCV.AIEngine
         /* ===== MAKALE İÇERİĞİ ===== */
         .page-content {{
             padding: 48px 40px 40px;
+        }}
+        .page-content .category-tag {{
+            display: inline-block;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-bottom: 12px;
         }}
         .page-content h1 {{
             font-size: 2.4em;
@@ -320,6 +384,7 @@ namespace MobilCV.AIEngine
 
     <!-- ===== MAKALE İÇERİĞİ ===== -->
     <div class=""page-content"">
+        <span class=""category-tag"">📂 {category.Replace("-", " ")}</span>
         <article>
             <h1>{title}</h1>
             {htmlBody}
