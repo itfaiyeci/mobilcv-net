@@ -107,25 +107,24 @@
     <section class="blog-posts">
         <h2>📝 Blog Yazıları</h2>
         <ul class="post-list" id="postList">
-            <!-- BLOG_POSTS -->
             <li>
-    <a href="2026nin-en-populer-10-meslegi.html">
-        <div class="post-title">2026'nın En Popüler 10 Mesleği</div>
-        <div class="post-meta"><span class="badge">Yeni</span> 📅 15 Temmuz 2026</div>
-    </a>
-</li>
-<li>
-    <a href="cvde-dikkat-edilmesi-gereken-5-kritik-nokta.html">
-        <div class="post-title">CV'de Dikkat Edilmesi Gereken 5 Kritik Nokta</div>
-        <div class="post-meta"><span class="badge">Yeni</span> 📅 15 Temmuz 2026</div>
-    </a>
-</li>
-<li>
-    <a href="yapay-zeka-is-dunyasini-nasil-donusturuyor.html">
-        <div class="post-title">Yapay Zeka İş Dünyasını Nasıl Dönüştürüyor?</div>
-        <div class="post-meta"><span class="badge">Yeni</span> 📅 15 Temmuz 2026</div>
-    </a>
-</li>
+                <a href="2026nin-en-populer-10-meslegi.html">
+                    <div class="post-title">2026'nın En Popüler 10 Mesleği</div>
+                    <div class="post-meta"><span class="badge">Yeni</span> 📅 15 Temmuz 2026</div>
+                </a>
+            </li>
+            <li>
+                <a href="cvde-dikkat-edilmesi-gereken-5-kritik-nokta.html">
+                    <div class="post-title">CV'de Dikkat Edilmesi Gereken 5 Kritik Nokta</div>
+                    <div class="post-meta"><span class="badge">Yeni</span> 📅 15 Temmuz 2026</div>
+                </a>
+            </li>
+            <li>
+                <a href="yapay-zeka-is-dunyasini-nasil-donusturuyor.html">
+                    <div class="post-title">Yapay Zeka İş Dünyasını Nasıl Dönüştürüyor?</div>
+                    <div class="post-meta"><span class="badge">Yeni</span> 📅 15 Temmuz 2026</div>
+                </a>
+            </li>
         </ul>
     </section>
 
@@ -179,5 +178,66 @@
         <p>&copy; 2026 MobilCV &mdash; <a href="https://mobilcv.com">mobilcv.com</a></p>
     </footer>
 </div>
+
+<!-- ============================================================ -->
+<!-- ===== TÜM JAVASCRIPT KODLARI (BODY SONU) ===== -->
+<!-- ============================================================ -->
+
+<!-- ===== LAZY LOADING: PDF KÜTÜPHANELERİ ===== -->
+<script>
+let pdfLibsLoaded = false;
+
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = () => reject(new Error('Script yüklenemedi: ' + src));
+        document.head.appendChild(script);
+    });
+}
+
+// Eğer bu sayfada PDF butonu varsa kullanmak için
+async function loadPDFLibraries() {
+    if (pdfLibsLoaded) return true;
+    try {
+        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+        pdfLibsLoaded = true;
+        console.log('✅ PDF kütüphaneleri yüklendi');
+        return true;
+    } catch (error) {
+        console.error('❌ PDF kütüphane yükleme hatası:', error);
+        return false;
+    }
+}
+
+// Global olarak erişilebilir yap
+window.loadPDFLibraries = loadPDFLibraries;
+</script>
+
+<!-- ===== TAWK.TO - GECİKMELİ YÜKLEME (3 saniye) ===== -->
+<script>
+setTimeout(() => {
+    var s1 = document.createElement("script");
+    s1.src = 'https://embed.tawk.to/68d93dfa3341941951f1d20e/1j689k7br';
+    s1.async = true;
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    document.body.appendChild(s1);
+    console.log('✅ Tawk.to yüklendi (3sn gecikmeli)');
+}, 3000);
+</script>
+
+<!-- ===== PERFORMANS İZLEME (OPSİYONEL) ===== -->
+<script>
+// Sayfa yükleme süresini göster
+window.addEventListener('load', function() {
+    const loadTime = performance.now();
+    console.log(`⏱️ Sayfa yükleme süresi: ${loadTime.toFixed(2)}ms`);
+});
+</script>
+
 </body>
 </html>
