@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kivi\\mobilcv-net\\MobilCV.AIEngine\\MobilCV.AIEngine.csproj": {}
+    "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kivi\\mobilcv-net\\MobilCV.AIEngine\\MobilCV.AIEngine.csproj": {
+    "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kivi\\mobilcv-net\\MobilCV.AIEngine\\MobilCV.AIEngine.csproj",
+        "projectUniqueName": "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
         "projectName": "MobilCV.AIEngine",
-        "projectPath": "C:\\Users\\kivi\\mobilcv-net\\MobilCV.AIEngine\\MobilCV.AIEngine.csproj",
-        "packagesPath": "C:\\Users\\kivi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kivi\\mobilcv-net\\MobilCV.AIEngine\\obj\\",
+        "projectPath": "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kivi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/runner/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -62,30 +62,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[8.0.28, 8.0.28]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.28, 8.0.28]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
