@@ -23,19 +23,20 @@ namespace MobilCV.AIEngine
             Random random = new Random();
             string topic = topics[random.Next(topics.Length)];
             string slug = topic
-                .ToLowerInvariant()
-                .Replace("?", "")
-                .Replace(",", "")
-                .Replace(".", "")
-                .Replace("'", "")
-                .Replace("ü", "u")
-                .Replace("ğ", "g")
-                .Replace("ş", "s")
-                .Replace("ı", "i")
-                .Replace("ö", "o")
-                .Replace("ç", "c")
-                .Replace(" ", "-")
-                .Trim('-');
+    .ToLowerInvariant()
+    .Replace("?", "")
+    .Replace(",", "")
+    .Replace(".", "")
+    .Replace("'", "")
+    .Replace("ü", "u")
+    .Replace("ğ", "g")
+    .Replace("ş", "s")
+    .Replace("ı", "i")
+    .Replace("ö", "o")
+    .Replace("ç", "c")
+    .Replace("İ", "i")   // <-- BU SATIRI EKLE
+    .Replace(" ", "-")
+    .Trim('-');
 
             Console.WriteLine($"📝 Konu: {topic}");
 
