@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim | MobilCV</title>
+    <meta name="description" content="MobilCV ile iletişime geçin. Sorularınızı ve önerilerinizi bize iletin.">
+    <style>
+        /* ========== ORTAK CSS (Tüm sayfalarla aynı) ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container { max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); overflow: hidden; }
+
+        /* ===== HEADER (Tüm sayfalarda aynı) ===== */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+        .logo { font-size: 1.6em; font-weight: 900; color: #0f172a; text-decoration: none; }
+        .logo span { color: #2563eb; }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            padding: 10px 20px;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            border-radius: 40px;
+            transition: all 0.25s ease;
+        }
+        .nav-links a:hover { color: #2563eb; background: #dbeafe; }
+        .nav-links a.active { color: #fff; background: #2563eb; }
+        .nav-cta {
+            background: #2563eb;
+            color: #fff !important;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+        }
+        .nav-cta:hover { background: #1d4ed8 !important; }
+
+        /* ===== SAYFA İÇERİĞİ ===== */
+        .page-content {
+            padding: 48px 40px 40px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .page-content h1 {
+            font-size: 2.6em;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #0f172a, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-content .subtitle {
+            font-size: 1.1em;
+            color: #475569;
+            margin-bottom: 32px;
+            border-left: 4px solid #2563eb;
+            padding-left: 16px;
+        }
+        .page-content label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+        .page-content input,
+        .page-content textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1em;
+            font-family: inherit;
+            margin-bottom: 20px;
+            transition: border 0.2s;
+            background: #f8fafc;
+        }
+        .page-content input:focus,
+        .page-content textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: #fff;
+        }
+        .page-content textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .page-content .btn-submit {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .page-content .btn-submit:hover {
+            background: #1d4ed8;
+        }
+        .page-content .contact-info {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .page-content .contact-info p {
+            margin-bottom: 6px;
+            color: #475569;
+        }
+        .page-content .contact-info a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .page-content .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== FOOTER (Tüm sayfalarda aynı) ===== */
+        .footer {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 30px;
+            text-align: center;
+            color: #94a3b8;
+        }
+        .footer a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .footer-links a { color: #64748b; font-weight: 500; }
+        .footer-links a:hover { color: #2563eb; }
+
+        @media (max-width: 640px) {
+            .site-header { flex-direction: column; gap: 12px; padding: 16px; }
+            .nav-links { justify-content: center; }
+            .page-content { padding: 24px 18px; }
+            .page-content h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ===== HEADER (Aynı) ===== -->
+    <header class="site-header">
+        <a href="https://mobilcv.net" class="logo">Mobil<span>CV</span></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="https://mobilcv.com">Ana Site</a></li>
+                <li><a href="https://mobilcv.net">Blog</a></li>
+                <li><a href="cv-rehberi.html">CV Rehberi</a></li>
+                <li><a href="iletisim.html" class="active">İletişim</a></li>
+                <li><a href="https://mobilcv.net" class="nav-cta">🚀 Keşfet</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===== İÇERİK ===== -->
+    <div class="page-content">
+        <h1>📬 İletişim</h1>
+        <div class="subtitle">Sorularınız, önerileriniz veya geri bildirimleriniz için bize ulaşın.</div>
+
+        <form action="#" method="POST">
+            <label for="name">Adınız Soyadınız</label>
+            <input type="text" id="name" name="name" placeholder="Örn: Ahmet Yılmaz" required>
+
+            <label for="email">E-posta Adresiniz</label>
+            <input type="email" id="email" name="email" placeholder="ornek@mail.com" required>
+
+            <label for="message">Mesajınız</label>
+            <textarea id="message" name="message" placeholder="Mesajınızı buraya yazın..." required></textarea>
+
+            <button type="submit" class="btn-submit">📤 Gönder</button>
+        </form>
+
+        <div class="contact-info">
+            <p>📧 <strong>E-posta:</strong> <a href="mailto:info@mobilcv.com">info@mobilcv.com</a></p>
+            <p>🌐 <strong>Web:</strong> <a href="https://mobilcv.com">mobilcv.com</a></p>
+            <p>📝 <strong>Blog:</strong> <a href="https://mobilcv.net">mobilcv.net</a></p>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER (Aynı) ===== -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://mobilcv.com">Ana Site</a>
+            <a href="https://mobilcv.net">Blog</a>
+            <a href="cv-rehberi.html">CV Rehberi</a>
+            <a href="iletisim.html">İletişim</a>
+        </div>
+        <p>&copy; 2026 MobilCV &mdash; <a href="https://mobilcv.com">mobilcv.com</a> ile güçlendirilmiştir.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
