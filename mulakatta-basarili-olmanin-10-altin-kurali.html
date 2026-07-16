@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mülakatta Başarılı Olmanın 10 Altın Kuralı | MobilCV</title>
+    <meta name="description" content="Mülakatta Başarılı Olmanın 10 Altın Kuralı - Mülakat Taktikleri kategorisinde kapsamlı bir rehber.">
+    <style>
+        /* ===== TÜM SAYFALAR İÇİN ORTAK CSS ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container { max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); overflow: hidden; }
+
+        /* ===== HEADER ===== */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+        .logo { font-size: 1.6em; font-weight: 900; color: #0f172a; text-decoration: none; }
+        .logo span { color: #2563eb; }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            padding: 10px 20px;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            border-radius: 40px;
+            transition: all 0.25s ease;
+        }
+        .nav-links a:hover { color: #2563eb; background: #dbeafe; }
+        .nav-links a.active { color: #fff; background: #2563eb; }
+        .nav-cta {
+            background: #2563eb;
+            color: #fff !important;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+        }
+        .nav-cta:hover { background: #1d4ed8 !important; }
+
+        /* ===== MAKALE İÇERİĞİ ===== */
+        .page-content {
+            padding: 48px 40px 40px;
+        }
+        .page-content .category-tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .page-content h1 {
+            font-size: 2.4em;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }
+        .page-content p {
+            color: #334155;
+            margin-bottom: 16px;
+            font-size: 1.05em;
+        }
+        .page-content h2 {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+        .page-content ul, .page-content ol {
+            margin-left: 24px;
+            margin-bottom: 20px;
+            color: #334155;
+        }
+        .page-content li { margin-bottom: 8px; }
+
+        /* ===== SOSYAL PAYLAŞIM ===== */
+        .share-box {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+        .share-box p {
+            font-size: 0.95em;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .share-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: #fff !important;
+            transition: opacity 0.2s;
+        }
+        .share-btn:hover { opacity: 0.8; }
+        .share-linkedin { background: #0a66c2; }
+        .share-twitter { background: #000; }
+        .share-whatsapp { background: #25D366; }
+
+        /* ===== CTA BUTONU ===== */
+        .cta-box {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+        .cta-box p {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: background 0.3s ease;
+        }
+        .cta-button:hover { background: #1d4ed8; }
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter-box {
+            text-align: center;
+            margin-top: 30px;
+            padding: 30px;
+            background: #0f172a;
+            border-radius: 16px;
+            color: #fff;
+        }
+        .newsletter-box p {
+            color: #94a3b8;
+        }
+        .newsletter-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .newsletter-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 18px;
+            border-radius: 40px;
+            border: none;
+            font-size: 0.95em;
+        }
+        .newsletter-form button {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .newsletter-form button:hover { background: #1d4ed8; }
+        .newsletter-note {
+            font-size: 0.75em;
+            color: #64748b;
+            margin-top: 12px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 30px;
+            text-align: center;
+            color: #94a3b8;
+        }
+        .footer a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .footer-links a { color: #64748b; font-weight: 500; }
+        .footer-links a:hover { color: #2563eb; }
+
+        @media (max-width: 640px) {
+            .site-header { flex-direction: column; gap: 12px; padding: 16px; }
+            .nav-links { justify-content: center; }
+            .page-content { padding: 24px 18px; }
+            .page-content h1 { font-size: 1.8em; }
+            .cta-box { padding: 20px; }
+            .cta-button { padding: 12px 24px; font-size: 1em; }
+            .newsletter-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+        <a href="https://mobilcv.net" class="logo">Mobil<span>CV</span></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="https://mobilcv.com">Ana Site</a></li>
+                <li><a href="https://mobilcv.net">Blog</a></li>
+                <li><a href="cv-rehberi.html">CV Rehberi</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="https://mobilcv.net" class="nav-cta">🚀 Keşfet</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===== MAKALE İÇERİĞİ ===== -->
+    <div class="page-content">
+        <span class="category-tag">📂 Mülakat Taktikleri</span>
+        <article>
+            <h1>Mülakatta Başarılı Olmanın 10 Altın Kuralı</h1>
+            <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mülakatta Başarılı Olmanın 10 Altın Kuralı</title>
+</head>
+<body>
+    <header>
+        <h1>Mülakatta Başarılı Olmanın 10 Altın Kuralı</h1>
+    </header>
+    <section>
+        <p>Mülakatlar, iş başvurularının önemli aşamalarından biridir ve başarılı olmak isteyen adaylar için oldukça stresli bir süreç olabilir. Ancak doğru hazırlık ve uygulanacak bazı stratejiler ile mülakatta başarılı olmak mümkündür. İşte mülakatta başarılı olmanın 10 altın kuralı.</p>
+    </section>
+    <section>
+        <h2>1. Kendinizi Tanıyın ve Hazırlıklı Olun</h2>
+        <p>Mülakata giderken özgeçmişinizi, güçlü yönlerinizi ve zayıf noktalarınızı net bir şekilde tanımalısınız. Ayrıca, iş ilanını ve şirketi detaylıca araştırarak kendinizi mülakata en iyi şekilde hazırlamalısınız.</p>
+        
+        <h2>2. İletişim Becerilerinizi Geliştirin</h2>
+        <p>Mülakatta başarılı olmanın önemli bir yolu da iyi iletişim kurabilmektir. Karşınızdaki kişiye net ve açık şekilde düşüncelerinizi aktarabilmek mülakat sürecinde sizi öne çıkaracaktır.</p>
+        
+        <h2>3. Gülümseyin ve Pozitif Bir Hava Yaratın</h2>
+        <p>Pozitif enerjinizi yansıtmak, mülakat sürecinde olumlu bir etki yaratabilir. Gülümsemek ve samimi bir tavır sergilemek, karşınızdaki kişilerle daha iyi bağ kurmanıza yardımcı olacaktır.</p>
+        
+        <h2>4. Başarılı Örnekler ve Tecrübeler Paylaşın</h2>
+        <p>Mülakatta, daha önceki başarılı projelerinizden ve deneyimlerinizden bahsetmek önemlidir. Bu, sizi ilgi çekici kılabilir ve potansiyel işvereninizin dikkatini çekebilir.</p>
+        
+        <h2>5. Sorular Sorun ve Aktif Dinleyici Olun</h2>
+        <p>Mülakatta sadece cevap vermek değil, sorular sormak da önemlidir. Aynı zamanda, karşınızdaki kişiyi dikkatle dinleyerek, sorularına doğru ve etkili şekilde yanıt vermek önemlidir.</p>
+        
+        <h2>6. Güçlü ve İkna Edici Argümanlar Sunun</h2>
+        <p>Yeteneklerinizi ve neden bu iş için uygun olduğunuzu destekleyen güçlü argümanlar sunmak, mülakatta olumlu bir izlenim bırakmanıza yardımcı olacaktır.</p>
+    </section>
+    <section>
+        <h3>Özet</h3>
+        <p>Mülakatta başarılı olmanın anahtarı, kendinizi iyi tanımak, etkili iletişim kurmak, pozitif bir hava yaratmak, deneyimlerinizi paylaşmak, sorular sormak ve ikna edici argümanlar sunmaktan geçer. Bu altın kuralları uygulayarak, mülakatta daha güçlü ve kendinden emin bir şekilde yer alabilirsiniz.</p>
+        <p>Mülakatlar her ne kadar stresli olsa da, kendinize güvenin ve bu altın kuralları takip edin. Unutmayın, doğru hazırlık ve doğru stratejiler ile başarı kaçınılmaz olacaktır.</p>
+    </section>
+    <footer>
+        <p>Yararlanılan Kaynaklar: Bu makale hazırlanırken çeşitli kariyer kitapları ve iş dünyası uzmanlarının görüşlerinden faydalanılmıştır.</p>
+    </footer>
+</body>
+</html>
+        </article>
+
+        <!-- ===== SOSYAL PAYLAŞIM BUTONLARI ===== -->
+        <div class="share-box">
+            <p>📤 Bu makaleyi paylaş:</p>
+            <div class="share-buttons">
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mobilcv.net/mulakatta-basarili-olmanin-10-altin-kurali.html" 
+                   target="_blank" class="share-btn share-linkedin">LinkedIn</a>
+                <a href="https://twitter.com/intent/tweet?url=https://mobilcv.net/mulakatta-basarili-olmanin-10-altin-kurali.html&text=Mülakatta Başarılı Olmanın 10 Altın Kuralı" 
+                   target="_blank" class="share-btn share-twitter">X (Twitter)</a>
+                <a href="https://api.whatsapp.com/send?text=Mülakatta Başarılı Olmanın 10 Altın Kuralı - https://mobilcv.net/mulakatta-basarili-olmanin-10-altin-kurali.html" 
+                   target="_blank" class="share-btn share-whatsapp">WhatsApp</a>
+            </div>
+        </div>
+
+        <!-- ===== CTA BUTONU ===== -->
+        <div class="cta-box">
+            <p>✨ CV'ni hemen oluştur!</p>
+            <a href="https://mobilcv.com" class="cta-button">🚀 MobilCV ile CV Oluştur</a>
+        </div>
+
+        <!-- ===== NEWSLETTER FORMU ===== -->
+        <div class="newsletter-box">
+            <p style="font-size: 1.2em; font-weight: 700; color: #fff;">📩 Haftalık Kariyer İpuçları</p>
+            <p>En yeni makaleler ve kariyer tavsiyeleri e-posta kutunda.</p>
+            <form action="#" method="post" class="newsletter-form">
+                <input type="email" placeholder="E-posta adresiniz" required>
+                <button type="submit">Abone Ol</button>
+            </form>
+            <p class="newsletter-note">Spam yok, istediğin zaman ayrılabilirsin.</p>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://mobilcv.com">Ana Site</a>
+            <a href="https://mobilcv.net">Blog</a>
+            <a href="cv-rehberi.html">CV Rehberi</a>
+            <a href="iletisim.html">İletişim</a>
+        </div>
+        <p>&copy; 2026 MobilCV &mdash; <a href="https://mobilcv.com">mobilcv.com</a> ile güçlendirilmiştir.</p>
+    </footer>
+
+</div>
+</body>
+</html>
