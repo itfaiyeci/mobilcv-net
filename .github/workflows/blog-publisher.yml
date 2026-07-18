@@ -1,4 +1,3 @@
-
 name: Blog Publisher
 
 on:
@@ -33,3 +32,25 @@ jobs:
           git add .
           git diff --cached --quiet || git commit -m "Otomatik makale $(date -u +'%Y-%m-%d')"
           git push
+
+      - name: E-posta bildirimi gönder
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: "✅ Yeni makale yayınlandı - MobilCV"
+          to: ${{secrets.MAIL_TO}}
+          from: MobilCV Bot
+          body: |
+            Merhaba,
+
+            MobilCV botu yeni bir makale oluşturdu ve yayınladı.
+
+            Tarih: $(date -u +'%Y-%m-%d %H:%M UTC')
+            Makale: https://mobilcv.net
+
+            İyi okumalar!
+            MobilCV Bot
