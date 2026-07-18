@@ -76,48 +76,48 @@ namespace MobilCV.AIEngine
             try
             {
                 // ===== PROFESYONEL VE TELİF GÜVENLİ PROMPT =====
-var messages = new List<ChatMessage>
-{
-    new SystemChatMessage(@"Sen, 10 yıllık deneyime sahip, iş dünyası trendlerini yakından takip eden bir kariyer uzmanısın.
+                var messages = new List<ChatMessage>
+                {
+                    new SystemChatMessage(@"Sen, 10 yıllık deneyime sahip, iş dünyası trendlerini yakından takip eden bir kariyer uzmanısın.
 
-    **TELİF HAKKI KURALI (KIRMIZI ÇİZGİ):**
-    - Asla başka kaynaklardan birebir alıntı yapma.
-    - İstatistikler, veriler veya örnekler verirken bunları KENDİ CÜMLELERİNLE yorumla ve sentezle.
-    - Kaynakça bölümünde gerçek bir kaynak belirtme, sadece 'Yararlanılan Kaynaklar' başlığı altında genel bir bilgi ver.
-    - Hiçbir şekilde başka bir yazarın, kurumun veya web sitesinin metnini kopyalama.
-    - Oluşturduğun tüm içerik %100 ÖZGÜN ve SANA AİT olmalı.
-    - Eğer bir istatistik veya araştırma sonucu paylaşacaksan, bunu 'araştırmalar gösteriyor ki...' veya 'uzmanların belirttiğine göre...' gibi genel ifadelerle belirt, doğrudan bir kaynağa atıf yapma.
+                    **TELİF HAKKI KURALI (KIRMIZI ÇİZGİ):**
+                    - Asla başka kaynaklardan birebir alıntı yapma.
+                    - İstatistikler, veriler veya örnekler verirken bunları KENDİ CÜMLELERİNLE yorumla ve sentezle.
+                    - Kaynakça bölümünde gerçek bir kaynak belirtme, sadece 'Yararlanılan Kaynaklar' başlığı altında genel bir bilgi ver.
+                    - Hiçbir şekilde başka bir yazarın, kurumun veya web sitesinin metnini kopyalama.
+                    - Oluşturduğun tüm içerik %100 ÖZGÜN ve SANA AİT olmalı.
+                    - Eğer bir istatistik veya araştırma sonucu paylaşacaksan, bunu 'araştırmalar gösteriyor ki...' veya 'uzmanların belirttiğine göre...' gibi genel ifadelerle belirt, doğrudan bir kaynağa atıf yapma.
 
-    **İÇERİK KALİTESİ:**
-    - Makalelerin hem bilgilendirici hem de uygulanabilir tavsiyeler içermeli.
-    - Okuyucuya gerçek değer katmalı.
-    - Yazım tarzı: Resmi ama samimi, bilgilendirici ve akıcı.
-    - Türkçe dilbilgisi kurallarına tam uygun."),
-    
-    new UserChatMessage($@"
-        Aşağıdaki konu hakkında 1000-1200 kelimelik, kapsamlı, ÖZGÜN ve TELİF HAKKINA UYGUN bir blog makalesi yaz.
+                    **İÇERİK KALİTESİ:**
+                    - Makalelerin hem bilgilendirici hem de uygulanabilir tavsiyeler içermeli.
+                    - Okuyucuya gerçek değer katmalı.
+                    - Yazım tarzı: Resmi ama samimi, bilgilendirici ve akıcı.
+                    - Türkçe dilbilgisi kurallarına tam uygun."),
+                    
+                    new UserChatMessage($@"
+                        Aşağıdaki konu hakkında 1000-1200 kelimelik, kapsamlı, ÖZGÜN ve TELİF HAKKINA UYGUN bir blog makalesi yaz.
 
-        KONU: {topic}
-        KATEGORİ: {selectedCategory}
+                        KONU: {topic}
+                        KATEGORİ: {selectedCategory}
 
-        Makalede şunlar olsun:
-        1. Dikkat çekici, SEO uyumlu bir başlık (H1)
-        2. Konuya ilgi çekici bir giriş (2-3 paragraf)
-        3. 4-6 alt başlık (H2) ile detaylandırılmış içerik
-           - Her bölümde özgün yorumlar, sentezlenmiş bilgiler ve genel eğilimler kullan
-           - Gerektiğinde madde işaretli listeler (ul/li)
-        4. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
-        5. 150-160 karakterlik meta açıklama
-        6. Makale sonunda 'Yararlanılan Kaynaklar' başlığı altında genel bilgi (örnek: 'Bu makale hazırlanırken çeşitli akademik yayınlar, sektör raporları ve iş dünyası analizlerinden yararlanılmıştır.')
+                        Makalede şunlar olsun:
+                        1. Dikkat çekici, SEO uyumlu bir başlık (H1)
+                        2. Konuya ilgi çekici bir giriş (2-3 paragraf)
+                        3. 4-6 alt başlık (H2) ile detaylandırılmış içerik
+                           - Her bölümde özgün yorumlar, sentezlenmiş bilgiler ve genel eğilimler kullan
+                           - Gerektiğinde madde işaretli listeler (ul/li)
+                        4. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
+                        5. 150-160 karakterlik meta açıklama
+                        6. Makale sonunda 'Yararlanılan Kaynaklar' başlığı altında genel bilgi (örnek: 'Bu makale hazırlanırken çeşitli akademik yayınlar, sektör raporları ve iş dünyası analizlerinden yararlanılmıştır.')
 
-        **UNUTMA:**
-        - Tüm içerik %100 ÖZGÜN olmalı.
-        - Başka kaynaklardan birebir alıntı yapma.
-        - İstatistik ve verileri kendi cümlelerinle yorumla.
+                        **UNUTMA:**
+                        - Tüm içerik %100 ÖZGÜN olmalı.
+                        - Başka kaynaklardan birebir alıntı yapma.
+                        - İstatistik ve verileri kendi cümlelerinle yorumla.
 
-        Sadece HTML kodunu ver, başka bir açıklama yapma.
-    ")
-};
+                        Sadece HTML kodunu ver, başka bir açıklama yapma.
+                    ")
+                };
 
                 var response = await client.CompleteChatAsync(messages);
                 string htmlContent = response.Value.Content[0].Text;
@@ -133,11 +133,45 @@ var messages = new List<ChatMessage>
                 File.WriteAllText(filePath, fullHtml);
 
                 Console.WriteLine($"✅ {fileName} oluşturuldu!");
+
+                // ===== ANA SAYFAYI GÜNCELLE =====
+                UpdateIndexPage(slug, topic);
+                Console.WriteLine("✅ index.html güncellendi!");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ HATA: {ex.Message}");
                 Environment.Exit(1);
+            }
+        }
+
+        // ===== ANA SAYFAYI GÜNCELLE =====
+        static void UpdateIndexPage(string slug, string title)
+        {
+            string indexPath = Path.Combine("..", "index.html");
+            if (!File.Exists(indexPath)) 
+            {
+                Console.WriteLine("⚠️ index.html bulunamadı!");
+                return;
+            }
+
+            string content = File.ReadAllText(indexPath);
+            string newEntry = $@"
+<li>
+    <a href=""{slug}.html"">
+        <div class=""post-title"">{title}</div>
+        <div class=""post-meta""><span class=""badge"">Yeni</span> 📅 {DateTime.Now:dd MMMM yyyy}</div>
+    </a>
+</li>";
+
+            if (content.Contains("<!-- BLOG_POSTS -->"))
+            {
+                content = content.Replace("<!-- BLOG_POSTS -->", $"<!-- BLOG_POSTS -->\n{newEntry}");
+                File.WriteAllText(indexPath, content);
+            }
+            else
+            {
+                Console.WriteLine("⚠️ index.html'de <!-- BLOG_POSTS --> yorumu bulunamadı!");
             }
         }
 
