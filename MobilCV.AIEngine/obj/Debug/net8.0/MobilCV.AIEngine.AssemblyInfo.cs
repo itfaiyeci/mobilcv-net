@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MobilCV.AIEngine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+271192e1bcc6192acf55a93edb277a635b730d54")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5021258c02011eeebf6120a5a952a445773a7653")]
 [assembly: System.Reflection.AssemblyProductAttribute("MobilCV.AIEngine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MobilCV.AIEngine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
