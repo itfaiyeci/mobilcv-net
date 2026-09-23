@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://mobilcv.net/</loc>
-        <lastmod>2026-07-15</lastmod>
+        <lastmod>2026-09-22</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -17,5 +17,85 @@
         <lastmod>2026-07-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
+    </url>
+
+    <!-- Blog makaleleri (önceden sitemap'e hiç eklenmemişti) -->
+    <url>
+        <loc>https://mobilcv.net/girisimcilik-hikayeleri-sifirdan-basariya.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/sektor-degistirmek-isteyenler-icin-rehber.html</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/kariyer-planlamasi-adim-adim-rehber.html</loc>
+        <lastmod>2026-08-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/sektor-degistirerek-hayalindeki-ise-ulasanlar.html</loc>
+        <lastmod>2026-08-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/30-yasindan-once-kariyerinde-yapman-gereken-5-hamle.html</loc>
+        <lastmod>2026-08-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/cvde-dikkat-edilmesi-gereken-7-kritik-nokta.html</loc>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/uzaktan-mulakatlarda-basarili-olma-taktikleri.html</loc>
+        <lastmod>2026-08-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/2026nin-en-populer-10-meslegi.html</loc>
+        <lastmod>2026-07-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/cvde-fotograf-kullanmali-misiniz.html</loc>
+        <lastmod>2026-07-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/mulakatta-basarili-olmanin-10-altin-kurali.html</loc>
+        <lastmod>2026-07-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/yeni-mezunlar-icin-cv-hazirlama-rehberi.html</loc>
+        <lastmod>2026-07-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/cvde-dikkat-edilmesi-gereken-5-kritik-nokta.html</loc>
+        <lastmod>2026-07-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/yapay-zeka-is-dunyasini-nasil-donusturuyor.html</loc>
+        <lastmod>2026-07-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
 </urlset>
