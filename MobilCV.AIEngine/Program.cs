@@ -1,4 +1,6 @@
 using OpenAI.Chat;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace MobilCV.AIEngine
 {
@@ -12,6 +14,8 @@ namespace MobilCV.AIEngine
             var client = new ChatClient("gpt-3.5-turbo", apiKey);
 
             // ===== KATEGORİ VE KONU HAVUZU =====
+            // Not: Havuz genişletildi (17 -> 27 konu). Script artık aynı konuyu
+            // tekrar seçmediği için, havuz ne kadar büyükse o kadar geç tükenir.
             var topics = new Dictionary<string, List<string>>
             {
                 ["CV-Rehberi"] = new List<string>
@@ -19,59 +23,80 @@ namespace MobilCV.AIEngine
                     "CV'de Dikkat Edilmesi Gereken 7 Kritik Nokta",
                     "Etkili Bir Ön Yazı Nasıl Yazılır?",
                     "CV'de Fotoğraf Kullanmalı mısınız?",
-                    "Yeni Mezunlar İçin CV Hazırlama Rehberi"
+                    "Yeni Mezunlar İçin CV Hazırlama Rehberi",
+                    "ATS Sistemlerini Geçen CV Nasıl Hazırlanır?",
+                    "CV'de Hangi Kelimeler Kullanılmamalı?",
+                    "İngilizce CV Hazırlarken Dikkat Edilmesi Gerekenler",
+                    "CV ile Özgeçmiş Arasındaki Fark Nedir?"
                 },
                 ["Mülakat-Taktikleri"] = new List<string>
                 {
                     "Mülakatta Başarılı Olmanın 10 Altın Kuralı",
                     "En Zor Mülakat Sorularına Cevaplar",
-                    "Uzaktan Mülakatlarda Başarılı Olma Taktikleri"
+                    "Uzaktan Mülakatlarda Başarılı Olma Taktikleri",
+                    "Mülakatta Maaş Pazarlığı Nasıl Yapılır?",
+                    "Grup Mülakatlarında Öne Çıkmanın Yolları",
+                    "Mülakat Sonrası Teşekkür E-postası Nasıl Yazılır?"
                 },
                 ["Kariyer-Planlama"] = new List<string>
                 {
-                    "Kariyer Planlaması: Adım Adım Rehber",
+                    "Kariyer Planlaması Adım Adım Rehber",
                     "30 Yaşından Önce Kariyerinde Yapman Gereken 5 Hamle",
-                    "Sektör Değiştirmek İsteyenler İçin Rehber"
+                    "Sektör Değiştirmek İsteyenler İçin Rehber",
+                    "Kariyer Molası Vermek İsteyenler İçin Öneriler",
+                    "İkinci Bir Kariyere Nasıl Başlanır?"
                 },
                 ["İş-Dünyası-Trendleri"] = new List<string>
                 {
                     "2026'nın En Popüler 10 Mesleği",
                     "Uzaktan Çalışmanın Geleceği ve Trendler",
-                    "Yapay Zeka Hangi Meslekleri Dönüştürecek?"
+                    "Yapay Zeka Hangi Meslekleri Dönüştürecek?",
+                    "Hibrit Çalışma Modeli Kariyerini Nasıl Etkiler?",
+                    "Freelance Çalışmaya Geçiş Rehberi"
                 },
                 ["Başarı-Hikayeleri"] = new List<string>
                 {
                     "Sektör Değiştirerek Hayalindeki İşe Ulaşanlar",
-                    "Girişimcilik Hikayeleri: Sıfırdan Başarıya",
-                    "Kadın Girişimcilerin Başarı Hikayeleri"
+                    "Girişimcilik Hikayeleri Sıfırdan Başarıya",
+                    "Kadın Girişimcilerin Başarı Hikayeleri",
+                    "Küçük Bir Fikirden Büyük Bir Şirkete Uzanan Yolculuklar"
                 }
             };
 
-            // ===== RASTGELE KATEGORİ VE KONU SEÇ =====
-            Random random = new Random();
-            var categoryKeys = topics.Keys.ToList();
-            string selectedCategory = categoryKeys[random.Next(categoryKeys.Count)];
-            string topic = topics[selectedCategory][random.Next(topics[selectedCategory].Count)];
+            // ===== DAHA ÖNCE YAZILMIŞ KONULARI HAVUZDAN ÇIKAR =====
+            // Önceki hatanın kök nedeni: script hangi konuların zaten işlendiğini
+            // hiç kontrol etmiyordu. Artık slug'ı zaten bir HTML dosyası olarak
+            // var olan konular aday listesinden çıkarılıyor.
+            var availableTopics = new List<(string Category, string Topic, string Slug)>();
+            foreach (var kvp in topics)
+            {
+                foreach (var t in kvp.Value)
+                {
+                    string s = Slugify(t);
+                    string path = Path.Combine("..", $"{s}.html");
+                    if (!File.Exists(path))
+                    {
+                        availableTopics.Add((kvp.Key, t, s));
+                    }
+                }
+            }
 
-            // ===== SLUG (URL) OLUŞTUR =====
-            string slug = topic
-                .ToLowerInvariant()
-                .Replace("?", "")
-                .Replace(",", "")
-                .Replace(".", "")
-                .Replace("'", "")
-                .Replace("ü", "u")
-                .Replace("ğ", "g")
-                .Replace("ş", "s")
-                .Replace("ı", "i")
-                .Replace("ö", "o")
-                .Replace("ç", "c")
-                .Replace("İ", "i")
-                .Replace(" ", "-")
-                .Trim('-');
+            if (availableTopics.Count == 0)
+            {
+                Console.WriteLine("⚠️ Havuzdaki tüm konular zaten yazılmış! Yukarıdaki 'topics' sözlüğüne yeni konular eklemeniz gerekiyor. İşlem sonlandırılıyor (hata değil).");
+                return;
+            }
+
+            // ===== RASTGELE (AMA DAHA ÖNCE YAZILMAMIŞ) KONU SEÇ =====
+            Random random = new Random();
+            var selected = availableTopics[random.Next(availableTopics.Count)];
+            string selectedCategory = selected.Category;
+            string topic = selected.Topic;
+            string slug = selected.Slug;
 
             Console.WriteLine($"📂 Kategori: {selectedCategory}");
             Console.WriteLine($"📝 Konu: {topic}");
+            Console.WriteLine($"📊 Havuzda kalan işlenmemiş konu sayısı: {availableTopics.Count - 1}");
 
             try
             {
@@ -137,12 +162,36 @@ namespace MobilCV.AIEngine
                 // ===== ANA SAYFAYI GÜNCELLE =====
                 UpdateIndexPage(slug, topic);
                 Console.WriteLine("✅ index.html güncellendi!");
+
+                // ===== SITEMAP.XML GÜNCELLE =====
+                UpdateSitemap(slug);
+                Console.WriteLine("✅ sitemap.xml güncellendi!");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ HATA: {ex.Message}");
                 Environment.Exit(1);
             }
+        }
+
+        // ===== SLUG (URL) OLUŞTURMA =====
+        // Önceki hatanın kök nedeni: ':' karakteri temizlenmiyordu, bozuk URL'ler
+        // oluşuyordu (örn. "girisimcilik-hikayeleri:-sifirdan-basariya.html").
+        // Artık harf/rakam/boşluk DIŞINDAKİ her karakter (:, ?, !, (, ) vb.) genel
+        // bir regex ile temizleniyor - gelecekte yeni bir özel karakter eklense
+        // bile tekrar bozulmaz.
+        static string Slugify(string text)
+        {
+            string s = text
+                .ToLowerInvariant()
+                .Replace("ü", "u").Replace("ğ", "g").Replace("ş", "s")
+                .Replace("ı", "i").Replace("ö", "o").Replace("ç", "c")
+                .Replace("İ", "i");
+
+            s = Regex.Replace(s, @"[^a-z0-9\s-]", "");   // izin verilmeyen her karakteri sil
+            s = Regex.Replace(s, @"\s+", "-");             // boşlukları tireye çevir
+            s = Regex.Replace(s, @"-+", "-");              // ardışık tireleri teke indir
+            return s.Trim('-');
         }
 
         // ===== ANA SAYFAYI GÜNCELLE =====
@@ -156,11 +205,24 @@ namespace MobilCV.AIEngine
             }
 
             string content = File.ReadAllText(indexPath);
+
+            // Önceki hatanın kök nedeni: aynı makale için (aynı href) ESKİ bir
+            // liste girişi varsa siliniyordu, sadece EKLENİYORDU - bu yüzden
+            // aynı yazı index.html'de birden fazla kez, farklı tarihlerle
+            // görünüyordu. Artık önce eski girişi (varsa) siliyoruz.
+            string existingEntryPattern = $@"<li>\s*<a href=""{Regex.Escape(slug)}\.html"">.*?</a>\s*</li>";
+            content = Regex.Replace(content, existingEntryPattern, "", RegexOptions.Singleline);
+
+            // Önceki hatanın kök nedeni: DateTime.Now:dd MMMM yyyy formatı,
+            // sunucunun o anki dil ayarına bağımlıydı (bazen İngilizce ay ismi,
+            // bazen Türkçe çıkıyordu). Artık kültür AÇIKÇA tr-TR olarak veriliyor.
+            string formattedDate = DateTime.Now.ToString("dd MMMM yyyy", new CultureInfo("tr-TR"));
+
             string newEntry = $@"
 <li>
     <a href=""{slug}.html"">
         <div class=""post-title"">{title}</div>
-        <div class=""post-meta""><span class=""badge"">Yeni</span> 📅 {DateTime.Now:dd MMMM yyyy}</div>
+        <div class=""post-meta""><span class=""badge"">Yeni</span> 📅 {formattedDate}</div>
     </a>
 </li>";
 
@@ -172,6 +234,42 @@ namespace MobilCV.AIEngine
             else
             {
                 Console.WriteLine("⚠️ index.html'de <!-- BLOG_POSTS --> yorumu bulunamadı!");
+            }
+        }
+
+        // ===== SITEMAP.XML GÜNCELLE (yeni eklendi) =====
+        // Her yeni makale otomatik olarak sitemap.xml'e de eklenir, böylece
+        // arama motorları yeni sayfaları daha hızlı keşfeder.
+        static void UpdateSitemap(string slug)
+        {
+            string sitemapPath = Path.Combine("..", "sitemap.xml");
+            if (!File.Exists(sitemapPath))
+            {
+                Console.WriteLine("⚠️ sitemap.xml bulunamadı, bu adım atlanıyor.");
+                return;
+            }
+
+            string content = File.ReadAllText(sitemapPath);
+            string url = $"https://mobilcv.net/{slug}.html";
+
+            if (content.Contains($"<loc>{url}</loc>"))
+            {
+                return; // zaten ekli
+            }
+
+            string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
+            string newUrlEntry = $@"  <url>
+    <loc>{url}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>";
+
+            if (content.Contains("</urlset>"))
+            {
+                content = content.Replace("</urlset>", newUrlEntry);
+                File.WriteAllText(sitemapPath, content);
             }
         }
 
