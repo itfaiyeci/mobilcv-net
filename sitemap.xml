@@ -19,7 +19,85 @@
         <priority>0.5</priority>
     </url>
 
-    <!-- Blog makaleleri (önceden sitemap'e hiç eklenmemişti) -->
+    <!-- CV Örnekleri hub sayfası -->
+    <url>
+        <loc>https://mobilcv.net/cv-ornekleri.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Mesleğe özel CV şablonu sayfaları (10 yeni) -->
+    <url>
+        <loc>https://mobilcv.net/avukat-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/hemsire-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/makine-muhendisi-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/mimar-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/ogretmen-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/satis-danismani-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/yeni-mezun-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/bankacilik-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/yazilimci-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/muhasebeci-cv-sablonu.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Haftalık ipuçları sayfası -->
+    <url>
+        <loc>https://mobilcv.net/haftalik-ipuclari.html</loc>
+        <lastmod>2026-09-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Blog makaleleri -->
     <url>
         <loc>https://mobilcv.net/girisimcilik-hikayeleri-sifirdan-basariya.html</loc>
         <lastmod>2026-09-01</lastmod>
@@ -98,10 +176,10 @@
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-  <url>
-    <loc>https://mobilcv.net/mulakat-sonrasi-tesekkur-e-postasi-nasil-yazilir.html</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+    <url>
+        <loc>https://mobilcv.net/mulakat-sonrasi-tesekkur-e-postasi-nasil-yazilir.html</loc>
+        <lastmod>2026-09-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
 </urlset>
