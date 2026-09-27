@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avukat CV Örneği ve Hazırlama Rehberi | MobilCV</title>
+    <meta name="description" content="Avukat CV'si nasıl hazırlanır? Baro sicil bilgisi, uzmanlık alanı, dava deneyimi ekleme ipuçları ve ücretsiz avukat CV şablonu.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .container { max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); overflow: hidden; }
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+        .logo { font-size: 1.6em; font-weight: 900; color: #0f172a; text-decoration: none; }
+        .logo span { color: #2563eb; }
+        .nav-links { display: flex; list-style: none; gap: 6px; flex-wrap: wrap; }
+        .nav-links a {
+            padding: 10px 20px; color: #64748b; text-decoration: none; font-weight: 600;
+            font-size: 0.95em; border-radius: 40px; transition: all 0.25s ease;
+        }
+        .nav-links a:hover { color: #2563eb; background: #dbeafe; }
+        .nav-links a.active { color: #fff; background: #2563eb; }
+        .nav-cta { background: #2563eb; color: #fff !important; padding: 10px 24px; border-radius: 40px; font-weight: 700; }
+        .nav-cta:hover { background: #1d4ed8 !important; }
+        .page-content { padding: 48px 40px 40px; }
+        .page-content .category-tag {
+            display: inline-block; background: #dbeafe; color: #2563eb; padding: 4px 14px;
+            border-radius: 40px; font-size: 0.75em; font-weight: 700; margin-bottom: 12px;
+        }
+        .page-content h1 { font-size: 2.2em; font-weight: 800; margin-bottom: 16px; color: #0f172a; }
+        .page-content p { color: #334155; margin-bottom: 16px; font-size: 1.05em; }
+        .page-content h2 { font-size: 1.5em; font-weight: 700; margin-top: 32px; margin-bottom: 12px; color: #0f172a; }
+        .page-content ul, .page-content ol { margin-left: 24px; margin-bottom: 20px; color: #334155; }
+        .page-content li { margin-bottom: 8px; }
+        .top-cta-box {
+            text-align: center; margin: 24px 0 32px; padding: 24px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8); border-radius: 16px;
+        }
+        .top-cta-box p { color: #fff; font-size: 1.15em; font-weight: 700; margin-bottom: 14px; }
+        .top-cta-button {
+            display: inline-block; background: #fff; color: #2563eb; padding: 14px 32px;
+            border-radius: 40px; text-decoration: none; font-weight: 800; font-size: 1.05em;
+        }
+        .example-cv-section {
+            margin-top: 40px; padding: 32px; background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0;
+        }
+        .example-cv-section h2 { margin-top: 0; }
+        .example-cv-section .example-note { color: #64748b; font-size: 0.95em; margin-bottom: 20px; }
+        .example-cv-image {
+            width: 100%; max-width: 500px; display: block; margin: 0 auto;
+            border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+        .example-cv-cta { text-align: center; margin-top: 20px; }
+        .example-cv-cta a {
+            display: inline-block; background: #2563eb; color: #fff; padding: 12px 28px;
+            border-radius: 40px; text-decoration: none; font-weight: 700; font-size: 1em;
+        }
+        .share-box { text-align: center; margin: 30px 0; padding: 20px; background: #f8fafc; border-radius: 12px; }
+        .share-box p { font-size: 0.95em; color: #64748b; margin-bottom: 12px; }
+        .share-buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .share-btn {
+            display: inline-block; padding: 8px 18px; border-radius: 40px; text-decoration: none;
+            font-weight: 600; font-size: 0.85em; color: #fff !important; transition: opacity 0.2s;
+        }
+        .share-btn:hover { opacity: 0.8; }
+        .share-linkedin { background: #0a66c2; }
+        .share-twitter { background: #000; }
+        .share-whatsapp { background: #25D366; }
+        .cta-box {
+            text-align: center; margin-top: 40px; padding: 30px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 16px; border: 1px solid #e2e8f0;
+        }
+        .cta-box p { font-size: 1.2em; font-weight: 700; color: #0f172a; margin-bottom: 12px; }
+        .cta-button {
+            display: inline-block; background: #2563eb; color: #fff; padding: 14px 36px;
+            border-radius: 40px; text-decoration: none; font-weight: 700; font-size: 1.1em;
+            transition: background 0.3s ease;
+        }
+        .cta-button:hover { background: #1d4ed8; }
+        .footer { background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 30px; text-align: center; color: #94a3b8; }
+        .footer a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        .footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-bottom: 10px; }
+        .footer-links a { color: #64748b; font-weight: 500; }
+        .footer-links a:hover { color: #2563eb; }
+        @media (max-width: 640px) {
+            .site-header { flex-direction: column; gap: 12px; padding: 16px; }
+            .nav-links { justify-content: center; }
+            .page-content { padding: 24px 18px; }
+            .page-content h1 { font-size: 1.6em; }
+            .cta-box { padding: 20px; }
+            .cta-button { padding: 12px 24px; font-size: 1em; }
+            .example-cv-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="site-header">
+        <a href="https://mobilcv.net" class="logo">Mobil<span>CV</span></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="https://mobilcv.com">Ana Site</a></li>
+                <li><a href="https://mobilcv.net">Blog</a></li>
+                <li><a href="cv-ornekleri.html" class="active">CV Örnekleri</a></li>
+                <li><a href="cv-rehberi.html">CV Rehberi</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="https://mobilcv.com" class="nav-cta">🚀 Hemen Oluştur</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-content">
+        <span class="category-tag">📂 CV Rehberi - Hukuk</span>
+        <article>
+            <h1>Avukat CV Örneği ve Hazırlama Rehberi</h1>
+
+            <div class="top-cta-box">
+                <p>✨ Bu şablonu MobilCV'de düzenle - ücretsiz, üyeliksiz, 1 dakikada!</p>
+                <a href="https://mobilcv.com" class="top-cta-button">🚀 Bu Şablonu MobilCV'de Düzenle</a>
+            </div>
+
+            
+<p>Hukuk sektöründe iş başvurusu yaparken CV'niz, akademik geçmişinizi ve mesleki deneyiminizi net bir şekilde ortaya koymalıdır. İşe alım yapan hukuk büroları ve şirketlerin hukuk departmanları, bir avukat CV'sinde belirli detayları özellikle arar. İşte avukat CV'nizi hazırlarken dikkat etmeniz gereken noktalar.</p>
+
+<h2>Kişisel Bilgiler ve Baro Sicil Numarası</h2>
+<p>Ad soyad, telefon, e-posta gibi standart bilgilerin yanında, avukat CV'lerinde <strong>kayıtlı olduğunuz baro</strong> ve varsa sicil numaranız önemli bir güven unsurudur. Bu bilgiyi "Hakkımda" bölümünde ya da ayrı bir satırda belirtebilirsiniz.</p>
+
+<h2>Eğitim Bölümünü Doğru Sıralayın</h2>
+<p>Hukuk fakültesi mezuniyetinizi, varsa yüksek lisans (LLM) veya doktora çalışmalarınızı en yeniden en eskiye doğru sıralayın. Staj dönemindeki avukatlık stajı bilgisini de bu bölümde veya ayrı bir "Staj" başlığı altında belirtmek faydalı olur.</p>
+
+<h2>Deneyim Bölümünde Uzmanlık Alanınızı Vurgulayın</h2>
+<p>Genel "avukat" ifadesi yerine, hangi hukuk alanlarında (ticaret hukuku, iş hukuku, ceza hukuku, gayrimenkul hukuku, aile hukuku vb.) deneyim sahibi olduğunuzu açıkça belirtin. Çalıştığınız dava türlerini, katıldığınız duruşma sayısını veya yönettiğiniz dosya hacmini somut rakamlarla desteklemek CV'nizi güçlendirir.</p>
+<ul>
+    <li>Örnek: "3 yıl boyunca ticari uyuşmazlık davalarında müvekkil temsilciliği yaptım, 50'den fazla dosya yönettim."</li>
+    <li>Örnek: "Şirketler hukuku alanında sözleşme hazırlama ve inceleme süreçlerinde aktif rol aldım."</li>
+</ul>
+
+<h2>Beceriler Bölümünde Neler Olmalı</h2>
+<p>Hukuki araştırma, sözleşme hazırlama, müzakere, dava takibi gibi mesleki becerilerin yanında, UYAP sistemi bilgisi gibi teknik yetkinlikleri de eklemek işe alım uzmanlarının dikkatini çeker.</p>
+
+<h2>Sertifikalar ve Ek Eğitimler</h2>
+<p>Baro stajı sertifikanız, katıldığınız arabuluculuk eğitimleri veya belirli bir hukuk dalında aldığınız sertifika programları CV'nizde ayrı bir bölümde yer almalıdır.</p>
+
+<h2>Sonuç</h2>
+<p>Avukat CV'nizi hazırlarken netlik, somut örnekler ve uzmanlık alanınızın açık şekilde belirtilmesi en önemli unsurlardır. Aşağıdaki butona tıklayarak bu ipuçlarına uygun, hazır bir CV şablonunu ücretsiz olarak doldurmaya başlayabilirsiniz.</p>
+
+
+            <div class="example-cv-section">
+                <h2>📄 Doldurulmuş Örnek CV</h2>
+                <p class="example-note">Yukarıdaki ipuçlarına göre hazırlanmış, Avukat pozisyonu için doldurulmuş örnek bir CV. Kendi bilgilerinle aynı şekilde doldurabilirsin.</p>
+                <img src="avukat-cv-sablonu.png" alt="Avukat için doldurulmuş örnek CV" class="example-cv-image" loading="lazy">
+                <div class="example-cv-cta">
+                    <a href="https://mobilcv.com">🚀 Kendi CV'ni Bu Şablonla Oluştur</a>
+                </div>
+            </div>
+        </article>
+
+        <div class="share-box">
+            <p>📤 Bu makaleyi paylaş:</p>
+            <div class="share-buttons">
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mobilcv.net/avukat-cv-sablonu.html" target="_blank" class="share-btn share-linkedin">LinkedIn</a>
+                <a href="https://twitter.com/intent/tweet?url=https://mobilcv.net/avukat-cv-sablonu.html&text=Avukat CV Örneği ve Hazırlama Rehberi" target="_blank" class="share-btn share-twitter">X (Twitter)</a>
+                <a href="https://api.whatsapp.com/send?text=Avukat CV Örneği ve Hazırlama Rehberi - https://mobilcv.net/avukat-cv-sablonu.html" target="_blank" class="share-btn share-whatsapp">WhatsApp</a>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <p>✨ CV'ni hemen oluştur!</p>
+            <a href="https://mobilcv.com" class="cta-button">🚀 MobilCV ile CV Oluştur</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://mobilcv.com">Ana Site</a>
+            <a href="https://mobilcv.net">Blog</a>
+            <a href="cv-rehberi.html">CV Rehberi</a>
+            <a href="iletisim.html">İletişim</a>
+        </div>
+        <p>&copy; 2026 MobilCV &mdash; <a href="https://mobilcv.com">mobilcv.com</a> ile güçlendirilmiştir.</p>
+    </footer>
+</div>
+</body>
+</html>
