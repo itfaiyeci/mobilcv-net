@@ -1,107 +1,89 @@
 # ============================================================
-# MobilCV - Mevcut Makalelere "CV Örnekleri" Linkini Toplu Ekleme
+# MobilCV - fix_headers v3 (nav ve footer BAĞIMSIZ kontrol edilir)
 # ============================================================
-# Bu script, mobilcv.net reponuzdaki TÜM .html dosyalarını tarar.
-# Eski (CV Örnekleri linki OLMAYAN) header/footer yapısını bulursa
-# otomatik olarak günceller. Zaten güncel olan dosyalara (index.html,
-# cv-ornekleri.html, meslek şablonları) DOKUNMAZ - güvenlidir,
-# birden fazla kez çalıştırılabilir.
-#
-# KULLANIM:
-# 1. Bu dosyayı "fix_headers.py" adıyla mobilcv.net reponuzun
-#    KÖK dizinine kaydedin (index.html ile AYNI klasöre).
-# 2. Terminal/komut satırında o klasöre gidin.
-# 3. Şunu çalıştırın:  python fix_headers.py
-# 4. Script hangi dosyaları güncellediğini ekrana yazacaktır.
-# 5. Sonuçları git ile commit edip GitHub'a push edin.
+# v1: class="active" olan linkleri (kendi sayfasını vurgulayan
+#     sayfalarda) atlıyordu.
+# v2: footer'da "cv-ornekleri.html" varsa TÜM dosyayı atlıyordu,
+#     nav'daki eksikliği kaçırıyordu (cv-rehberi.html'de yaşanan
+#     tam olarak buydu).
+# v3: nav-links ve footer-links bloklarını AYRI AYRI, BAĞIMSIZ
+#     kontrol eder - biri eksikse SADECE onu tamamlar.
+# Güvenli: birden fazla kez çalıştırılabilir, zaten doğru olan
+# kısımlara dokunmaz.
 # ============================================================
 
-import os
+import re
 import glob
 
-OLD_NAV = '''<ul class="nav-links">
-                <li><a href="https://mobilcv.com">Ana Site</a></li>
-                <li><a href="https://mobilcv.net">Blog</a></li>
-                <li><a href="cv-rehberi.html">CV Rehberi</a></li>
-                <li><a href="iletisim.html">İletişim</a></li>
-                <li><a href="https://mobilcv.net" class="nav-cta">🚀 Keşfet</a></li>
-            </ul>'''
 
-NEW_NAV = '''<ul class="nav-links">
-                <li><a href="https://mobilcv.com">Ana Site</a></li>
-                <li><a href="https://mobilcv.net">Blog</a></li>
-                <li><a href="cv-ornekleri.html">CV Örnekleri</a></li>
-                <li><a href="cv-rehberi.html">CV Rehberi</a></li>
-                <li><a href="iletisim.html">İletişim</a></li>
-                <li><a href="https://mobilcv.net" class="nav-cta">🚀 Keşfet</a></li>
-            </ul>'''
+def fix_block(content, block_pattern, link_pattern, link_replacement):
+    """block_pattern ile bir HTML bloğunu bulur, içinde 'cv-ornekleri.html'
+    yoksa link_pattern eşleşmesinin hemen önüne link_replacement ekler."""
+    block_match = re.search(block_pattern, content, re.DOTALL)
+    if not block_match:
+        return content, False  # blok bulunamadı
 
-OLD_FOOTER = '''<div class="footer-links">
-            <a href="https://mobilcv.com">Ana Site</a>
-            <a href="https://mobilcv.net">Blog</a>
-            <a href="cv-rehberi.html">CV Rehberi</a>
-            <a href="iletisim.html">İletişim</a>
-        </div>'''
+    block_text = block_match.group(0)
+    if "cv-ornekleri.html" in block_text:
+        return content, False  # bu blokta zaten var
 
-NEW_FOOTER = '''<div class="footer-links">
-            <a href="https://mobilcv.com">Ana Site</a>
-            <a href="https://mobilcv.net">Blog</a>
-            <a href="cv-ornekleri.html">CV Örnekleri</a>
-            <a href="cv-rehberi.html">CV Rehberi</a>
-            <a href="iletisim.html">İletişim</a>
-        </div>'''
+    new_block_text, count = re.subn(link_pattern, link_replacement, block_text, count=1)
+    if count == 0:
+        return content, False  # beklenen link deseni bulunamadı
+
+    content = content[:block_match.start()] + new_block_text + content[block_match.end():]
+    return content, True
 
 
 def main():
     html_files = glob.glob("*.html")
     if not html_files:
         print("⚠️  Bu klasörde hiç .html dosyası bulunamadı.")
-        print("    Script'i mobilcv.net reponuzun KÖK dizininde çalıştırdığınızdan emin olun.")
         return
 
+    nav_block_pattern = r'<ul class="nav-links">.*?</ul>'
+    nav_link_pattern = r'(<li><a href="cv-rehberi\.html"[^>]*>CV Rehberi</a></li>)'
+    nav_link_replacement = r'<li><a href="cv-ornekleri.html">CV Örnekleri</a></li>\n                \1'
+
+    footer_block_pattern = r'<div class="footer-links">.*?</div>'
+    footer_link_pattern = r'(<a href="cv-rehberi\.html"[^>]*>CV Rehberi</a>)'
+    footer_link_replacement = r'<a href="cv-ornekleri.html">CV Örnekleri</a>\n            \1'
+
     updated = []
-    already_ok = []
-    no_match = []
+    no_change = []
 
     for filename in html_files:
         with open(filename, encoding='utf-8') as f:
             content = f.read()
 
-        original_content = content
-        changed = False
+        original = content
+        changed_nav = False
+        changed_footer = False
 
-        if OLD_NAV in content:
-            content = content.replace(OLD_NAV, NEW_NAV)
-            changed = True
+        content, changed_nav = fix_block(content, nav_block_pattern, nav_link_pattern, nav_link_replacement)
+        content, changed_footer = fix_block(content, footer_block_pattern, footer_link_pattern, footer_link_replacement)
 
-        if OLD_FOOTER in content:
-            content = content.replace(OLD_FOOTER, NEW_FOOTER)
-            changed = True
-
-        if changed:
+        if changed_nav or changed_footer:
             with open(filename, 'w', encoding='utf-8') as f:
                 f.write(content)
-            updated.append(filename)
-        elif "cv-ornekleri.html" in original_content:
-            already_ok.append(filename)
+            detail = []
+            if changed_nav:
+                detail.append("nav")
+            if changed_footer:
+                detail.append("footer")
+            updated.append(f"{filename} ({' + '.join(detail)})")
         else:
-            no_match.append(filename)
+            no_change.append(filename)
 
     print(f"\n✅ Güncellenen dosyalar ({len(updated)}):")
     for f in updated:
         print(f"   - {f}")
 
-    if already_ok:
-        print(f"\n☑️  Zaten güncel olan dosyalar ({len(already_ok)}):")
-        for f in already_ok:
-            print(f"   - {f}")
+    print(f"\n☑️  Değişmeyen dosyalar ({len(no_change)}) - zaten güncel veya beklenmeyen yapıda:")
+    for f in no_change:
+        print(f"   - {f}")
 
-    if no_match:
-        print(f"\n⚠️  Beklenen yapı bulunamayan dosyalar ({len(no_match)}) - bunlara elle bakmanız gerekebilir:")
-        for f in no_match:
-            print(f"   - {f}")
-
-    print(f"\n🎉 Tamamlandı! {len(updated)} dosya güncellendi.")
+    print(f"\n🎉 Tamamlandı!")
 
 
 if __name__ == "__main__":
