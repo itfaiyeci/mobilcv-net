@@ -13,9 +13,7 @@ namespace MobilCV.AIEngine
             var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("OPENAI_API_KEY bulunamadı!");
             var client = new ChatClient("gpt-3.5-turbo", apiKey);
 
-            // ===== KATEGORİ VE KONU HAVUZU =====
-            // Not: Havuz genişletildi (17 -> 27 konu). Script artık aynı konuyu
-            // tekrar seçmediği için, havuz ne kadar büyükse o kadar geç tükenir.
+            // ===== KATEGORİ VE KONU HAVUZU (TÜRKÇE) =====
             var topics = new Dictionary<string, List<string>>
             {
                 ["CV-Rehberi"] = new List<string>
@@ -63,18 +61,60 @@ namespace MobilCV.AIEngine
                 }
             };
 
+            // ===== AYNI KONULARIN İNGİLİZCE BAŞLIKLARI =====
+            // Her Türkçe konu başlığı için SABİT bir İngilizce karşılık. Bu, GPT'ye
+            // her seferinde ayrı bir başlık ürettirmek yerine (tutarsız/öngörülemez
+            // sonuç riski) tutarlı, öngörülebilir İngilizce başlıklar ve slug'lar sağlar.
+            // GPT sadece İNGİLİZCE İÇERİĞİ üretmek için çağrılır, başlık için değil.
+            var topicsEnglish = new Dictionary<string, string>
+            {
+                ["CV'de Dikkat Edilmesi Gereken 7 Kritik Nokta"] = "7 Critical Points to Watch in Your CV",
+                ["Etkili Bir Ön Yazı Nasıl Yazılır?"] = "How to Write an Effective Cover Letter?",
+                ["CV'de Fotoğraf Kullanmalı mısınız?"] = "Should You Use a Photo on Your CV?",
+                ["Yeni Mezunlar İçin CV Hazırlama Rehberi"] = "CV Writing Guide for New Graduates",
+                ["ATS Sistemlerini Geçen CV Nasıl Hazırlanır?"] = "How to Write a CV That Passes ATS Systems?",
+                ["CV'de Hangi Kelimeler Kullanılmamalı?"] = "Words You Should Avoid on Your CV",
+                ["İngilizce CV Hazırlarken Dikkat Edilmesi Gerekenler"] = "What to Consider When Writing an English CV",
+                ["CV ile Özgeçmiş Arasındaki Fark Nedir?"] = "What's the Difference Between a CV and a Resume?",
+                ["Mülakatta Başarılı Olmanın 10 Altın Kuralı"] = "10 Golden Rules for Interview Success",
+                ["En Zor Mülakat Sorularına Cevaplar"] = "Answers to the Toughest Interview Questions",
+                ["Uzaktan Mülakatlarda Başarılı Olma Taktikleri"] = "Tactics for Succeeding in Remote Interviews",
+                ["Mülakatta Maaş Pazarlığı Nasıl Yapılır?"] = "How to Negotiate Salary in an Interview",
+                ["Grup Mülakatlarında Öne Çıkmanın Yolları"] = "Ways to Stand Out in Group Interviews",
+                ["Mülakat Sonrası Teşekkür E-postası Nasıl Yazılır?"] = "How to Write a Thank-You Email After an Interview",
+                ["Kariyer Planlaması Adım Adım Rehber"] = "Career Planning: A Step-by-Step Guide",
+                ["30 Yaşından Önce Kariyerinde Yapman Gereken 5 Hamle"] = "5 Career Moves to Make Before Turning 30",
+                ["Sektör Değiştirmek İsteyenler İçin Rehber"] = "A Guide for Those Who Want to Change Industries",
+                ["Kariyer Molası Vermek İsteyenler İçin Öneriler"] = "Tips for Those Considering a Career Break",
+                ["İkinci Bir Kariyere Nasıl Başlanır?"] = "How to Start a Second Career",
+                ["2026'nın En Popüler 10 Mesleği"] = "The 10 Most Popular Professions of 2026",
+                ["Uzaktan Çalışmanın Geleceği ve Trendler"] = "The Future of Remote Work and Emerging Trends",
+                ["Yapay Zeka Hangi Meslekleri Dönüştürecek?"] = "Which Professions Will AI Transform?",
+                ["Hibrit Çalışma Modeli Kariyerini Nasıl Etkiler?"] = "How Does the Hybrid Work Model Affect Your Career?",
+                ["Freelance Çalışmaya Geçiş Rehberi"] = "A Guide to Transitioning to Freelance Work",
+                ["Sektör Değiştirerek Hayalindeki İşe Ulaşanlar"] = "Success Stories: Changing Industries to Land a Dream Job",
+                ["Girişimcilik Hikayeleri Sıfırdan Başarıya"] = "Entrepreneurship Stories: From Zero to Success",
+                ["Kadın Girişimcilerin Başarı Hikayeleri"] = "Success Stories of Women Entrepreneurs",
+                ["Küçük Bir Fikirden Büyük Bir Şirkete Uzanan Yolculuklar"] = "From a Small Idea to a Big Company: Growth Journeys"
+            };
+
             // ===== DAHA ÖNCE YAZILMIŞ KONULARI HAVUZDAN ÇIKAR =====
-            // Önceki hatanın kök nedeni: script hangi konuların zaten işlendiğini
-            // hiç kontrol etmiyordu. Artık slug'ı zaten bir HTML dosyası olarak
-            // var olan konular aday listesinden çıkarılıyor.
+            // Not: Artık HEM Türkçe HEM İngilizce dosyanın var olup olmadığını kontrol
+            // ediyoruz. Eğer geçmişte (bu güncellemeden önce) sadece Türkçesi üretilmiş
+            // bir konu varsa, bu konu HALA "işlenmemiş" sayılır ve seçildiğinde eksik
+            // olan İngilizce versiyonu da otomatik tamamlanır.
             var availableTopics = new List<(string Category, string Topic, string Slug)>();
             foreach (var kvp in topics)
             {
                 foreach (var t in kvp.Value)
                 {
                     string s = Slugify(t);
-                    string path = Path.Combine("..", $"{s}.html");
-                    if (!File.Exists(path))
+                    string pathTr = Path.Combine("..", $"{s}.html");
+                    string slugEnCheck = Slugify(topicsEnglish.ContainsKey(t) ? topicsEnglish[t] : t);
+                    string pathEn = Path.Combine("..", "en", $"{slugEnCheck}.html");
+                    bool trExists = File.Exists(pathTr);
+                    bool enExists = File.Exists(pathEn);
+                    if (!trExists || !enExists)
                     {
                         availableTopics.Add((kvp.Key, t, s));
                     }
@@ -83,89 +123,162 @@ namespace MobilCV.AIEngine
 
             if (availableTopics.Count == 0)
             {
-                Console.WriteLine("⚠️ Havuzdaki tüm konular zaten yazılmış! Yukarıdaki 'topics' sözlüğüne yeni konular eklemeniz gerekiyor. İşlem sonlandırılıyor (hata değil).");
+                Console.WriteLine("⚠️ Havuzdaki tüm konular zaten yazılmış (TR + EN)! Yukarıdaki 'topics' sözlüğüne yeni konular eklemeniz gerekiyor. İşlem sonlandırılıyor (hata değil).");
                 return;
             }
 
-            // ===== RASTGELE (AMA DAHA ÖNCE YAZILMAMIŞ) KONU SEÇ =====
+            // ===== RASTGELE (AMA DAHA ÖNCE TAMAMLANMAMIŞ) KONU SEÇ =====
             Random random = new Random();
             var selected = availableTopics[random.Next(availableTopics.Count)];
             string selectedCategory = selected.Category;
             string topic = selected.Topic;
             string slug = selected.Slug;
 
+            string topicEnglish = topicsEnglish.ContainsKey(topic) ? topicsEnglish[topic] : topic;
+            string slugEnglish = Slugify(topicEnglish);
+
             Console.WriteLine($"📂 Kategori: {selectedCategory}");
-            Console.WriteLine($"📝 Konu: {topic}");
+            Console.WriteLine($"📝 Konu (TR): {topic}");
+            Console.WriteLine($"📝 Konu (EN): {topicEnglish}");
             Console.WriteLine($"📊 Havuzda kalan işlenmemiş konu sayısı: {availableTopics.Count - 1}");
+
+            bool needTr = !File.Exists(Path.Combine("..", $"{slug}.html"));
+            bool needEn = !File.Exists(Path.Combine("..", "en", $"{slugEnglish}.html"));
 
             try
             {
-                // ===== PROFESYONEL VE TELİF GÜVENLİ PROMPT =====
-                var messages = new List<ChatMessage>
+                // ===== TÜRKÇE MAKALE =====
+                if (needTr)
                 {
-                    new SystemChatMessage(@"Sen, 10 yıllık deneyime sahip, iş dünyası trendlerini yakından takip eden bir kariyer uzmanısın.
+                    var messagesTr = new List<ChatMessage>
+                    {
+                        new SystemChatMessage(@"Sen, 10 yıllık deneyime sahip, iş dünyası trendlerini yakından takip eden bir kariyer uzmanısın.
 
-                    **TELİF HAKKI KURALI (KIRMIZI ÇİZGİ):**
-                    - Asla başka kaynaklardan birebir alıntı yapma.
-                    - İstatistikler, veriler veya örnekler verirken bunları KENDİ CÜMLELERİNLE yorumla ve sentezle.
-                    - Kaynakça bölümünde gerçek bir kaynak belirtme, sadece 'Yararlanılan Kaynaklar' başlığı altında genel bir bilgi ver.
-                    - Hiçbir şekilde başka bir yazarın, kurumun veya web sitesinin metnini kopyalama.
-                    - Oluşturduğun tüm içerik %100 ÖZGÜN ve SANA AİT olmalı.
-                    - Eğer bir istatistik veya araştırma sonucu paylaşacaksan, bunu 'araştırmalar gösteriyor ki...' veya 'uzmanların belirttiğine göre...' gibi genel ifadelerle belirt, doğrudan bir kaynağa atıf yapma.
+                        **TELİF HAKKI KURALI (KIRMIZI ÇİZGİ):**
+                        - Asla başka kaynaklardan birebir alıntı yapma.
+                        - İstatistikler, veriler veya örnekler verirken bunları KENDİ CÜMLELERİNLE yorumla ve sentezle.
+                        - Kaynakça bölümünde gerçek bir kaynak belirtme, sadece 'Yararlanılan Kaynaklar' başlığı altında genel bir bilgi ver.
+                        - Hiçbir şekilde başka bir yazarın, kurumun veya web sitesinin metnini kopyalama.
+                        - Oluşturduğun tüm içerik %100 ÖZGÜN ve SANA AİT olmalı.
+                        - Eğer bir istatistik veya araştırma sonucu paylaşacaksan, bunu 'araştırmalar gösteriyor ki...' veya 'uzmanların belirttiğine göre...' gibi genel ifadelerle belirt, doğrudan bir kaynağa atıf yapma.
 
-                    **İÇERİK KALİTESİ:**
-                    - Makalelerin hem bilgilendirici hem de uygulanabilir tavsiyeler içermeli.
-                    - Okuyucuya gerçek değer katmalı.
-                    - Yazım tarzı: Resmi ama samimi, bilgilendirici ve akıcı.
-                    - Türkçe dilbilgisi kurallarına tam uygun."),
-                    
-                    new UserChatMessage($@"
-                        Aşağıdaki konu hakkında 1000-1200 kelimelik, kapsamlı, ÖZGÜN ve TELİF HAKKINA UYGUN bir blog makalesi yaz.
+                        **İÇERİK KALİTESİ:**
+                        - Makalelerin hem bilgilendirici hem de uygulanabilir tavsiyeler içermeli.
+                        - Okuyucuya gerçek değer katmalı.
+                        - Yazım tarzı: Resmi ama samimi, bilgilendirici ve akıcı.
+                        - Türkçe dilbilgisi kurallarına tam uygun."),
+                        
+                        new UserChatMessage($@"
+                            Aşağıdaki konu hakkında 1000-1200 kelimelik, kapsamlı, ÖZGÜN ve TELİF HAKKINA UYGUN bir blog makalesi yaz.
 
-                        KONU: {topic}
-                        KATEGORİ: {selectedCategory}
+                            KONU: {topic}
+                            KATEGORİ: {selectedCategory}
 
-                        Makalede şunlar olsun:
-                        1. Dikkat çekici, SEO uyumlu bir başlık (H1)
-                        2. Konuya ilgi çekici bir giriş (2-3 paragraf)
-                        3. 4-6 alt başlık (H2) ile detaylandırılmış içerik
-                           - Her bölümde özgün yorumlar, sentezlenmiş bilgiler ve genel eğilimler kullan
-                           - Gerektiğinde madde işaretli listeler (ul/li)
-                        4. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
-                        5. 150-160 karakterlik meta açıklama
-                        6. Makale sonunda 'Yararlanılan Kaynaklar' başlığı altında genel bilgi (örnek: 'Bu makale hazırlanırken çeşitli akademik yayınlar, sektör raporları ve iş dünyası analizlerinden yararlanılmıştır.')
+                            Makalede şunlar olsun:
+                            1. Dikkat çekici, SEO uyumlu bir başlık (H1)
+                            2. Konuya ilgi çekici bir giriş (2-3 paragraf)
+                            3. 4-6 alt başlık (H2) ile detaylandırılmış içerik
+                               - Her bölümde özgün yorumlar, sentezlenmiş bilgiler ve genel eğilimler kullan
+                               - Gerektiğinde madde işaretli listeler (ul/li)
+                            4. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
+                            5. 150-160 karakterlik meta açıklama
+                            6. Makale sonunda 'Yararlanılan Kaynaklar' başlığı altında genel bilgi (örnek: 'Bu makale hazırlanırken çeşitli akademik yayınlar, sektör raporları ve iş dünyası analizlerinden yararlanılmıştır.')
 
-                        **UNUTMA:**
-                        - Tüm içerik %100 ÖZGÜN olmalı.
-                        - Başka kaynaklardan birebir alıntı yapma.
-                        - İstatistik ve verileri kendi cümlelerinle yorumla.
+                            **UNUTMA:**
+                            - Tüm içerik %100 ÖZGÜN olmalı.
+                            - Başka kaynaklardan birebir alıntı yapma.
+                            - İstatistik ve verileri kendi cümlelerinle yorumla.
 
-                        Sadece HTML kodunu ver, başka bir açıklama yapma.
-                    ")
-                };
+                            Sadece HTML kodunu ver, başka bir açıklama yapma.
+                        ")
+                    };
 
-                var response = await client.CompleteChatAsync(messages);
-                string htmlContent = response.Value.Content[0].Text;
+                    var responseTr = await client.CompleteChatAsync(messagesTr);
+                    string htmlContentTr = responseTr.Value.Content[0].Text;
+                    string metaDescriptionTr = topic + " - " + selectedCategory.Replace("-", " ") + " kategorisinde kapsamlı bir rehber.";
 
-                // ===== META AÇIKLAMAYI ÇIKAR =====
-                string metaDescription = topic + " - " + selectedCategory.Replace("-", " ") + " kategorisinde kapsamlı bir rehber.";
+                    string fullHtmlTr = BuildHtmlPage(topic, metaDescriptionTr, htmlContentTr, slug, selectedCategory, slugEnglish);
+                    File.WriteAllText(Path.Combine("..", $"{slug}.html"), fullHtmlTr);
+                    Console.WriteLine($"✅ {slug}.html (Türkçe) oluşturuldu!");
 
-                // ===== HTML DOSYASINI OLUŞTUR =====
-                string fileName = $"{slug}.html";
-                string fullHtml = BuildHtmlPage(topic, metaDescription, htmlContent, slug, selectedCategory);
-                
-                string filePath = Path.Combine("..", fileName);
-                File.WriteAllText(filePath, fullHtml);
+                    UpdateIndexPage(slug, topic);
+                    Console.WriteLine("✅ index.html güncellendi!");
 
-                Console.WriteLine($"✅ {fileName} oluşturuldu!");
+                    UpdateSitemap(slug);
+                    Console.WriteLine("✅ sitemap.xml güncellendi (TR)!");
+                }
+                else
+                {
+                    Console.WriteLine("☑️ Türkçe versiyon zaten mevcut, atlanıyor.");
+                }
 
-                // ===== ANA SAYFAYI GÜNCELLE =====
-                UpdateIndexPage(slug, topic);
-                Console.WriteLine("✅ index.html güncellendi!");
+                // ===== İNGİLİZCE MAKALE =====
+                if (needEn)
+                {
+                    var messagesEn = new List<ChatMessage>
+                    {
+                        new SystemChatMessage(@"You are a career expert with 10 years of experience, closely following global job market trends.
 
-                // ===== SITEMAP.XML GÜNCELLE =====
-                UpdateSitemap(slug);
-                Console.WriteLine("✅ sitemap.xml güncellendi!");
+                        **COPYRIGHT RULE (HARD LIMIT):**
+                        - Never quote any source verbatim.
+                        - When referencing statistics, data, or examples, synthesize and rephrase them ENTIRELY IN YOUR OWN WORDS.
+                        - Do not cite a real, specific source in the references section - only give a general statement under a 'Sources' heading.
+                        - Never copy text from any author, institution, or website.
+                        - All content you produce must be 100% ORIGINAL and your own.
+                        - When sharing a statistic or research finding, attribute it generally (e.g. 'research suggests...' or 'experts note...') rather than citing a specific source.
+
+                        **CONTENT QUALITY:**
+                        - Articles should be both informative and give actionable advice.
+                        - Provide genuine value to the reader.
+                        - Tone: professional but warm, informative, and easy to read.
+                        - Written in natural, fluent English (not a translation - write as a native English-speaking career expert would)."),
+
+                        new UserChatMessage($@"
+                            Write a comprehensive, 100% ORIGINAL, copyright-safe blog article of 1000-1200 words on the following topic.
+
+                            TOPIC: {topicEnglish}
+                            CATEGORY: {selectedCategory.Replace("-", " ")}
+
+                            The article should include:
+                            1. An engaging, SEO-friendly title (H1)
+                            2. An engaging introduction to the topic (2-3 paragraphs)
+                            3. 4-6 subheadings (H2) with detailed content
+                               - Use original commentary, synthesized insights, and general trends in each section
+                               - Use bullet lists (ul/li) where appropriate
+                            4. A conclusion section (summary and a call to action for the reader)
+                            5. A 150-160 character meta description
+                            6. A 'Sources' section at the end with a general statement (e.g. 'This article was prepared drawing on various academic publications, industry reports, and business analyses.')
+
+                            **REMEMBER:**
+                            - All content must be 100% ORIGINAL.
+                            - Do not quote any source verbatim.
+                            - Rephrase all statistics and data in your own words.
+                            - Write naturally in English, not as a translation of Turkish content.
+
+                            Return only the HTML code, no other explanation.
+                        ")
+                    };
+
+                    var responseEn = await client.CompleteChatAsync(messagesEn);
+                    string htmlContentEn = responseEn.Value.Content[0].Text;
+                    string metaDescriptionEn = topicEnglish + " - a comprehensive guide with practical tips and expert insights.";
+
+                    string fullHtmlEn = BuildHtmlPageEnglish(topicEnglish, metaDescriptionEn, htmlContentEn, slugEnglish, selectedCategory, slug);
+                    string enDir = Path.Combine("..", "en");
+                    Directory.CreateDirectory(enDir);
+                    File.WriteAllText(Path.Combine(enDir, $"{slugEnglish}.html"), fullHtmlEn);
+                    Console.WriteLine($"✅ en/{slugEnglish}.html (English) oluşturuldu!");
+
+                    UpdateIndexPageEnglish(slugEnglish, topicEnglish);
+                    Console.WriteLine("✅ en/index.html güncellendi!");
+
+                    UpdateSitemapEnglish(slugEnglish);
+                    Console.WriteLine("✅ sitemap.xml güncellendi (EN)!");
+                }
+                else
+                {
+                    Console.WriteLine("☑️ İngilizce versiyon zaten mevcut, atlanıyor.");
+                }
             }
             catch (Exception ex)
             {
@@ -175,11 +288,6 @@ namespace MobilCV.AIEngine
         }
 
         // ===== SLUG (URL) OLUŞTURMA =====
-        // Önceki hatanın kök nedeni: ':' karakteri temizlenmiyordu, bozuk URL'ler
-        // oluşuyordu (örn. "girisimcilik-hikayeleri:-sifirdan-basariya.html").
-        // Artık harf/rakam/boşluk DIŞINDAKİ her karakter (:, ?, !, (, ) vb.) genel
-        // bir regex ile temizleniyor - gelecekte yeni bir özel karakter eklense
-        // bile tekrar bozulmaz.
         static string Slugify(string text)
         {
             string s = text
@@ -194,7 +302,7 @@ namespace MobilCV.AIEngine
             return s.Trim('-');
         }
 
-        // ===== ANA SAYFAYI GÜNCELLE =====
+        // ===== TÜRKÇE ANA SAYFAYI GÜNCELLE =====
         static void UpdateIndexPage(string slug, string title)
         {
             string indexPath = Path.Combine("..", "index.html");
@@ -206,16 +314,9 @@ namespace MobilCV.AIEngine
 
             string content = File.ReadAllText(indexPath);
 
-            // Önceki hatanın kök nedeni: aynı makale için (aynı href) ESKİ bir
-            // liste girişi varsa siliniyordu, sadece EKLENİYORDU - bu yüzden
-            // aynı yazı index.html'de birden fazla kez, farklı tarihlerle
-            // görünüyordu. Artık önce eski girişi (varsa) siliyoruz.
             string existingEntryPattern = $@"<li>\s*<a href=""{Regex.Escape(slug)}\.html"">.*?</a>\s*</li>";
             content = Regex.Replace(content, existingEntryPattern, "", RegexOptions.Singleline);
 
-            // Önceki hatanın kök nedeni: DateTime.Now:dd MMMM yyyy formatı,
-            // sunucunun o anki dil ayarına bağımlıydı (bazen İngilizce ay ismi,
-            // bazen Türkçe çıkıyordu). Artık kültür AÇIKÇA tr-TR olarak veriliyor.
             string formattedDate = DateTime.Now.ToString("dd MMMM yyyy", new CultureInfo("tr-TR"));
 
             string newEntry = $@"
@@ -237,9 +338,43 @@ namespace MobilCV.AIEngine
             }
         }
 
-        // ===== SITEMAP.XML GÜNCELLE (yeni eklendi) =====
-        // Her yeni makale otomatik olarak sitemap.xml'e de eklenir, böylece
-        // arama motorları yeni sayfaları daha hızlı keşfeder.
+        // ===== İNGİLİZCE ANA SAYFAYI GÜNCELLE (yeni) =====
+        static void UpdateIndexPageEnglish(string slug, string title)
+        {
+            string indexPath = Path.Combine("..", "en", "index.html");
+            if (!File.Exists(indexPath))
+            {
+                Console.WriteLine("⚠️ en/index.html bulunamadı!");
+                return;
+            }
+
+            string content = File.ReadAllText(indexPath);
+
+            string existingEntryPattern = $@"<li>\s*<a href=""{Regex.Escape(slug)}\.html"">.*?</a>\s*</li>";
+            content = Regex.Replace(content, existingEntryPattern, "", RegexOptions.Singleline);
+
+            string formattedDate = DateTime.Now.ToString("dd MMMM yyyy", new CultureInfo("en-US"));
+
+            string newEntry = $@"
+<li>
+    <a href=""{slug}.html"">
+        <div class=""post-title"">{title}</div>
+        <div class=""post-meta""><span class=""badge"">New</span> 📅 {formattedDate}</div>
+    </a>
+</li>";
+
+            if (content.Contains("<!-- BLOG_POSTS -->"))
+            {
+                content = content.Replace("<!-- BLOG_POSTS -->", $"<!-- BLOG_POSTS -->\n{newEntry}");
+                File.WriteAllText(indexPath, content);
+            }
+            else
+            {
+                Console.WriteLine("⚠️ en/index.html'de <!-- BLOG_POSTS --> yorumu bulunamadı!");
+            }
+        }
+
+        // ===== TÜRKÇE SITEMAP.XML GÜNCELLE =====
         static void UpdateSitemap(string slug)
         {
             string sitemapPath = Path.Combine("..", "sitemap.xml");
@@ -254,7 +389,7 @@ namespace MobilCV.AIEngine
 
             if (content.Contains($"<loc>{url}</loc>"))
             {
-                return; // zaten ekli
+                return;
             }
 
             string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
@@ -273,18 +408,58 @@ namespace MobilCV.AIEngine
             }
         }
 
-        // ===== MAKALE ŞABLONU (HEADER + FOOTER + CTA + SOSYAL + NEWSLETTER + KATEGORİ) =====
-        static string BuildHtmlPage(string title, string metaDescription, string htmlBody, string slug, string category)
+        // ===== İNGİLİZCE SAYFALAR İÇİN SITEMAP.XML GÜNCELLE (yeni) =====
+        static void UpdateSitemapEnglish(string slug)
         {
+            string sitemapPath = Path.Combine("..", "sitemap.xml");
+            if (!File.Exists(sitemapPath))
+            {
+                Console.WriteLine("⚠️ sitemap.xml bulunamadı, bu adım atlanıyor.");
+                return;
+            }
+
+            string content = File.ReadAllText(sitemapPath);
+            string url = $"https://mobilcv.net/en/{slug}.html";
+
+            if (content.Contains($"<loc>{url}</loc>"))
+            {
+                return;
+            }
+
+            string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
+            string newUrlEntry = $@"  <url>
+    <loc>{url}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>";
+
+            if (content.Contains("</urlset>"))
+            {
+                content = content.Replace("</urlset>", newUrlEntry);
+                File.WriteAllText(sitemapPath, content);
+            }
+        }
+
+        // ===== TÜRKÇE MAKALE ŞABLONU =====
+        static string BuildHtmlPage(string title, string metaDescription, string htmlBody, string slug, string category, string slugEn)
+        {
+            string hreflangTags = $@"
+    <link rel=""alternate"" hreflang=""tr"" href=""https://mobilcv.net/{slug}.html"">
+    <link rel=""alternate"" hreflang=""en"" href=""https://mobilcv.net/en/{slugEn}.html"">
+    <link rel=""alternate"" hreflang=""x-default"" href=""https://mobilcv.net/{slug}.html"">";
+            string langSwitch = $@"
+                <li><a href=""https://mobilcv.net/en/{slugEn}.html"" class=""lang-switch"">🇬🇧 English</a></li>";
+
             return $@"<!DOCTYPE html>
 <html lang=""tr"">
 <head>
     <meta charset=""UTF-8"">
     <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
     <title>{title} | MobilCV</title>
-    <meta name=""description"" content=""{metaDescription}"">
+    <meta name=""description"" content=""{metaDescription}"">{hreflangTags}
     <style>
-        /* ===== TÜM SAYFALAR İÇİN ORTAK CSS ===== */
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -294,8 +469,6 @@ namespace MobilCV.AIEngine
             padding: 20px;
         }}
         .container {{ max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); overflow: hidden; }}
-
-        /* ===== HEADER ===== */
         .site-header {{
             display: flex;
             justify-content: space-between;
@@ -312,6 +485,7 @@ namespace MobilCV.AIEngine
             list-style: none;
             gap: 6px;
             flex-wrap: wrap;
+            align-items: center;
         }}
         .nav-links a {{
             padding: 10px 20px;
@@ -332,8 +506,11 @@ namespace MobilCV.AIEngine
             font-weight: 700;
         }}
         .nav-cta:hover {{ background: #1d4ed8 !important; }}
-
-        /* ===== MAKALE İÇERİĞİ ===== */
+        .lang-switch {{
+            padding: 6px 14px; border: 1px solid #e2e8f0; border-radius: 40px;
+            color: #64748b; text-decoration: none; font-size: 0.85em; font-weight: 700;
+        }}
+        .lang-switch:hover {{ background: #f1f5f9; }}
         .page-content {{
             padding: 48px 40px 40px;
         }}
@@ -371,8 +548,6 @@ namespace MobilCV.AIEngine
             color: #334155;
         }}
         .page-content li {{ margin-bottom: 8px; }}
-
-        /* ===== SOSYAL PAYLAŞIM ===== */
         .share-box {{
             text-align: center;
             margin: 30px 0;
@@ -405,8 +580,6 @@ namespace MobilCV.AIEngine
         .share-linkedin {{ background: #0a66c2; }}
         .share-twitter {{ background: #000; }}
         .share-whatsapp {{ background: #25D366; }}
-
-        /* ===== CTA BUTONU ===== */
         .cta-box {{
             text-align: center;
             margin-top: 40px;
@@ -433,8 +606,6 @@ namespace MobilCV.AIEngine
             transition: background 0.3s ease;
         }}
         .cta-button:hover {{ background: #1d4ed8; }}
-
-        /* ===== NEWSLETTER ===== */
         .newsletter-box {{
             text-align: center;
             margin-top: 30px;
@@ -479,8 +650,6 @@ namespace MobilCV.AIEngine
             color: #64748b;
             margin-top: 12px;
         }}
-
-        /* ===== FOOTER ===== */
         .footer {{
             background: #f8fafc;
             border-top: 1px solid #e2e8f0;
@@ -498,7 +667,6 @@ namespace MobilCV.AIEngine
         }}
         .footer-links a {{ color: #64748b; font-weight: 500; }}
         .footer-links a:hover {{ color: #2563eb; }}
-
         @media (max-width: 640px) {{
             .site-header {{ flex-direction: column; gap: 12px; padding: 16px; }}
             .nav-links {{ justify-content: center; }}
@@ -513,7 +681,6 @@ namespace MobilCV.AIEngine
 <body>
 <div class=""container"">
 
-    <!-- ===== HEADER ===== -->
     <header class=""site-header"">
         <a href=""https://mobilcv.net"" class=""logo"">Mobil<span>CV</span></a>
         <nav>
@@ -523,12 +690,11 @@ namespace MobilCV.AIEngine
                 <li><a href=""cv-ornekleri.html"">CV Örnekleri</a></li>
                 <li><a href=""cv-rehberi.html"">CV Rehberi</a></li>
                 <li><a href=""iletisim.html"">İletişim</a></li>
-                <li><a href=""https://mobilcv.net"" class=""nav-cta"">🚀 Keşfet</a></li>
+                <li><a href=""https://mobilcv.net"" class=""nav-cta"">🚀 Keşfet</a></li>{langSwitch}
             </ul>
         </nav>
     </header>
 
-    <!-- ===== MAKALE İÇERİĞİ ===== -->
     <div class=""page-content"">
         <span class=""category-tag"">📂 {category.Replace("-", " ")}</span>
         <article>
@@ -536,7 +702,6 @@ namespace MobilCV.AIEngine
             {htmlBody}
         </article>
 
-        <!-- ===== SOSYAL PAYLAŞIM BUTONLARI ===== -->
         <div class=""share-box"">
             <p>📤 Bu makaleyi paylaş:</p>
             <div class=""share-buttons"">
@@ -549,13 +714,11 @@ namespace MobilCV.AIEngine
             </div>
         </div>
 
-        <!-- ===== CTA BUTONU ===== -->
         <div class=""cta-box"">
             <p>✨ CV'ni hemen oluştur!</p>
             <a href=""https://mobilcv.com"" class=""cta-button"">🚀 MobilCV ile CV Oluştur</a>
         </div>
 
-        <!-- ===== NEWSLETTER FORMU ===== -->
         <div class=""newsletter-box"">
             <p style=""font-size: 1.2em; font-weight: 700; color: #fff;"">📩 Haftalık Kariyer İpuçları</p>
             <p>En yeni makaleler ve kariyer tavsiyeleri e-posta kutunda.</p>
@@ -567,7 +730,6 @@ namespace MobilCV.AIEngine
         </div>
     </div>
 
-    <!-- ===== FOOTER ===== -->
     <footer class=""footer"">
         <div class=""footer-links"">
             <a href=""https://mobilcv.com"">Ana Site</a>
@@ -577,6 +739,252 @@ namespace MobilCV.AIEngine
             <a href=""iletisim.html"">İletişim</a>
         </div>
         <p>&copy; {DateTime.UtcNow.Year} MobilCV &mdash; <a href=""https://mobilcv.com"">mobilcv.com</a> ile güçlendirilmiştir.</p>
+    </footer>
+
+</div>
+</body>
+</html>";
+        }
+
+        // ===== İNGİLİZCE MAKALE ŞABLONU (yeni) =====
+        static string BuildHtmlPageEnglish(string title, string metaDescription, string htmlBody, string slug, string category, string slugTr)
+        {
+            string hreflangTags = $@"
+    <link rel=""alternate"" hreflang=""tr"" href=""https://mobilcv.net/{slugTr}.html"">
+    <link rel=""alternate"" hreflang=""en"" href=""https://mobilcv.net/en/{slug}.html"">
+    <link rel=""alternate"" hreflang=""x-default"" href=""https://mobilcv.net/{slugTr}.html"">";
+
+            return $@"<!DOCTYPE html>
+<html lang=""en"">
+<head>
+    <meta charset=""UTF-8"">
+    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+    <title>{title} | MobilCV</title>
+    <meta name=""description"" content=""{metaDescription}"">{hreflangTags}
+    <style>
+        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        body {{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.8;
+            padding: 20px;
+        }}
+        .container {{ max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); overflow: hidden; }}
+        .site-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }}
+        .logo {{ font-size: 1.6em; font-weight: 900; color: #0f172a; text-decoration: none; }}
+        .logo span {{ color: #2563eb; }}
+        .nav-links {{
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }}
+        .nav-links a {{
+            padding: 10px 20px;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            border-radius: 40px;
+            transition: all 0.25s ease;
+        }}
+        .nav-links a:hover {{ color: #2563eb; background: #dbeafe; }}
+        .nav-links a.active {{ color: #fff; background: #2563eb; }}
+        .nav-cta {{
+            background: #2563eb;
+            color: #fff !important;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+        }}
+        .nav-cta:hover {{ background: #1d4ed8 !important; }}
+        .lang-switch {{
+            padding: 6px 14px; border: 1px solid #e2e8f0; border-radius: 40px;
+            color: #64748b; text-decoration: none; font-size: 0.85em; font-weight: 700;
+        }}
+        .lang-switch:hover {{ background: #f1f5f9; }}
+        .page-content {{
+            padding: 48px 40px 40px;
+        }}
+        .page-content .category-tag {{
+            display: inline-block;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }}
+        .page-content h1 {{
+            font-size: 2.4em;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }}
+        .page-content p {{
+            color: #334155;
+            margin-bottom: 16px;
+            font-size: 1.05em;
+        }}
+        .page-content h2 {{
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }}
+        .page-content ul, .page-content ol {{
+            margin-left: 24px;
+            margin-bottom: 20px;
+            color: #334155;
+        }}
+        .page-content li {{ margin-bottom: 8px; }}
+        .share-box {{
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }}
+        .share-box p {{
+            font-size: 0.95em;
+            color: #64748b;
+            margin-bottom: 12px;
+        }}
+        .share-buttons {{
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }}
+        .share-btn {{
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: #fff !important;
+            transition: opacity 0.2s;
+        }}
+        .share-btn:hover {{ opacity: 0.8; }}
+        .share-linkedin {{ background: #0a66c2; }}
+        .share-twitter {{ background: #000; }}
+        .share-whatsapp {{ background: #25D366; }}
+        .cta-box {{
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }}
+        .cta-box p {{
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }}
+        .cta-button {{
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: background 0.3s ease;
+        }}
+        .cta-button:hover {{ background: #1d4ed8; }}
+        .footer {{
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 30px;
+            text-align: center;
+            color: #94a3b8;
+        }}
+        .footer a {{ color: #2563eb; text-decoration: none; font-weight: 600; }}
+        .footer-links {{
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }}
+        .footer-links a {{ color: #64748b; font-weight: 500; }}
+        .footer-links a:hover {{ color: #2563eb; }}
+        @media (max-width: 640px) {{
+            .site-header {{ flex-direction: column; gap: 12px; padding: 16px; }}
+            .nav-links {{ justify-content: center; }}
+            .page-content {{ padding: 24px 18px; }}
+            .page-content h1 {{ font-size: 1.8em; }}
+            .cta-box {{ padding: 20px; }}
+            .cta-button {{ padding: 12px 24px; font-size: 1em; }}
+        }}
+    </style>
+</head>
+<body>
+<div class=""container"">
+
+    <header class=""site-header"">
+        <a href=""https://mobilcv.net/en/"" class=""logo"">Mobil<span>CV</span></a>
+        <nav>
+            <ul class=""nav-links"">
+                <li><a href=""https://mobilcv.com"">Homepage</a></li>
+                <li><a href=""https://mobilcv.net/en/"">Blog</a></li>
+                <li><a href=""cv-examples.html"">CV Examples</a></li>
+                <li><a href=""cv-guide.html"">CV Guide</a></li>
+                <li><a href=""contact.html"">Contact</a></li>
+                <li><a href=""https://mobilcv.com"" class=""nav-cta"">🚀 Create Now</a></li>
+                <li><a href=""https://mobilcv.net/{slugTr}.html"" class=""lang-switch"">🇹🇷 Türkçe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class=""page-content"">
+        <span class=""category-tag"">📂 {category.Replace("-", " ")}</span>
+        <article>
+            <h1>{title}</h1>
+            {htmlBody}
+        </article>
+
+        <div class=""share-box"">
+            <p>📤 Share this article:</p>
+            <div class=""share-buttons"">
+                <a href=""https://www.linkedin.com/sharing/share-offsite/?url=https://mobilcv.net/en/{slug}.html"" 
+                   target=""_blank"" class=""share-btn share-linkedin"">LinkedIn</a>
+                <a href=""https://twitter.com/intent/tweet?url=https://mobilcv.net/en/{slug}.html&text={title}"" 
+                   target=""_blank"" class=""share-btn share-twitter"">X (Twitter)</a>
+                <a href=""https://api.whatsapp.com/send?text={title} - https://mobilcv.net/en/{slug}.html"" 
+                   target=""_blank"" class=""share-btn share-whatsapp"">WhatsApp</a>
+            </div>
+        </div>
+
+        <div class=""cta-box"">
+            <p>✨ Create your CV now!</p>
+            <a href=""https://mobilcv.com"" class=""cta-button"">🚀 Create Your CV With MobilCV</a>
+        </div>
+    </div>
+
+    <footer class=""footer"">
+        <div class=""footer-links"">
+            <a href=""https://mobilcv.com"">Homepage</a>
+            <a href=""https://mobilcv.net/en/"">Blog</a>
+            <a href=""cv-examples.html"">CV Examples</a>
+        </div>
+        <p>&copy; {DateTime.UtcNow.Year} MobilCV &mdash; powered by <a href=""https://mobilcv.com"">mobilcv.com</a>.</p>
     </footer>
 
 </div>
