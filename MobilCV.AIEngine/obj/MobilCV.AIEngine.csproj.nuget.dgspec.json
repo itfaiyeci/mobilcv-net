@@ -1,31 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {}
+    "/workspaces/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {}
   },
   "projects": {
-    "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {
+    "/workspaces/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
+        "projectUniqueName": "/workspaces/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
         "projectName": "MobilCV.AIEngine",
-        "projectPath": "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
-        "packagesPath": "/home/runner/.nuget/packages/",
-        "outputPath": "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/obj/",
+        "projectPath": "/workspaces/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
+        "packagesPath": "/home/codespace/.nuget/packages/",
+        "outputPath": "/workspaces/mobilcv-net/MobilCV.AIEngine/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/runner/.nuget/NuGet/NuGet.Config"
+          "/home/codespace/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "framework": "net8.0",
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "framework": "net9.0",
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -42,9 +42,9 @@
         "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
-        "net8.0": {
-          "framework": "net8.0",
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "framework": "net9.0",
+          "targetAlias": "net9.0",
           "dependencies": {
             "OpenAI": {
               "target": "Package",
@@ -62,6 +62,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[9.0.20, 9.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
