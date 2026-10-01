@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/workspaces/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {}
+    "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {}
   },
   "projects": {
-    "/workspaces/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {
+    "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
+        "projectUniqueName": "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
         "projectName": "MobilCV.AIEngine",
-        "projectPath": "/workspaces/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
-        "packagesPath": "/home/codespace/.nuget/packages/",
-        "outputPath": "/workspaces/mobilcv-net/MobilCV.AIEngine/obj/",
+        "projectPath": "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/MobilCV.AIEngine.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/mobilcv-net/mobilcv-net/MobilCV.AIEngine/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/codespace/.nuget/NuGet/NuGet.Config"
+          "/home/runner/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -62,20 +62,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.20, 9.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[9.0.20, 9.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.20, 9.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
