@@ -178,26 +178,29 @@ namespace MobilCV.AIEngine
                             KATEGORİ: {selectedCategory}
 
                             Makalede şunlar olsun:
-                            1. Dikkat çekici, SEO uyumlu bir başlık (H1)
-                            2. Konuya ilgi çekici bir giriş (2-3 paragraf)
-                            3. 4-6 alt başlık (H2) ile detaylandırılmış içerik
-                               - Her bölümde özgün yorumlar, sentezlenmiş bilgiler ve genel eğilimler kullan
+                            1. Konuya ilgi çekici bir giriş (2-3 paragraf, <p> ile)
+                            2. 4-6 alt başlık (H2) ile detaylandırılmış içerik
+                               - Her bölümde özgün yorumlar, somut örnekler ve uygulanabilir adımlar kullan
                                - Gerektiğinde madde işaretli listeler (ul/li)
-                            4. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
-                            5. 150-160 karakterlik meta açıklama
-                            6. Makale sonunda 'Yararlanılan Kaynaklar' başlığı altında genel bilgi (örnek: 'Bu makale hazırlanırken çeşitli akademik yayınlar, sektör raporları ve iş dünyası analizlerinden yararlanılmıştır.')
+                            3. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
+                            4. Makale sonunda 'Yararlanılan Kaynaklar' başlığı altında genel bilgi (örnek: 'Bu makale hazırlanırken çeşitli akademik yayınlar, sektör raporları ve iş dünyası analizlerinden yararlanılmıştır.')
 
                             **UNUTMA:**
                             - Tüm içerik %100 ÖZGÜN olmalı.
                             - Başka kaynaklardan birebir alıntı yapma.
                             - İstatistik ve verileri kendi cümlelerinle yorumla.
 
-                            Sadece HTML kodunu ver, başka bir açıklama yapma.
+                            ÖNEMLİ BİÇİM KURALI: <!DOCTYPE>, <html>, <head>, <body>, <title>, <meta> ve <h1> etiketlerini KULLANMA
+                            (sayfa başlığı zaten var). Doğrudan giriş paragrafıyla başla. Kod bloğu (```) kullanma.
+                            Sadece makale gövdesinin HTML kodunu ver, başka bir açıklama yapma.
                         ")
                     };
 
                     var responseTr = await client.CompleteChatAsync(messagesTr);
                     string htmlContentTr = responseTr.Value.Content[0].Text;
+                    htmlContentTr = await MultiLang.EnsureLengthAsync(client, messagesTr, htmlContentTr, false,
+                        "Makale çok kısa ({N}). Aynı makaleyi baştan ve TAM haliyle yeniden yaz; her bölümü somut örnekler, adımlar ve ipuçlarıyla genişlet, toplam en az 1000 kelime olsun. Aynı biçim kurallarına uy: sadece makale gövdesinin HTML'i, <html>/<head>/<body>/<h1> yok.");
+                    htmlContentTr = MultiLang.CleanArticleHtml(htmlContentTr);
                     string metaDescriptionTr = topic + " - " + selectedCategory.Replace("-", " ") + " kategorisinde kapsamlı bir rehber.";
 
                     string fullHtmlTr = BuildHtmlPage(topic, metaDescriptionTr, htmlContentTr, slug, selectedCategory, slugEnglish);
@@ -243,14 +246,12 @@ namespace MobilCV.AIEngine
                             CATEGORY: {selectedCategory.Replace("-", " ")}
 
                             The article should include:
-                            1. An engaging, SEO-friendly title (H1)
-                            2. An engaging introduction to the topic (2-3 paragraphs)
-                            3. 4-6 subheadings (H2) with detailed content
-                               - Use original commentary, synthesized insights, and general trends in each section
+                            1. An engaging introduction to the topic (2-3 paragraphs, using <p>)
+                            2. 4-6 subheadings (H2) with detailed content
+                               - Use original commentary, concrete examples, and actionable steps in each section
                                - Use bullet lists (ul/li) where appropriate
-                            4. A conclusion section (summary and a call to action for the reader)
-                            5. A 150-160 character meta description
-                            6. A 'Sources' section at the end with a general statement (e.g. 'This article was prepared drawing on various academic publications, industry reports, and business analyses.')
+                            3. A conclusion section (summary and a call to action for the reader)
+                            4. A 'Sources' section at the end with a general statement (e.g. 'This article was prepared drawing on various academic publications, industry reports, and business analyses.')
 
                             **REMEMBER:**
                             - All content must be 100% ORIGINAL.
@@ -258,12 +259,17 @@ namespace MobilCV.AIEngine
                             - Rephrase all statistics and data in your own words.
                             - Write naturally in English, not as a translation of Turkish content.
 
-                            Return only the HTML code, no other explanation.
+                            FORMAT RULE: Do NOT use <!DOCTYPE>, <html>, <head>, <body>, <title>, <meta> or <h1> tags
+                            (the page title already exists). Start directly with the introduction. No code fences (```).
+                            Return only the article body HTML, no other explanation.
                         ")
                     };
 
                     var responseEn = await client.CompleteChatAsync(messagesEn);
                     string htmlContentEn = responseEn.Value.Content[0].Text;
+                    htmlContentEn = await MultiLang.EnsureLengthAsync(client, messagesEn, htmlContentEn, false,
+                        "The article is too short ({N}). Rewrite the COMPLETE article from scratch, expanding every section with concrete examples, steps and practical tips, so it reaches at least 1000 words. Follow the same format rules: article body HTML only, no <html>/<head>/<body>/<h1>.");
+                    htmlContentEn = MultiLang.CleanArticleHtml(htmlContentEn);
                     string metaDescriptionEn = topicEnglish + " - a comprehensive guide with practical tips and expert insights.";
 
                     string fullHtmlEn = BuildHtmlPageEnglish(topicEnglish, metaDescriptionEn, htmlContentEn, slugEnglish, selectedCategory, slug);
@@ -460,6 +466,7 @@ namespace MobilCV.AIEngine
     <link rel=""alternate"" hreflang=""tr"" href=""https://mobilcv.net/{slug}.html"">
     <link rel=""alternate"" hreflang=""en"" href=""https://mobilcv.net/en/{slugEn}.html"">
     <link rel=""alternate"" hreflang=""x-default"" href=""https://mobilcv.net/{slug}.html"">";
+            string canonicalUrl = $"https://mobilcv.net/{slug}.html";
             string langSwitch = $@"
                 <li><a href=""https://mobilcv.net/en/{slugEn}.html"" class=""lang-switch"">🇬🇧 English</a></li>";
 
@@ -469,7 +476,8 @@ namespace MobilCV.AIEngine
     <meta charset=""UTF-8"">
     <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
     <title>{title} | MobilCV</title>
-    <meta name=""description"" content=""{metaDescription}"">{hreflangTags}
+    <meta name=""description"" content=""{metaDescription}"">
+    <link rel=""canonical"" href=""{canonicalUrl}"">{hreflangTags}
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{
@@ -765,6 +773,7 @@ namespace MobilCV.AIEngine
     <link rel=""alternate"" hreflang=""tr"" href=""https://mobilcv.net/{slugTr}.html"">
     <link rel=""alternate"" hreflang=""en"" href=""https://mobilcv.net/en/{slug}.html"">
     <link rel=""alternate"" hreflang=""x-default"" href=""https://mobilcv.net/{slugTr}.html"">";
+            string canonicalUrl = $"https://mobilcv.net/en/{slug}.html";
 
             return $@"<!DOCTYPE html>
 <html lang=""en"">
@@ -772,7 +781,8 @@ namespace MobilCV.AIEngine
     <meta charset=""UTF-8"">
     <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
     <title>{title} | MobilCV</title>
-    <meta name=""description"" content=""{metaDescription}"">{hreflangTags}
+    <meta name=""description"" content=""{metaDescription}"">
+    <link rel=""canonical"" href=""{canonicalUrl}"">{hreflangTags}
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{

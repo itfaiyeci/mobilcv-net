@@ -99,6 +99,8 @@ namespace MobilCV.AIEngine
 
                     var response = await client.CompleteChatAsync(messages);
                     string raw = response.Value.Content[0].Text;
+                    raw = await EnsureLengthAsync(client, messages, raw, l.Code == "zh",
+                        $"The article is too short ({{N}}). Rewrite the COMPLETE article from scratch in {l.LangName}, expanding every section with concrete examples, steps and practical tips, so that it reaches at least 1000 words (for Chinese: at least 1800 characters). Keep EXACTLY the same output format (TITLE:, META:, ---, article HTML).");
                     var (title, meta, body) = ParseResponse(raw, topicEnglish);
 
                     Directory.CreateDirectory(Path.Combine(Root, l.Code));
@@ -179,11 +181,7 @@ Rules for the article HTML:
                 body = Regex.Replace(text, @"^\s*(TITLE|META)\s*:.*$", "", RegexOptions.Multiline);
             }
 
-            body = Regex.Replace(body, @"<h1[^>]*>[\s\S]*?</h1>", "", RegexOptions.IgnoreCase);
-            body = Regex.Replace(body, @"<title[^>]*>[\s\S]*?</title>", "", RegexOptions.IgnoreCase);
-            body = Regex.Replace(body, @"<meta[^>]*>", "", RegexOptions.IgnoreCase);
-            body = Regex.Replace(body, @"</?(html|head|body|!doctype)[^>]*>", "", RegexOptions.IgnoreCase);
-            body = body.Trim();
+            body = CleanArticleHtml(body);
 
             title = StripTags(title).Trim().Trim('"', '“', '”', '«', '»');
             if (string.IsNullOrWhiteSpace(title)) title = fallbackTitle;
@@ -196,6 +194,61 @@ Rules for the article HTML:
             }
 
             return (title, meta, body);
+        }
+
+        // ===== MODELİN DÖNDÜRDÜĞÜ HTML'İ TEMİZLE =====
+        // Model bazen makaleyi tam bir HTML belgesi olarak (<!DOCTYPE>, <html>, <head>, <title>, <body>)
+        // ve kendi <h1> başlığıyla döndürüyor; şablonun içine gömülünce sayfa bozuluyordu.
+        public static string CleanArticleHtml(string html)
+        {
+            string s = Regex.Replace(html ?? "", @"```[a-zA-Z]*", "");
+            s = Regex.Replace(s, @"<!DOCTYPE[^>]*>", "", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<head[^>]*>[\s\S]*?</head>", "", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<title[^>]*>[\s\S]*?</title>", "", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<meta[^>]*>", "", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"</?(html|body)[^>]*>", "", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<h1[^>]*>[\s\S]*?</h1>", "", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<header>\s*</header>", "", RegexOptions.IgnoreCase);
+            return s.Trim();
+        }
+
+        // ===== METİN UZUNLUĞU KONTROLÜ =====
+        // Model istenen uzunluğa çoğu zaman uymuyor (200-400 kelime). Metin kısaysa en fazla 2 kez
+        // "genişleterek yeniden yaz" isteği gönderilir; daha uzun sonuç gelirse o kullanılır.
+        public static async Task<string> EnsureLengthAsync(ChatClient client, List<ChatMessage> messages, string raw, bool isChinese, string expandInstruction)
+        {
+            int min = isChinese ? 1400 : 800;
+            for (int attempt = 0; attempt < 2; attempt++)
+            {
+                int n = CountLength(raw, isChinese);
+                if (n >= min) break;
+                string unit = isChinese ? "characters" : "words";
+                Console.WriteLine($"   ↻ Metin kısa ({n} {(isChinese ? "karakter" : "kelime")}), genişletme isteniyor...");
+                var msgs = new List<ChatMessage>(messages)
+                {
+                    new AssistantChatMessage(raw),
+                    new UserChatMessage(expandInstruction.Replace("{N}", $"{n} {unit}"))
+                };
+                try
+                {
+                    var r = await client.CompleteChatAsync(msgs);
+                    string candidate = r.Value.Content[0].Text;
+                    if (CountLength(candidate, isChinese) > n) raw = candidate;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"   ⚠️ Genişletme başarısız: {ex.Message}");
+                    break;
+                }
+            }
+            return raw;
+        }
+
+        static int CountLength(string html, bool isChinese)
+        {
+            string text = Regex.Replace(StripTags(html ?? ""), @"\s+", " ").Trim();
+            if (isChinese) return text.Count(c => c >= 0x4E00 && c <= 0x9FFF);
+            return text.Length == 0 ? 0 : text.Split(' ').Length;
         }
 
         static string StripTags(string s) => Regex.Replace(s ?? "", "<[^>]+>", "");
