@@ -11,7 +11,14 @@ namespace MobilCV.AIEngine
             Console.WriteLine("🚀 MobilCV AI Motoru Başlatılıyor...");
             
             var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("OPENAI_API_KEY bulunamadı!");
-            var client = new ChatClient("gpt-3.5-turbo", apiKey);
+            // Model isteğe bağlı olarak OPENAI_MODEL ortam değişkeniyle değiştirilebilir (varsayılan: gpt-3.5-turbo)
+            var model = Environment.GetEnvironmentVariable("OPENAI_MODEL");
+            if (string.IsNullOrWhiteSpace(model)) model = "gpt-3.5-turbo";
+            var client = new ChatClient(model, apiKey);
+            Console.WriteLine($"🤖 Model: {model}");
+
+            // İngilizce blog sayfalarındaki mobilcv.com linklerini İngilizce araç sayfasına çevir (tek seferlik, tekrar çalışması zararsız)
+            MultiLang.FixEnglishCtaLinks();
 
             // ===== KATEGORİ VE KONU HAVUZU (TÜRKÇE) =====
             var topics = new Dictionary<string, List<string>>
@@ -62,10 +69,8 @@ namespace MobilCV.AIEngine
             };
 
             // ===== AYNI KONULARIN İNGİLİZCE BAŞLIKLARI =====
-            // Her Türkçe konu başlığı için SABİT bir İngilizce karşılık. Bu, GPT'ye
-            // her seferinde ayrı bir başlık ürettirmek yerine (tutarsız/öngörülemez
-            // sonuç riski) tutarlı, öngörülebilir İngilizce başlıklar ve slug'lar sağlar.
-            // GPT sadece İNGİLİZCE İÇERİĞİ üretmek için çağrılır, başlık için değil.
+            // Her Türkçe konu başlığı için SABİT bir İngilizce karşılık. İngilizce slug, ek dillerde
+            // (de, fr, es, it, pt, ru, ar, zh) de dosya adı olarak kullanılır.
             var topicsEnglish = new Dictionary<string, string>
             {
                 ["CV'de Dikkat Edilmesi Gereken 7 Kritik Nokta"] = "7 Critical Points to Watch in Your CV",
@@ -99,10 +104,8 @@ namespace MobilCV.AIEngine
             };
 
             // ===== DAHA ÖNCE YAZILMIŞ KONULARI HAVUZDAN ÇIKAR =====
-            // Not: Artık HEM Türkçe HEM İngilizce dosyanın var olup olmadığını kontrol
-            // ediyoruz. Eğer geçmişte (bu güncellemeden önce) sadece Türkçesi üretilmiş
-            // bir konu varsa, bu konu HALA "işlenmemiş" sayılır ve seçildiğinde eksik
-            // olan İngilizce versiyonu da otomatik tamamlanır.
+            // Bir konu; Türkçe, İngilizce veya ek dillerden (de, fr, es, it, pt, ru, ar, zh) HERHANGİ
+            // birinde eksikse hâlâ "işlenmemiş" sayılır ve seçildiğinde yalnızca eksik diller üretilir.
             var availableTopics = new List<(string Category, string Topic, string Slug)>();
             foreach (var kvp in topics)
             {
@@ -114,7 +117,7 @@ namespace MobilCV.AIEngine
                     string pathEn = Path.Combine("..", "en", $"{slugEnCheck}.html");
                     bool trExists = File.Exists(pathTr);
                     bool enExists = File.Exists(pathEn);
-                    if (!trExists || !enExists)
+                    if (!trExists || !enExists || MultiLang.AnyMissing(slugEnCheck))
                     {
                         availableTopics.Add((kvp.Key, t, s));
                     }
@@ -123,7 +126,7 @@ namespace MobilCV.AIEngine
 
             if (availableTopics.Count == 0)
             {
-                Console.WriteLine("⚠️ Havuzdaki tüm konular zaten yazılmış (TR + EN)! Yukarıdaki 'topics' sözlüğüne yeni konular eklemeniz gerekiyor. İşlem sonlandırılıyor (hata değil).");
+                Console.WriteLine("⚠️ Havuzdaki tüm konular zaten tüm dillerde yazılmış! Yukarıdaki 'topics' sözlüğüne yeni konular eklemeniz gerekiyor. İşlem sonlandırılıyor (hata değil).");
                 return;
             }
 
@@ -285,6 +288,14 @@ namespace MobilCV.AIEngine
                 Console.WriteLine($"❌ HATA: {ex.Message}");
                 Environment.Exit(1);
             }
+
+            // ===== EK DİLLER (de, fr, es, it, pt, ru, ar, zh) =====
+            await MultiLang.GenerateMissingAsync(client, topicEnglish, selectedCategory, slugEnglish, slug);
+
+            // ===== TÜM DİL SÜRÜMLERİNDE hreflang ETİKETLERİNİ EŞİTLE =====
+            MultiLang.SyncHreflang(slug, slugEnglish);
+
+            Console.WriteLine("🏁 Tamamlandı.");
         }
 
         // ===== SLUG (URL) OLUŞTURMA =====
@@ -338,7 +349,7 @@ namespace MobilCV.AIEngine
             }
         }
 
-        // ===== İNGİLİZCE ANA SAYFAYI GÜNCELLE (yeni) =====
+        // ===== İNGİLİZCE ANA SAYFAYI GÜNCELLE =====
         static void UpdateIndexPageEnglish(string slug, string title)
         {
             string indexPath = Path.Combine("..", "en", "index.html");
@@ -408,7 +419,7 @@ namespace MobilCV.AIEngine
             }
         }
 
-        // ===== İNGİLİZCE SAYFALAR İÇİN SITEMAP.XML GÜNCELLE (yeni) =====
+        // ===== İNGİLİZCE SAYFALAR İÇİN SITEMAP.XML GÜNCELLE =====
         static void UpdateSitemapEnglish(string slug)
         {
             string sitemapPath = Path.Combine("..", "sitemap.xml");
@@ -746,7 +757,8 @@ namespace MobilCV.AIEngine
 </html>";
         }
 
-        // ===== İNGİLİZCE MAKALE ŞABLONU (yeni) =====
+        // ===== İNGİLİZCE MAKALE ŞABLONU =====
+        // Not: Araç linkleri artık https://www.mobilcv.com/en/ (İngilizce araç sayfası) adresine gider.
         static string BuildHtmlPageEnglish(string title, string metaDescription, string htmlBody, string slug, string category, string slugTr)
         {
             string hreflangTags = $@"
@@ -942,12 +954,12 @@ namespace MobilCV.AIEngine
         <a href=""https://mobilcv.net/en/"" class=""logo"">Mobil<span>CV</span></a>
         <nav>
             <ul class=""nav-links"">
-                <li><a href=""https://mobilcv.com"">Homepage</a></li>
+                <li><a href=""https://www.mobilcv.com/en/"">Homepage</a></li>
                 <li><a href=""https://mobilcv.net/en/"">Blog</a></li>
                 <li><a href=""cv-examples.html"">CV Examples</a></li>
                 <li><a href=""cv-guide.html"">CV Guide</a></li>
                 <li><a href=""contact.html"">Contact</a></li>
-                <li><a href=""https://mobilcv.com"" class=""nav-cta"">🚀 Create Now</a></li>
+                <li><a href=""https://www.mobilcv.com/en/"" class=""nav-cta"">🚀 Create Now</a></li>
                 <li><a href=""https://mobilcv.net/{slugTr}.html"" class=""lang-switch"">🇹🇷 Türkçe</a></li>
             </ul>
         </nav>
@@ -974,17 +986,17 @@ namespace MobilCV.AIEngine
 
         <div class=""cta-box"">
             <p>✨ Create your CV now!</p>
-            <a href=""https://mobilcv.com"" class=""cta-button"">🚀 Create Your CV With MobilCV</a>
+            <a href=""https://www.mobilcv.com/en/"" class=""cta-button"">🚀 Create Your CV With MobilCV</a>
         </div>
     </div>
 
     <footer class=""footer"">
         <div class=""footer-links"">
-            <a href=""https://mobilcv.com"">Homepage</a>
+            <a href=""https://www.mobilcv.com/en/"">Homepage</a>
             <a href=""https://mobilcv.net/en/"">Blog</a>
             <a href=""cv-examples.html"">CV Examples</a>
         </div>
-        <p>&copy; {DateTime.UtcNow.Year} MobilCV &mdash; powered by <a href=""https://mobilcv.com"">mobilcv.com</a>.</p>
+        <p>&copy; {DateTime.UtcNow.Year} MobilCV &mdash; powered by <a href=""https://www.mobilcv.com/en/"">mobilcv.com</a>.</p>
     </footer>
 
 </div>
