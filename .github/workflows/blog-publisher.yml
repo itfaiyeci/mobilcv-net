@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "MobilCV Bot"
           git config user.email "bot@mobilcv.net"
-          git add . ':!MobilCV.AIEngine/bin' ':!MobilCV.AIEngine/obj'
+          git add . 
           echo "NEW_FILES=$(git diff --cached --name-only --diff-filter=A -- '*.html' | wc -l)" >> $GITHUB_ENV
           echo "NOW=$(date -u +'%Y-%m-%d %H:%M UTC')" >> $GITHUB_ENV
           git diff --cached --quiet || git commit -m "Otomatik makale $(date -u +'%Y-%m-%d')"
