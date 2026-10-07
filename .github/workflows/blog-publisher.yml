@@ -40,24 +40,4 @@ jobs:
           git diff --cached --quiet || git commit -m "Otomatik makale $(date -u +'%Y-%m-%d')"
           git push
 
-      - name: E-posta bildirimi gönder
-        if: success()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "✅ MobilCV: ${{ env.NEW_FILES }} yeni sayfa yayınlandı"
-          to: ${{ secrets.MAIL_TO }}
-          from: MobilCV Bot
-          body: |
-            Merhaba,
-
-            MobilCV botu çalıştı.
-
-            Tarih: ${{ env.NOW }}
-            Yeni HTML sayfa sayısı: ${{ env.NEW_FILES }}
-            Blog: https://mobilcv.net
-
-            MobilCV Bot
+     
