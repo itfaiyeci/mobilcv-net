@@ -399,4 +399,44 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://mobilcv.net/gizlilik-politikasi.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://mobilcv.net/en/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://mobilcv.net/de/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://mobilcv.net/fr/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://mobilcv.net/es/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://mobilcv.net/it/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://mobilcv.net/pt/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://mobilcv.net/ru/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://mobilcv.net/ar/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://mobilcv.net/zh/privacy-policy.html</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
 </urlset>
