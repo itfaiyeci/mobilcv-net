@@ -29,7 +29,10 @@ jobs:
           cd MobilCV.AIEngine
           dotnet restore
           dotnet run
-
+          
+      - name: Gizlilik ve bakım
+        run: python3 gizlilik_ve_bakim.py
+        
       - name: Değişiklikleri gönder
         run: |
           git config user.name "MobilCV Bot"
