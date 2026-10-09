@@ -1,27 +1,44 @@
 name: Blog Publisher
 
+# Iki haftada bir (cift haftalarin pazartesisi) yeni makale TASLAGI uretir.
+# Taslak dogrudan yayina cikmaz: "Pull request" olarak gelir; okuyup onaylarsaniz (Merge) yayinlanir.
 on:
   schedule:
-    - cron: '0 9 * * 1'   # Her pazartesi 09:00 UTC (Türkiye saatiyle 12:00)
-  workflow_dispatch:
+    - cron: '0 9 * * 1'   # Her pazartesi 09:00 UTC calisir, tek haftalarda hemen durur
+  workflow_dispatch:      # Elle calistirildiginda hafta kontrolu yapilmaz
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
+      - name: Hafta kontrolu (iki haftada bir)
+        id: week
+        run: |
+          WEEK=$(date -u +%V)
+          if [ "${{ github.event_name }}" = "schedule" ] && [ $((10#$WEEK % 2)) -ne 0 ]; then
+            echo "Tek hafta ($WEEK), bu hafta makale uretilmiyor."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Kodu indir
+        if: steps.week.outputs.skip != 'true'
         uses: actions/checkout@v4
 
       - name: .NET 8 kur
+        if: steps.week.outputs.skip != 'true'
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Makaleleri üret
+      - name: Makale taslagi uret (yalnizca Turkce + Ingilizce)
+        if: steps.week.outputs.skip != 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
@@ -29,18 +46,30 @@ jobs:
           cd MobilCV.AIEngine
           dotnet restore
           dotnet run
-          
-      - name: Gizlilik ve bakım
-        run: python3 gizlilik_ve_bakim.py
-        
-      - name: Değişiklikleri gönder
-        run: |
-          git config user.name "MobilCV Bot"
-          git config user.email "bot@mobilcv.net"
-          git add . 
-          echo "NEW_FILES=$(git diff --cached --name-only --diff-filter=A -- '*.html' | wc -l)" >> $GITHUB_ENV
-          echo "NOW=$(date -u +'%Y-%m-%d %H:%M UTC')" >> $GITHUB_ENV
-          git diff --cached --quiet || git commit -m "Otomatik makale $(date -u +'%Y-%m-%d')"
-          git push
 
-     
+      - name: Gizlilik ve bakim
+        if: steps.week.outputs.skip != 'true'
+        run: python3 gizlilik_ve_bakim.py
+
+      - name: Onay icin taslak olustur
+        if: steps.week.outputs.skip != 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: taslak/yeni-makale
+          delete-branch: true
+          commit-message: "Makale taslagi"
+          committer: MobilCV Bot <bot@mobilcv.net>
+          author: MobilCV Bot <bot@mobilcv.net>
+          title: "📝 Yeni makale taslağı – onayınızı bekliyor"
+          body: |
+            Bot yeni bir makale taslağı hazırladı. Henüz **yayında değil**.
+
+            **Nasıl kontrol edilir?**
+            1. Yukarıdaki **Files changed** sekmesinde yeni `.html` dosyalarını açıp metni okuyun.
+            2. Uygunsa en alttaki yeşil **Merge pull request** → **Confirm merge** düğmelerine basın. Birkaç dakika içinde yayına çıkar.
+            3. Uygun değilse **Close pull request** deyin; hiçbir şey yayınlanmaz.
+
+            Kontrol listesi:
+            - [ ] Bilgiler doğru, abartılı ya da uydurma iddia yok
+            - [ ] Metin akıcı, tekrar yok
+            - [ ] Yaklaşık 1000 kelime (çok kısa değil)

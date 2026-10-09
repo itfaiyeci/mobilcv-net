@@ -17,6 +17,11 @@ namespace MobilCV.AIEngine
             var client = new ChatClient(model, apiKey);
             Console.WriteLine($"🤖 Model: {model}");
 
+            // Ek diller (de, fr, es, it, pt, ru, ar, zh) varsayilan olarak KAPALI.
+            // Kalite icin yalnizca Turkce + Ingilizce uretilir. Acmak icin: EXTRA_LANGS=1
+            bool extraLangs = Environment.GetEnvironmentVariable("EXTRA_LANGS") == "1";
+            Console.WriteLine(extraLangs ? "🌍 Ek diller: ACIK" : "🌍 Ek diller: kapali (yalnizca TR + EN)");
+
             // İngilizce blog sayfalarındaki mobilcv.com linklerini İngilizce araç sayfasına çevir (tek seferlik, tekrar çalışması zararsız)
             MultiLang.FixEnglishCtaLinks();
 
@@ -117,7 +122,7 @@ namespace MobilCV.AIEngine
                     string pathEn = Path.Combine("..", "en", $"{slugEnCheck}.html");
                     bool trExists = File.Exists(pathTr);
                     bool enExists = File.Exists(pathEn);
-                    if (!trExists || !enExists || MultiLang.AnyMissing(slugEnCheck))
+                    if (!trExists || !enExists || (extraLangs && MultiLang.AnyMissing(slugEnCheck)))
                     {
                         availableTopics.Add((kvp.Key, t, s));
                     }
@@ -296,7 +301,10 @@ namespace MobilCV.AIEngine
             }
 
             // ===== EK DİLLER (de, fr, es, it, pt, ru, ar, zh) =====
-            await MultiLang.GenerateMissingAsync(client, topicEnglish, selectedCategory, slugEnglish, slug);
+            if (extraLangs)
+            {
+                await MultiLang.GenerateMissingAsync(client, topicEnglish, selectedCategory, slugEnglish, slug);
+            }
 
             // ===== TÜM DİL SÜRÜMLERİNDE hreflang ETİKETLERİNİ EŞİTLE =====
             MultiLang.SyncHreflang(slug, slugEnglish);
