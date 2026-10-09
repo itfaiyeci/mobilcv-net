@@ -1043,4 +1043,16 @@
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
+    <url>
+        <loc>https://mobilcv.net/ulkelere-gore-cv-kurallari.html</loc>
+        <lastmod>2026-10-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/en/cv-rules-by-country.html</loc>
+        <lastmod>2026-10-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 </urlset>
