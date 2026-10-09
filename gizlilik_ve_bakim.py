@@ -21,6 +21,11 @@ NET = "https://mobilcv.net"
 COM = "https://www.mobilcv.com"
 FORMSPREE = "https://formspree.io/f/movkoozp"
 CONTACT = "info@mobilcv.com"
+INSTAGRAM = "https://www.instagram.com/mobilcvcom/"
+THREADS = "https://www.threads.com/@mobilcvcom"
+SOCIAL = (f'<p data-social-link style="margin-top:6px;font-size:0.85em;">'
+          f'<a href="{INSTAGRAM}" target="_blank" rel="noopener me">Instagram</a> · '
+          f'<a href="{THREADS}" target="_blank" rel="noopener me">Threads</a></p>')
 UPDATED = date(2026, 10, 8)
 
 # Dil -> (sayfa yolu, link etiketi, ana site etiketi, blog etiketi, başlık, son güncelleme etiketi, tarih formatı)
@@ -217,6 +222,7 @@ def build_page(code):
     </div>
     <footer class="footer">
         <p>&copy; {UPDATED.year} MobilCV &mdash; <a href="{d['com']}">mobilcv.com</a></p>
+        {SOCIAL}
     </footer>
 </div>
 </body>
@@ -245,7 +251,7 @@ def main():
             written += 1
     privacy_files = {LANGS[c]["path"] for c in LANGS}
 
-    links = forms = news = 0
+    links = forms = news = social = 0
     for f in sorted(root.rglob("*.html")):
         rel = f.as_posix()
         if rel.startswith("MobilCV.AIEngine/") or f.name.startswith("google") or rel in privacy_files:
@@ -261,6 +267,12 @@ def main():
             idx = s.rfind("</footer>")
             s = s[:idx] + link + s[idx:]
             links += 1
+
+        # 2b) Footer'a Instagram / Threads linki
+        if "data-social-link" not in s and "</footer>" in s:
+            idx = s.rfind("</footer>")
+            s = s[:idx] + "    " + SOCIAL + "\n    " + s[idx:]
+            social += 1
 
         # 3) İletişim formları
         if f.name in ("iletisim.html", "contact.html"):
@@ -295,6 +307,7 @@ def main():
 
     print(f"Gizlilik sayfası yazıldı/güncellendi : {written}")
     print(f"Footer'a gizlilik linki eklenen sayfa: {links}")
+    print(f"Instagram/Threads linki eklenen sayfa: {social}")
     print(f"Düzeltilen iletişim formu            : {forms}")
     print(f"Kaldırılan bülten kutusu             : {news}")
     print(f"Sitemap'e eklenen adres              : {added}")
