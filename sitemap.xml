@@ -1031,4 +1031,16 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://mobilcv.net/kurumlar-icin.html</loc>
+        <lastmod>2026-10-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/en/for-organisations.html</loc>
+        <lastmod>2026-10-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
 </urlset>
