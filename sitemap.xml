@@ -1111,4 +1111,16 @@
     <loc>https://mobilcv.net/ja/terms.html</loc>
     <lastmod>2026-10-10</lastmod>
   </url>
+    <url>
+        <loc>https://mobilcv.net/motivasyon-mektubu-nasil-yazilir.html</loc>
+        <lastmod>2026-10-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://mobilcv.net/en/how-to-write-a-motivation-letter.html</loc>
+        <lastmod>2026-10-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 </urlset>
