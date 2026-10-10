@@ -1,0 +1,94 @@
+{
+ "labels": {
+  "about": "Über uns",
+  "terms": "Nutzungsbedingungen",
+  "privacy": "Datenschutzerklärung",
+  "home": "Startseite",
+  "blog": "Blog",
+  "orgs": "Für Organisationen",
+  "contact": "Kontakt",
+  "updated": "Zuletzt aktualisiert",
+  "date": "10. Oktober 2026"
+ },
+ "about": {
+  "meta": "MobilCV ist ein kostenloser Lebenslauf-Generator in 11 Sprachen, ganz ohne Registrierung. Wer wir sind, unsere Grundsätze und wie Sie uns für Kooperationen erreichen.",
+  "lead": "MobilCV ist ein Werkzeug, mit dem jeder auf dem Smartphone einen professionellen Lebenslauf erstellen kann – kostenlos und ohne Registrierung.",
+  "sections": [
+   [
+    "Unser Angebot",
+    "<ul><li><a href=\"https://www.mobilcv.com/de/\">mobilcv.com</a>: ein Lebenslauf-Generator für Smartphone und Computer. Füllen Sie Ihren Lebenslauf aus, wählen Sie eine Vorlage und eine Farbe und laden Sie ihn als PDF herunter.</li><li>11 Sprachen: Englisch, Türkisch, Deutsch, Französisch, Spanisch, Italienisch, Portugiesisch, Russisch, Arabisch, Chinesisch und Japanisch.</li><li>Drei Vorlagen: Modern, Klassisch (einspaltig) und der japanische Lebenslauf (履歴書).</li><li><a href=\"https://mobilcv.net/en/cv-examples.html\">mobilcv.net</a>: Lebenslauf-Beispiele nach Beruf, Lebenslauf-Regeln nach Land und Karriereratgeber.</li></ul>"
+   ],
+   [
+    "Warum wir das tun",
+    "<p>Ein guter Lebenslauf ist der erste Schritt bei der Jobsuche. Dennoch haben viele Menschen keinen Computer, kein Budget für Lebenslauf-Software oder keine Zeit, noch ein weiteres Konto anzulegen. Wir entwickeln MobilCV, um diese Hürden abzubauen: Ein Smartphone und wenige Minuten sollen genügen.</p>"
+   ],
+   [
+    "Unsere Grundsätze",
+    "<ul><li><strong>Kostenlos:</strong> Das Erstellen eines Lebenslaufs und der PDF-Download sind kostenlos – ohne Wasserzeichen und ohne Bezahlschranke beim Herunterladen.</li><li><strong>Ohne Registrierung:</strong> Wir fragen weder nach einer E-Mail-Adresse noch nach einem Passwort oder Konto.</li><li><strong>Datenschutz:</strong> Ihre Lebenslaufdaten werden nicht an unsere Server übermittelt, sondern verbleiben in Ihrem eigenen Browser. Einzelheiten finden Sie in unserer <a href=\"https://mobilcv.net/de/privacy-policy.html\">Datenschutzerklärung</a>.</li><li><strong>Werbefrei:</strong> Wir zeigen keine Werbung und verkaufen keine personenbezogenen Daten.</li><li><strong>Transparenz:</strong> Unsere Ratgeber nennen ihre Quellen, und wir veröffentlichen keine Informationen, die wir nicht überprüfen können.</li></ul>"
+   ],
+   [
+    "Wer dahintersteht",
+    "<p>MobilCV ist ein unabhängiges Projekt, das von İlhan Taşan in der Türkei entwickelt wird. Ihr Feedback fließt unmittelbar in die Weiterentwicklung ein.</p>"
+   ],
+   [
+    "Kooperationen",
+    "<p>Wir freuen uns über Kooperationen mit Jobcentern, Kommunen, gemeinnützigen Organisationen, Schulen, Bildungsträgern und Berufsberatungen. Organisationen können MobilCV ihren Klientinnen und Klienten kostenlos empfehlen, unsere Plakate mit QR-Code nutzen und von ihrer Website auf uns verlinken. Einzelheiten finden Sie unter <a href=\"https://mobilcv.net/en/for-organisations.html\">Für Organisationen</a> (auf Englisch).</p>"
+   ],
+   [
+    "Kontakt",
+    "<p>E-Mail: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a><br>Kontaktformular: <a href=\"https://mobilcv.net/en/contact.html\">mobilcv.net/en/contact.html</a> (auf Englisch)<br>Instagram und Threads: @mobilcvcom</p>"
+   ]
+  ]
+ },
+ "terms": {
+  "meta": "Nutzungsbedingungen von MobilCV: Umfang des Dienstes, Ihre Daten, Verantwortlichkeiten und geistiges Eigentum.",
+  "lead": "Diese Bedingungen gelten für die Nutzung von mobilcv.com und mobilcv.net (gemeinsam „MobilCV“). Mit der Nutzung dieser Websites erklären Sie sich mit diesen Bedingungen einverstanden.",
+  "sections": [
+   [
+    "1. Der Dienst",
+    "<p>MobilCV umfasst einen kostenlosen, browserbasierten Lebenslauf-Generator, der keine Registrierung erfordert, sowie informative Inhalte rund um das Verfassen von Lebensläufen. Für das Erstellen Ihres Lebenslaufs und dessen Download als PDF fallen keine Gebühren an.</p>"
+   ],
+   [
+    "2. Ihre Daten",
+    "<p>Die Angaben, die Sie in Ihren Lebenslauf eingeben, werden nicht an unsere Server übermittelt; sie werden ausschließlich auf Ihrem eigenen Gerät im lokalen Speicher Ihres Browsers gespeichert. Wenn Sie Ihre Browserdaten löschen oder ein anderes Gerät verwenden, können Sie daher den Zugriff darauf verlieren. Wir empfehlen, mit der Funktion <strong>Backup herunterladen</strong> eine Kopie aufzubewahren. Einzelheiten zu personenbezogenen Daten finden Sie in unserer <a href=\"https://mobilcv.net/de/privacy-policy.html\">Datenschutzerklärung</a>.</p>"
+   ],
+   [
+    "3. Ihre Verantwortung",
+    "<ul><li>Sie sind für die Richtigkeit der Angaben in Ihrem Lebenslauf verantwortlich.</li><li>Geben Sie Informationen über andere Personen nur mit deren Einwilligung ein (zum Beispiel die Kontaktdaten Ihrer Referenzen).</li><li>Nutzen Sie MobilCV nicht, um rechtswidrige oder irreführende Inhalte oder Inhalte zu erstellen, die Rechte Dritter verletzen.</li></ul>"
+   ],
+   [
+    "4. Geistiges Eigentum",
+    "<p>Die Inhalte, die Sie in Ihrem Lebenslauf verfassen, gehören Ihnen, und Sie können das erstellte PDF nach Belieben verwenden. Die Beispieltexte für Lebensläufe auf unseren Websites dürfen Sie bei der Erstellung Ihres eigenen Lebenslaufs frei anpassen. Software, Design, Logo, Ratgebertexte und Bilder der Websites sind Eigentum von MobilCV und dürfen ohne Genehmigung weder kopiert noch in einem anderen Dienst verwendet werden.</p>"
+   ],
+   [
+    "5. Informative Inhalte",
+    "<p>Unsere Ratgeber und die Lebenslauf-Regeln nach Land dienen ausschließlich der allgemeinen Information und ersetzen keine rechtliche, finanzielle oder sonstige fachliche Beratung. Wir achten darauf, Quellen anzugeben und die Inhalte aktuell zu halten; die Gepflogenheiten unterscheiden sich jedoch je nach Land, Branche und Arbeitgeber.</p>"
+   ],
+   [
+    "6. Keine Gewährleistung",
+    "<p>MobilCV wird „wie besehen“ bereitgestellt. Wir übernehmen keine Gewähr dafür, dass der Dienst unterbrechungs- oder fehlerfrei funktioniert oder dass ein damit erstellter Lebenslauf zu einer bestimmten Stelle führt. Wir empfehlen, Ihr PDF vor dem Versand zu überprüfen.</p>"
+   ],
+   [
+    "7. Haftungsbeschränkung",
+    "<p>Soweit nach geltendem Recht zulässig, haften wir nicht für mittelbare Schäden, Datenverluste oder entgangene Beschäftigungsmöglichkeiten, die sich aus der Nutzung von MobilCV ergeben. Eine Haftung, die gesetzlich nicht beschränkt werden kann, bleibt hiervon unberührt.</p>"
+   ],
+   [
+    "8. Links zu anderen Websites",
+    "<p>Unsere Websites können Links zu anderen Websites enthalten (zum Beispiel zu unseren Quellen oder zu Social-Media-Plattformen). Für deren Inhalte und Datenschutzpraktiken sind ausschließlich die jeweiligen Betreiber verantwortlich.</p>"
+   ],
+   [
+    "9. Änderungen",
+    "<p>Wir können Funktionen des Dienstes hinzufügen, ändern oder entfernen. Diese Bedingungen können von Zeit zu Zeit aktualisiert werden; die jeweils aktuelle Fassung wird stets mit Datum auf dieser Seite veröffentlicht.</p>"
+   ],
+   [
+    "10. Anwendbares Recht",
+    "<p>Diese Bedingungen unterliegen dem Recht der Republik Türkiye. Zwingende Verbraucherschutzvorschriften des Landes, in dem Sie leben, bleiben unberührt.</p>"
+   ],
+   [
+    "11. Kontakt",
+    "<p>Bei Fragen erreichen Sie uns unter: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a></p>"
+   ]
+  ]
+ },
+ "privacy_add": "Die WhatsApp- und LinkedIn-Schaltflächen im Empfehlungsfeld öffnen die jeweiligen Websites nur, wenn Sie darauf klicken, und teilen ausschließlich die Adresse von MobilCV; Ihre Lebenslaufdaten werden niemals weitergegeben."
+}

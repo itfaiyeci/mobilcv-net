@@ -1,0 +1,94 @@
+{
+ "labels": {
+  "about": "Hakkımızda",
+  "terms": "Kullanım Koşulları",
+  "privacy": "Gizlilik Politikası",
+  "home": "Ana Site",
+  "blog": "Blog",
+  "orgs": "Kurumlar İçin",
+  "contact": "İletişim",
+  "updated": "Son güncelleme",
+  "date": "10 Ekim 2026"
+ },
+ "about": {
+  "meta": "MobilCV; ücretsiz, üyeliksiz ve 11 dilde çalışan bir CV oluşturma aracıdır. Kim olduğumuz, ilkelerimiz ve işbirliği için iletişim bilgileri.",
+  "lead": "MobilCV, herkesin telefonundan, ücretsiz ve üye olmadan profesyonel bir CV hazırlayabilmesi için geliştirilen bir araçtır.",
+  "sections": [
+   [
+    "Ne sunuyoruz?",
+    "<ul><li><a href=\"https://www.mobilcv.com/\">mobilcv.com</a>: Telefonda ve bilgisayarda çalışan CV oluşturma aracı. CV'nizi doldurur, şablon ve renk seçer, PDF olarak indirirsiniz.</li><li>11 dil: Türkçe, İngilizce, Almanca, Fransızca, İspanyolca, İtalyanca, Portekizce, Rusça, Arapça, Çince ve Japonca.</li><li>Üç şablon: Modern, Klasik (tek sütun) ve Japon tipi özgeçmiş (履歴書).</li><li><a href=\"https://mobilcv.net/\">mobilcv.net</a>: Mesleğe göre CV örnekleri, ülkelere göre CV kuralları ve kariyer rehberleri.</li></ul>"
+   ],
+   [
+    "Neden yapıyoruz?",
+    "<p>İyi bir CV, iş aramanın ilk adımıdır; ama birçok kişinin bilgisayarı, CV programlarına ödeyecek bütçesi ya da hesap açmak için zamanı yoktur. MobilCV'yi bu engelleri kaldırmak için geliştiriyoruz: yalnızca bir telefon ve birkaç dakika yeterli olsun.</p>"
+   ],
+   [
+    "İlkelerimiz",
+    "<ul><li><strong>Ücretsiz:</strong> CV oluşturmak ve PDF indirmek ücretsizdir; filigran ya da indirme sırasında karşınıza çıkan bir ödeme ekranı yoktur.</li><li><strong>Üyelik yok:</strong> E-posta, şifre veya hesap istemiyoruz.</li><li><strong>Gizlilik:</strong> CV bilgileriniz sunucularımıza gönderilmez; yalnızca kendi tarayıcınızda tutulur. Ayrıntılar <a href=\"https://mobilcv.net/gizlilik-politikasi.html\">Gizlilik Politikası</a>'nda.</li><li><strong>Reklamsız:</strong> Sitede reklam göstermiyoruz ve kişisel veri satmıyoruz.</li><li><strong>Şeffaflık:</strong> Rehberlerimizde kaynak gösteriyor, doğrulayamadığımız bilgiyi yayımlamıyoruz.</li></ul>"
+   ],
+   [
+    "Kim geliştiriyor?",
+    "<p>MobilCV, Türkiye'de İlhan Taşan tarafından geliştirilen bağımsız bir projedir. Geri bildirimleriniz ürünü doğrudan şekillendirir.</p>"
+   ],
+   [
+    "İşbirliği",
+    "<p>İş bulma merkezleri, belediyeler, dernekler, okullar, kurslar ve kariyer danışmanlarıyla işbirliğine açığız. Kurumlar MobilCV'yi danışanlarına ücretsiz önerebilir, QR kodlu afişlerimizi kullanabilir ve sitelerine bağlantı ekleyebilir. Ayrıntılar için <a href=\"https://mobilcv.net/kurumlar-icin.html\">Kurumlar İçin</a> sayfasına göz atın.</p>"
+   ],
+   [
+    "İletişim",
+    "<p>E-posta: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a><br>İletişim formu: <a href=\"https://mobilcv.net/iletisim.html\">mobilcv.net/iletisim.html</a><br>Instagram ve Threads: @mobilcvcom</p>"
+   ]
+  ]
+ },
+ "terms": {
+  "meta": "MobilCV kullanım koşulları: hizmetin kapsamı, verileriniz, sorumluluklar ve fikri mülkiyet.",
+  "lead": "Bu koşullar, mobilcv.com ve mobilcv.net sitelerinin (birlikte \"MobilCV\") kullanımına ilişkindir. Siteleri kullanarak bu koşulları kabul etmiş olursunuz.",
+  "sections": [
+   [
+    "1. Hizmet",
+    "<p>MobilCV; tarayıcıda çalışan, üyelik gerektirmeyen ücretsiz bir CV oluşturma aracı ve CV yazımına ilişkin bilgilendirici içeriklerden oluşur. CV'nizi oluşturmak ve PDF olarak indirmek için herhangi bir ücret talep edilmez.</p>"
+   ],
+   [
+    "2. Verileriniz",
+    "<p>CV'ye girdiğiniz bilgiler sunucularımıza gönderilmez; yalnızca kendi cihazınızda, tarayıcınızın yerel depolama alanında tutulur. Bu nedenle tarayıcı verilerini silerseniz ya da başka bir cihaz kullanırsanız bilgilerinize erişemeyebilirsiniz. Önemli bilgileriniz için <strong>Yedekle</strong> özelliğiyle bir yedek almanızı öneririz. Kişisel verilerin işlenmesine ilişkin ayrıntılar <a href=\"https://mobilcv.net/gizlilik-politikasi.html\">Gizlilik Politikası</a>'nda yer alır.</p>"
+   ],
+   [
+    "3. Sizin sorumluluklarınız",
+    "<ul><li>CV'nize yazdığınız bilgilerin doğruluğu size aittir.</li><li>Başka bir kişiye ait bilgileri yalnızca o kişinin izniyle girmelisiniz (örneğin referanslarınızın iletişim bilgileri).</li><li>MobilCV'yi hukuka aykırı, yanıltıcı veya başkalarının haklarını ihlal eden içerik üretmek için kullanmamalısınız.</li></ul>"
+   ],
+   [
+    "4. Fikri mülkiyet",
+    "<p>CV'nize yazdığınız içerik size aittir; oluşturduğunuz PDF'i dilediğiniz gibi kullanabilirsiniz. Sitelerimizdeki örnek CV metinlerini kendi CV'nizi hazırlarken serbestçe uyarlayabilirsiniz. Sitelerin yazılımı, tasarımı, logosu, rehber metinleri ve görselleri MobilCV'ye aittir; izin alınmadan kopyalanamaz veya başka bir hizmette kullanılamaz.</p>"
+   ],
+   [
+    "5. Bilgilendirici içerikler",
+    "<p>Rehberlerimiz ve ülkelere göre CV kuralları genel bilgi amaçlıdır; hukuki, mali veya profesyonel danışmanlık yerine geçmez. Kaynak göstermeye ve güncel tutmaya özen gösteririz; ancak kurallar ülkeye, sektöre ve işverene göre değişebilir.</p>"
+   ],
+   [
+    "6. Garanti",
+    "<p>MobilCV \"olduğu gibi\" sunulur. Hizmetin kesintisiz veya hatasız çalışacağını ya da oluşturulan CV'nin belirli bir işe kabul edilmenizi sağlayacağını garanti etmeyiz. İndirdiğiniz PDF'i göndermeden önce kontrol etmenizi öneririz.</p>"
+   ],
+   [
+    "7. Sorumluluğun sınırı",
+    "<p>Yürürlükteki mevzuatın izin verdiği ölçüde, MobilCV'nin kullanımından doğabilecek dolaylı zararlardan, veri kaybından veya iş fırsatlarının kaybından sorumlu tutulamayız. Bu madde, mevzuat gereği sınırlandırılamayan sorumlulukları etkilemez.</p>"
+   ],
+   [
+    "8. Başka sitelere bağlantılar",
+    "<p>Sitelerimizde başka sitelere (örneğin kaynaklarımıza veya sosyal medya platformlarına) bağlantılar bulunabilir. Bu sitelerin içeriğinden ve gizlilik uygulamalarından ilgili site sorumludur.</p>"
+   ],
+   [
+    "9. Değişiklikler",
+    "<p>Hizmete yeni özellikler ekleyebilir, mevcut özellikleri değiştirebilir veya kaldırabiliriz. Bu koşulları zaman zaman güncelleyebiliriz; güncel sürüm her zaman bu sayfada, güncelleme tarihiyle birlikte yayımlanır.</p>"
+   ],
+   [
+    "10. Uygulanacak hukuk",
+    "<p>Bu koşullar Türkiye Cumhuriyeti hukukuna tabidir. Bulunduğunuz ülkenin tüketicileri koruyan zorunlu hükümleri saklıdır.</p>"
+   ],
+   [
+    "11. İletişim",
+    "<p>Sorularınız için: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a></p>"
+   ]
+  ]
+ },
+ "privacy_add": "Tavsiye kutusundaki WhatsApp ve LinkedIn düğmeleri yalnızca siz tıklarsanız ilgili siteyi açar ve yalnızca MobilCV'nin adresini paylaşır; CV bilgileriniz paylaşılmaz."
+}

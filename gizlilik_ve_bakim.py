@@ -5,7 +5,7 @@ Deponun KÖK klasöründe çalıştırın:   python gizlilik_ve_bakim.py
 (Blog botu her çalıştığında da otomatik çalıştırılabilir; tekrar çalıştırmak zararsızdır.)
 
 Yaptıkları:
- 1) 10 dilde gizlilik politikası sayfası oluşturur:
+ 1) 11 dilde gizlilik politikası, Hakkımızda ve Kullanım Koşulları sayfaları oluşturur:
       gizlilik-politikasi.html, en/privacy-policy.html, de/privacy-policy.html ... zh/privacy-policy.html
  2) Tüm sayfaların alt kısmına (footer) o dildeki gizlilik politikası linkini ekler.
  3) İletişim formlarını (iletisim.html, en/contact.html) çalışır hale getirir (Formspree).
@@ -26,30 +26,32 @@ THREADS = "https://www.threads.com/@mobilcvcom"
 SOCIAL = (f'<p data-social-link style="margin-top:6px;font-size:0.85em;">'
           f'<a href="{INSTAGRAM}" target="_blank" rel="noopener me">Instagram</a> · '
           f'<a href="{THREADS}" target="_blank" rel="noopener me">Threads</a></p>')
-UPDATED = date(2026, 10, 9)
+UPDATED = date(2026, 10, 10)
 
 # Dil -> (sayfa yolu, link etiketi, ana site etiketi, blog etiketi, başlık, son güncelleme etiketi, tarih formatı)
 LANGS = {
     "tr": dict(path="gizlilik-politikasi.html", label="Gizlilik Politikası", home="Ana Site", blog="Blog",
-               updated="Son güncelleme", date="9 Ekim 2026", rtl=False, com=f"{COM}/", net=f"{NET}/"),
+               updated="Son güncelleme", date="10 Ekim 2026", rtl=False, com=f"{COM}/", net=f"{NET}/"),
     "en": dict(path="en/privacy-policy.html", label="Privacy Policy", home="Homepage", blog="Blog",
-               updated="Last updated", date="9 October 2026", rtl=False),
+               updated="Last updated", date="10 October 2026", rtl=False),
     "de": dict(path="de/privacy-policy.html", label="Datenschutzerklärung", home="Startseite", blog="Blog",
-               updated="Zuletzt aktualisiert", date="9. Oktober 2026", rtl=False),
+               updated="Zuletzt aktualisiert", date="10. Oktober 2026", rtl=False),
     "fr": dict(path="fr/privacy-policy.html", label="Politique de confidentialité", home="Accueil", blog="Blog",
-               updated="Dernière mise à jour", date="9 octobre 2026", rtl=False),
+               updated="Dernière mise à jour", date="10 octobre 2026", rtl=False),
     "es": dict(path="es/privacy-policy.html", label="Política de privacidad", home="Inicio", blog="Blog",
-               updated="Última actualización", date="9 de octubre de 2026", rtl=False),
+               updated="Última actualización", date="10 de octubre de 2026", rtl=False),
     "it": dict(path="it/privacy-policy.html", label="Informativa sulla privacy", home="Home", blog="Blog",
-               updated="Ultimo aggiornamento", date="9 ottobre 2026", rtl=False),
+               updated="Ultimo aggiornamento", date="10 ottobre 2026", rtl=False),
     "pt": dict(path="pt/privacy-policy.html", label="Política de privacidade", home="Início", blog="Blog",
-               updated="Última atualização", date="9 de outubro de 2026", rtl=False),
+               updated="Última atualização", date="10 de outubro de 2026", rtl=False),
     "ru": dict(path="ru/privacy-policy.html", label="Политика конфиденциальности", home="Главная", blog="Блог",
-               updated="Последнее обновление", date="9 октября 2026 г.", rtl=False),
+               updated="Последнее обновление", date="10 октября 2026 г.", rtl=False),
     "ar": dict(path="ar/privacy-policy.html", label="سياسة الخصوصية", home="الرئيسية", blog="المدونة",
-               updated="آخر تحديث", date="9 أكتوبر 2026", rtl=True),
+               updated="آخر تحديث", date="10 أكتوبر 2026", rtl=True),
     "zh": dict(path="zh/privacy-policy.html", label="隐私政策", home="首页", blog="博客",
-               updated="最后更新", date="2026年10月9日", rtl=False),
+               updated="最后更新", date="2026年10月10日", rtl=False),
+    "ja": dict(path="ja/privacy-policy.html", label="プライバシーポリシー", home="ホーム", blog="ブログ",
+               updated="最終更新日", date="2026年10月10日", rtl=False, net=f"{NET}/en/"),
 }
 for code, d in LANGS.items():
     d.setdefault("com", f"{COM}/{code}/")
@@ -163,6 +165,85 @@ TEXT = {
 ],
 }
 
+# ---------------------------------------------------------------------------
+# KURUMSAL SAYFALAR (Hakkimizda, Kullanim Kosullari) ve Japonca gizlilik metni
+# metinler/ klasorundeki JSON dosyalarindan okunur.
+# ---------------------------------------------------------------------------
+import json as _json
+_K = Path(__file__).parent / "metinler"
+TEXT["ja"] = [tuple(x) for x in _json.loads((_K / "privacy_ja.json").read_text(encoding="utf-8"))]
+KURUMSAL = {c: _json.loads((_K / "kurumsal" / f"{c}.json").read_text(encoding="utf-8")) for c in LANGS}
+for _c in LANGS:  # Tavsiye kutusu notu: "ucuncu taraf hizmetler" bolumune
+    _h, _b = TEXT[_c][3]
+    assert "Google Analytics" in _b, _c
+    _add = KURUMSAL[_c]["privacy_add"]
+    if _add not in _b:
+        TEXT[_c][3] = (_h, _b + f"<p>{_add}</p>")
+LEGAL_PATHS = {c: (("hakkimizda.html", "kullanim-kosullari.html") if c == "tr" else (f"{c}/about.html", f"{c}/terms.html")) for c in LANGS}
+
+
+def legal_links(code):
+    k = KURUMSAL[code]["labels"]
+    a, t = LEGAL_PATHS[code]
+    return (f'<p data-legal-links style="margin-top:6px;font-size:0.85em;"><a href="{NET}/{a}">{k["about"]}</a> &middot; '
+            f'<a href="{NET}/{t}">{k["terms"]}</a> &middot; <a href="{LANGS[code]["url"]}">{LANGS[code]["label"]}</a></p>')
+
+
+def build_legal(code, kind):
+    d = LANGS[code]
+    k = KURUMSAL[code]
+    page = k[kind]
+    title = k["labels"]["about" if kind == "about" else "terms"]
+    idx = 0 if kind == "about" else 1
+    url = f"{NET}/{LEGAL_PATHS[code][idx]}"
+    dir_attr = ' dir="rtl"' if d["rtl"] else ""
+    sections = "\n".join(f"        <h2>{h}</h2>\n        {body}" for h, body in page["sections"])
+    alternates = "\n".join(f'    <link rel="alternate" hreflang="{c}" href="{NET}/{LEGAL_PATHS[c][idx]}">' for c in LANGS)
+    ld = {"@context": "https://schema.org", "@type": "AboutPage" if kind == "about" else "WebPage",
+          "name": title, "url": url, "inLanguage": code,
+          "publisher": {"@type": "Organization", "name": "MobilCV", "url": COM + "/", "email": CONTACT,
+                        "sameAs": [INSTAGRAM, THREADS]}}
+    return f"""<!DOCTYPE html>
+<html lang="{code}"{dir_attr}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} | MobilCV</title>
+    <meta name="description" content="{page['meta'].replace('"', '&quot;')}">
+    <link rel="canonical" href="{url}">
+{alternates}
+    <link rel="alternate" hreflang="x-default" href="{NET}/{LEGAL_PATHS['en'][idx]}">
+    <script type="application/ld+json">{_json.dumps(ld, ensure_ascii=False)}</script>
+    <style>{CSS}
+        .lead {{ font-size: 1.1em; color: #1e293b; margin-bottom: 8px; }}
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="site-header">
+        <a href="{d['net']}" class="logo">Mobil<span>CV</span></a>
+        <ul class="nav-links">
+            <li><a href="{d['com']}">{d['home']}</a></li>
+            <li><a href="{d['net']}">{d['blog']}</a></li>
+        </ul>
+    </header>
+    <div class="page-content">
+        <h1>{title}</h1>
+        <p class="updated">{d['updated']}: {d['date']}</p>
+        <p class="lead">{page['lead']}</p>
+{sections}
+    </div>
+    <footer class="footer">
+        <p>&copy; {UPDATED.year} MobilCV &mdash; <a href="{d['com']}">mobilcv.com</a></p>
+        {legal_links(code)}
+        {SOCIAL}
+    </footer>
+</div>
+</body>
+</html>
+"""
+
+
 CSS = """
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.8; padding: 20px; }
@@ -222,6 +303,7 @@ def build_page(code):
     </div>
     <footer class="footer">
         <p>&copy; {UPDATED.year} MobilCV &mdash; <a href="{d['com']}">mobilcv.com</a></p>
+        {legal_links(code)}
         {SOCIAL}
     </footer>
 </div>
@@ -251,6 +333,17 @@ def main():
             written += 1
     privacy_files = {LANGS[c]["path"] for c in LANGS}
 
+    # 1b) Kurumsal sayfalar (Hakkimizda / Kullanim Kosullari)
+    for code in LANGS:
+        for i, kind in enumerate(("about", "terms")):
+            p = root / LEGAL_PATHS[code][i]
+            p.parent.mkdir(parents=True, exist_ok=True)
+            html = build_legal(code, kind)
+            if not p.exists() or p.read_text(encoding="utf-8") != html:
+                p.write_text(html, encoding="utf-8")
+                written += 1
+            privacy_files.add(LEGAL_PATHS[code][i])
+
     links = forms = news = social = 0
     for f in sorted(root.rglob("*.html")):
         rel = f.as_posix()
@@ -266,6 +359,12 @@ def main():
                     f'<a href="{d["url"]}">{d["label"]}</a></p>\n    ')
             idx = s.rfind("</footer>")
             s = s[:idx] + link + s[idx:]
+            links += 1
+
+        # 2a) Footer'a Hakkimizda / Kullanim Kosullari linkleri
+        if "data-legal-links" not in s and "</footer>" in s:
+            idx = s.rfind("</footer>")
+            s = s[:idx] + "    " + legal_links(lang_of(rel)) + "\n    " + s[idx:]
             links += 1
 
         # 2b) Footer'a Instagram / Threads linki
@@ -298,9 +397,10 @@ def main():
     sm = root / "sitemap.xml"
     if sm.exists():
         content = sm.read_text(encoding="utf-8")
-        for d in LANGS.values():
-            if f"<loc>{d['url']}</loc>" not in content and "</urlset>" in content:
-                entry = f"  <url>\n    <loc>{d['url']}</loc>\n    <lastmod>{UPDATED.isoformat()}</lastmod>\n  </url>\n</urlset>"
+        urls = [d["url"] for d in LANGS.values()] + [f"{NET}/{x}" for c in LANGS for x in LEGAL_PATHS[c]]
+        for u in urls:
+            if f"<loc>{u}</loc>" not in content and "</urlset>" in content:
+                entry = f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{UPDATED.isoformat()}</lastmod>\n  </url>\n</urlset>"
                 content = content.replace("</urlset>", entry, 1)
                 added += 1
         sm.write_text(content, encoding="utf-8")

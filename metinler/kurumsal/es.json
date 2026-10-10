@@ -1,0 +1,94 @@
+{
+ "labels": {
+  "about": "Quiénes somos",
+  "terms": "Condiciones de uso",
+  "privacy": "Política de privacidad",
+  "home": "Inicio",
+  "blog": "Blog",
+  "orgs": "Para organizaciones",
+  "contact": "Contacto",
+  "updated": "Última actualización",
+  "date": "10 de octubre de 2026"
+ },
+ "about": {
+  "meta": "MobilCV es un creador de currículums gratuito disponible en 11 idiomas y sin registro. Quiénes somos, nuestros principios y cómo contactar con nosotros para colaboraciones.",
+  "lead": "MobilCV es una herramienta que permite a cualquier persona crear un currículum profesional en el móvil, de forma gratuita y sin registro.",
+  "sections": [
+   [
+    "Qué ofrecemos",
+    "<ul><li><a href=\"https://www.mobilcv.com/es/\">mobilcv.com</a>: un creador de currículums que funciona en móviles y ordenadores. Basta con completar el currículum, elegir una plantilla y un color y descargarlo en PDF.</li><li>11 idiomas: inglés, turco, alemán, francés, español, italiano, portugués, ruso, árabe, chino y japonés.</li><li>Tres plantillas: Moderna, Clásica (una columna) y el currículum japonés (履歴書).</li><li><a href=\"https://mobilcv.net/en/cv-examples.html\">mobilcv.net</a>: ejemplos de currículum por profesión, normas del currículum por país y guías de orientación profesional.</li></ul>"
+   ],
+   [
+    "Por qué lo hacemos",
+    "<p>Un buen currículum es el primer paso en la búsqueda de empleo; sin embargo, muchas personas no disponen de ordenador, de presupuesto para un programa de currículums ni de tiempo para crear otra cuenta más. Desarrollamos MobilCV para eliminar estas barreras: un móvil y unos minutos deberían ser suficientes.</p>"
+   ],
+   [
+    "Nuestros principios",
+    "<ul><li><strong>Gratuito:</strong> crear un currículum y descargar el PDF es gratis, sin marcas de agua ni pantallas de pago al descargar.</li><li><strong>Sin registro:</strong> no pedimos correo electrónico, contraseña ni cuenta.</li><li><strong>Privacidad:</strong> la información del currículum no se envía a nuestros servidores, sino que permanece en el propio navegador. Los detalles figuran en nuestra <a href=\"https://mobilcv.net/es/privacy-policy.html\">Política de privacidad</a>.</li><li><strong>Sin publicidad:</strong> no mostramos anuncios ni vendemos datos personales.</li><li><strong>Transparencia:</strong> nuestras guías citan sus fuentes y no publicamos información que no podamos verificar.</li></ul>"
+   ],
+   [
+    "Quién lo desarrolla",
+    "<p>MobilCV es un proyecto independiente desarrollado en Turquía por İlhan Taşan. Las opiniones de los usuarios orientan directamente la evolución del producto.</p>"
+   ],
+   [
+    "Colaboraciones",
+    "<p>Estamos abiertos a colaborar con servicios de empleo, municipios, entidades sin ánimo de lucro, centros educativos, entidades de formación y orientadores profesionales. Las organizaciones pueden recomendar MobilCV a las personas que atienden de forma gratuita, utilizar nuestros carteles con código QR y enlazarnos desde sus sitios web. Más información en <a href=\"https://mobilcv.net/en/for-organisations.html\">Para organizaciones</a> (en inglés).</p>"
+   ],
+   [
+    "Contacto",
+    "<p>Correo electrónico: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a><br>Formulario de contacto: <a href=\"https://mobilcv.net/en/contact.html\">mobilcv.net/en/contact.html</a> (en inglés)<br>Instagram y Threads: @mobilcvcom</p>"
+   ]
+  ]
+ },
+ "terms": {
+  "meta": "Condiciones de uso de MobilCV: alcance del servicio, datos del usuario, responsabilidades y propiedad intelectual.",
+  "lead": "Las presentes condiciones se aplican al uso de mobilcv.com y mobilcv.net (conjuntamente, «MobilCV»). El uso de estos sitios web implica la aceptación de estas condiciones.",
+  "sections": [
+   [
+    "1. El servicio",
+    "<p>MobilCV consiste en un creador de currículums gratuito que funciona en el navegador y no requiere registro, así como en contenidos informativos sobre la redacción de currículums. No se cobra ninguna tarifa por crear el currículum ni por descargarlo en PDF.</p>"
+   ],
+   [
+    "2. Datos del usuario",
+    "<p>La información introducida en el currículum no se envía a nuestros servidores; se guarda únicamente en el propio dispositivo, en el almacenamiento local del navegador. Por ello, si se borran los datos del navegador o se utiliza otro dispositivo, puede perderse el acceso a dicha información. Recomendamos conservar una copia mediante la función <strong>Descargar copia</strong>. La información sobre datos personales figura en nuestra <a href=\"https://mobilcv.net/es/privacy-policy.html\">Política de privacidad</a>.</p>"
+   ],
+   [
+    "3. Responsabilidades del usuario",
+    "<ul><li>El usuario es responsable de la exactitud de la información de su currículum.</li><li>Solo deben introducirse datos de otras personas con su autorización (por ejemplo, los datos de contacto de las referencias).</li><li>No está permitido utilizar MobilCV para crear contenidos ilícitos, engañosos o que vulneren derechos de terceros.</li></ul>"
+   ],
+   [
+    "4. Propiedad intelectual",
+    "<p>El contenido que el usuario redacta en su currículum le pertenece, y puede utilizar el PDF generado como desee. Los textos de ejemplo de currículum de nuestros sitios web pueden adaptarse libremente para elaborar el propio currículum. El software, el diseño, el logotipo, los textos de las guías y las imágenes de los sitios web pertenecen a MobilCV y no pueden copiarse ni utilizarse en otro servicio sin autorización.</p>"
+   ],
+   [
+    "5. Contenidos informativos",
+    "<p>Nuestras guías y las normas del currículum por país tienen únicamente carácter informativo general y no sustituyen el asesoramiento jurídico, financiero o profesional. Procuramos citar las fuentes y mantenerlas actualizadas, pero las convenciones varían según el país, el sector y el empleador.</p>"
+   ],
+   [
+    "6. Exclusión de garantías",
+    "<p>MobilCV se ofrece «tal cual». No garantizamos que el servicio funcione de forma ininterrumpida o sin errores, ni que un currículum creado con él permita obtener un empleo determinado. Recomendamos revisar el PDF antes de enviarlo.</p>"
+   ],
+   [
+    "7. Limitación de responsabilidad",
+    "<p>En la medida en que lo permita la legislación aplicable, no seremos responsables de los daños indirectos, la pérdida de datos o la pérdida de oportunidades de empleo derivados del uso de MobilCV. Lo anterior no afecta a la responsabilidad que no pueda limitarse conforme a la ley.</p>"
+   ],
+   [
+    "8. Enlaces a otros sitios web",
+    "<p>Nuestros sitios web pueden contener enlaces a otros sitios (por ejemplo, a nuestras fuentes o a redes sociales). Dichos sitios son responsables de sus propios contenidos y de sus prácticas de privacidad.</p>"
+   ],
+   [
+    "9. Modificaciones",
+    "<p>Podemos añadir, modificar o suprimir funciones del servicio. Estas condiciones podrán actualizarse periódicamente; la versión vigente se publica siempre en esta página junto con su fecha.</p>"
+   ],
+   [
+    "10. Legislación aplicable",
+    "<p>Las presentes condiciones se rigen por las leyes de la República de Türkiye. Ello no afecta a las normas imperativas de protección de los consumidores del país de residencia del usuario.</p>"
+   ],
+   [
+    "11. Contacto",
+    "<p>Para cualquier consulta: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a></p>"
+   ]
+  ]
+ },
+ "privacy_add": "Los botones de WhatsApp y LinkedIn del recuadro de recomendación solo abren esos sitios web si se hace clic en ellos y únicamente comparten la dirección de MobilCV; la información del currículum nunca se comparte."
+}

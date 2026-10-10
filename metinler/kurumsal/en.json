@@ -1,0 +1,94 @@
+{
+ "labels": {
+  "about": "About Us",
+  "terms": "Terms of Use",
+  "privacy": "Privacy Policy",
+  "home": "Homepage",
+  "blog": "Blog",
+  "orgs": "For Organisations",
+  "contact": "Contact",
+  "updated": "Last updated",
+  "date": "10 October 2026"
+ },
+ "about": {
+  "meta": "MobilCV is a free CV builder that works in 11 languages without sign-up. Who we are, our principles and how to get in touch for partnerships.",
+  "lead": "MobilCV is a tool that lets anyone create a professional CV on their phone – free and without signing up.",
+  "sections": [
+   [
+    "What we offer",
+    "<ul><li><a href=\"https://www.mobilcv.com/en/\">mobilcv.com</a>: a CV builder that works on phones and computers. Fill in your CV, choose a template and colour, and download it as a PDF.</li><li>11 languages: English, Turkish, German, French, Spanish, Italian, Portuguese, Russian, Arabic, Chinese and Japanese.</li><li>Three templates: Modern, Classic (single column) and the Japanese résumé (履歴書).</li><li><a href=\"https://mobilcv.net/en/cv-examples.html\">mobilcv.net</a>: CV examples by profession, CV rules by country and career guides.</li></ul>"
+   ],
+   [
+    "Why we do it",
+    "<p>A good CV is the first step of a job search, yet many people have no computer, no budget for CV software or no time to create yet another account. We build MobilCV to remove these barriers: a phone and a few minutes should be enough.</p>"
+   ],
+   [
+    "Our principles",
+    "<ul><li><strong>Free:</strong> creating a CV and downloading the PDF is free, with no watermark and no payment screen at download.</li><li><strong>No sign-up:</strong> we do not ask for an email, password or account.</li><li><strong>Privacy:</strong> your CV information is not sent to our servers; it stays in your own browser. Details are in our <a href=\"https://mobilcv.net/en/privacy-policy.html\">Privacy Policy</a>.</li><li><strong>No ads:</strong> we do not show ads and we do not sell personal data.</li><li><strong>Transparency:</strong> our guides cite their sources, and we do not publish information we cannot verify.</li></ul>"
+   ],
+   [
+    "Who builds it",
+    "<p>MobilCV is an independent project developed in Turkey by İlhan Taşan. Your feedback directly shapes the product.</p>"
+   ],
+   [
+    "Partnerships",
+    "<p>We welcome partnerships with job centres, municipalities, charities, schools, training providers and career advisers. Organisations can recommend MobilCV to their clients free of charge, use our QR-code posters and link to us from their websites. See <a href=\"https://mobilcv.net/en/for-organisations.html\">For Organisations</a> for details.</p>"
+   ],
+   [
+    "Contact",
+    "<p>Email: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a><br>Contact form: <a href=\"https://mobilcv.net/en/contact.html\">mobilcv.net/en/contact.html</a><br>Instagram and Threads: @mobilcvcom</p>"
+   ]
+  ]
+ },
+ "terms": {
+  "meta": "MobilCV terms of use: scope of the service, your data, responsibilities and intellectual property.",
+  "lead": "These terms apply to the use of mobilcv.com and mobilcv.net (together \"MobilCV\"). By using these websites, you agree to these terms.",
+  "sections": [
+   [
+    "1. The service",
+    "<p>MobilCV consists of a free, browser-based CV builder that requires no sign-up, and informational content about writing CVs. No fee is charged for creating your CV or downloading it as a PDF.</p>"
+   ],
+   [
+    "2. Your data",
+    "<p>The information you enter in your CV is not sent to our servers; it is kept only on your own device, in your browser's local storage. If you clear your browser data or use another device, you may therefore lose access to it. We recommend keeping a copy with the <strong>Download Backup</strong> feature. Details on personal data are in our <a href=\"https://mobilcv.net/en/privacy-policy.html\">Privacy Policy</a>.</p>"
+   ],
+   [
+    "3. Your responsibilities",
+    "<ul><li>You are responsible for the accuracy of the information in your CV.</li><li>Enter information about other people only with their permission (for example your referees' contact details).</li><li>Do not use MobilCV to create unlawful or misleading content, or content that infringes the rights of others.</li></ul>"
+   ],
+   [
+    "4. Intellectual property",
+    "<p>The content you write in your CV belongs to you, and you may use the PDF you create as you wish. You may freely adapt the example CV texts on our websites when preparing your own CV. The software, design, logo, guide texts and images of the websites belong to MobilCV and may not be copied or used in another service without permission.</p>"
+   ],
+   [
+    "5. Informational content",
+    "<p>Our guides and CV rules by country are for general information only and are not a substitute for legal, financial or professional advice. We take care to cite sources and keep them up to date, but conventions vary by country, sector and employer.</p>"
+   ],
+   [
+    "6. No warranty",
+    "<p>MobilCV is provided \"as is\". We do not guarantee that the service will be uninterrupted or error-free, or that a CV created with it will lead to a particular job. We recommend checking your PDF before sending it.</p>"
+   ],
+   [
+    "7. Limitation of liability",
+    "<p>To the extent permitted by applicable law, we are not liable for indirect damages, loss of data or loss of job opportunities arising from the use of MobilCV. This does not affect any liability that cannot be limited by law.</p>"
+   ],
+   [
+    "8. Links to other websites",
+    "<p>Our websites may contain links to other websites (for example our sources or social media platforms). Those websites are responsible for their own content and privacy practices.</p>"
+   ],
+   [
+    "9. Changes",
+    "<p>We may add, change or remove features of the service. We may update these terms from time to time; the current version is always published on this page together with its date.</p>"
+   ],
+   [
+    "10. Governing law",
+    "<p>These terms are governed by the laws of the Republic of Türkiye. Mandatory consumer protection rules of the country where you live remain unaffected.</p>"
+   ],
+   [
+    "11. Contact",
+    "<p>For any questions: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a></p>"
+   ]
+  ]
+ },
+ "privacy_add": "The WhatsApp and LinkedIn buttons in the recommendation box open those websites only if you click them, and share only MobilCV's address; your CV information is never shared."
+}

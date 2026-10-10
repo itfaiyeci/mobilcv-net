@@ -1,0 +1,94 @@
+{
+ "labels": {
+  "about": "Chi siamo",
+  "terms": "Condizioni d'uso",
+  "privacy": "Informativa sulla privacy",
+  "home": "Home",
+  "blog": "Blog",
+  "orgs": "Per le organizzazioni",
+  "contact": "Contatti",
+  "updated": "Ultimo aggiornamento",
+  "date": "10 ottobre 2026"
+ },
+ "about": {
+  "meta": "MobilCV è un generatore di CV gratuito, disponibile in 11 lingue e senza registrazione. Chi siamo, i nostri principi e come contattarci per collaborazioni.",
+  "lead": "MobilCV è uno strumento che permette a chiunque di creare un CV professionale dallo smartphone, gratuitamente e senza registrazione.",
+  "sections": [
+   [
+    "Cosa offriamo",
+    "<ul><li><a href=\"https://www.mobilcv.com/it/\">mobilcv.com</a>: un generatore di CV che funziona su smartphone e computer. Compili il CV, scelga un modello e un colore e lo scarichi in formato PDF.</li><li>11 lingue: inglese, turco, tedesco, francese, spagnolo, italiano, portoghese, russo, arabo, cinese e giapponese.</li><li>Tre modelli: Moderno, Classico (a una colonna) e il curriculum giapponese (履歴書).</li><li><a href=\"https://mobilcv.net/en/cv-examples.html\">mobilcv.net</a>: esempi di CV per professione, regole per il CV nei diversi Paesi e guide per la carriera.</li></ul>"
+   ],
+   [
+    "Perché lo facciamo",
+    "<p>Un buon CV è il primo passo nella ricerca di lavoro, eppure molte persone non hanno un computer, non dispongono di un budget per un software dedicato o non hanno tempo di creare l'ennesimo account. Sviluppiamo MobilCV per abbattere queste barriere: uno smartphone e pochi minuti dovrebbero bastare.</p>"
+   ],
+   [
+    "I nostri principi",
+    "<ul><li><strong>Gratuito:</strong> creare un CV e scaricarlo in PDF è gratuito, senza filigrana e senza alcuna schermata di pagamento al momento del download.</li><li><strong>Nessuna registrazione:</strong> non chiediamo indirizzo e-mail, password né account.</li><li><strong>Privacy:</strong> i dati del suo CV non vengono inviati ai nostri server, ma restano nel suo browser. Tutti i dettagli sono riportati nella nostra <a href=\"https://mobilcv.net/it/privacy-policy.html\">Informativa sulla privacy</a>.</li><li><strong>Nessuna pubblicità:</strong> non mostriamo annunci pubblicitari e non vendiamo dati personali.</li><li><strong>Trasparenza:</strong> le nostre guide citano le fonti e non pubblichiamo informazioni che non siamo in grado di verificare.</li></ul>"
+   ],
+   [
+    "Chi lo sviluppa",
+    "<p>MobilCV è un progetto indipendente sviluppato in Turchia da İlhan Taşan. I suoi suggerimenti incidono direttamente sullo sviluppo del prodotto.</p>"
+   ],
+   [
+    "Collaborazioni",
+    "<p>Siamo aperti a collaborazioni con centri per l'impiego, comuni, enti del terzo settore, scuole, enti di formazione e orientatori professionali. Le organizzazioni possono consigliare gratuitamente MobilCV ai propri utenti, utilizzare i nostri poster con codice QR e inserire un link al nostro sito nei propri siti web. Per maggiori dettagli, consulti la pagina <a href=\"https://mobilcv.net/en/for-organisations.html\">Per le organizzazioni</a> (in inglese).</p>"
+   ],
+   [
+    "Contatti",
+    "<p>E-mail: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a><br>Modulo di contatto: <a href=\"https://mobilcv.net/en/contact.html\">mobilcv.net/en/contact.html</a> (in inglese)<br>Instagram e Threads: @mobilcvcom</p>"
+   ]
+  ]
+ },
+ "terms": {
+  "meta": "Condizioni d'uso di MobilCV: ambito del servizio, dati dell'utente, responsabilità e proprietà intellettuale.",
+  "lead": "Le presenti condizioni si applicano all'utilizzo di mobilcv.com e mobilcv.net (di seguito, congiuntamente, «MobilCV»). Utilizzando questi siti web, lei accetta le presenti condizioni.",
+  "sections": [
+   [
+    "1. Il servizio",
+    "<p>MobilCV comprende un generatore di CV gratuito, basato su browser e senza registrazione, e contenuti informativi sulla redazione del CV. La creazione del CV e il relativo download in PDF non comportano alcun costo.</p>"
+   ],
+   [
+    "2. I suoi dati",
+    "<p>Le informazioni inserite nel CV non vengono inviate ai nostri server: sono conservate esclusivamente sul suo dispositivo, nella memoria locale del browser. Pertanto, se cancella i dati del browser o utilizza un altro dispositivo, potrebbe non avere più accesso a tali informazioni. Le consigliamo di conservarne una copia tramite la funzione <strong>Scarica backup</strong>. I dettagli sui dati personali sono riportati nella nostra <a href=\"https://mobilcv.net/it/privacy-policy.html\">Informativa sulla privacy</a>.</p>"
+   ],
+   [
+    "3. Responsabilità dell'utente",
+    "<ul><li>Lei è responsabile dell'esattezza delle informazioni contenute nel suo CV.</li><li>Inserisca dati relativi ad altre persone solo con la loro autorizzazione (ad esempio i recapiti delle sue referenze).</li><li>Non utilizzi MobilCV per creare contenuti illeciti o ingannevoli, né contenuti che violino i diritti altrui.</li></ul>"
+   ],
+   [
+    "4. Proprietà intellettuale",
+    "<p>I contenuti che scrive nel suo CV le appartengono e può utilizzare il PDF creato come preferisce. Nella preparazione del proprio CV può adattare liberamente i testi dei CV di esempio presenti sui nostri siti. Il software, il design, il logo, i testi delle guide e le immagini dei siti appartengono a MobilCV e non possono essere copiati né utilizzati in altri servizi senza autorizzazione.</p>"
+   ],
+   [
+    "5. Contenuti informativi",
+    "<p>Le nostre guide e le regole per il CV nei diversi Paesi hanno carattere puramente informativo e generale e non sostituiscono una consulenza legale, finanziaria o professionale. Ci impegniamo a citare le fonti e a mantenerle aggiornate, ma le consuetudini variano a seconda del Paese, del settore e del datore di lavoro.</p>"
+   ],
+   [
+    "6. Esclusione di garanzia",
+    "<p>MobilCV è fornito «così com'è». Non garantiamo che il servizio sia ininterrotto o privo di errori, né che un CV creato con esso porti a un determinato impiego. Le consigliamo di controllare il PDF prima di inviarlo.</p>"
+   ],
+   [
+    "7. Limitazione di responsabilità",
+    "<p>Nei limiti consentiti dalla legge applicabile, non siamo responsabili per danni indiretti, perdita di dati o perdita di opportunità di lavoro derivanti dall'utilizzo di MobilCV. Resta salva ogni responsabilità che non può essere limitata per legge.</p>"
+   ],
+   [
+    "8. Link ad altri siti web",
+    "<p>I nostri siti possono contenere link ad altri siti web (ad esempio alle nostre fonti o a piattaforme di social media). Tali siti sono responsabili dei propri contenuti e delle proprie pratiche in materia di privacy.</p>"
+   ],
+   [
+    "9. Modifiche",
+    "<p>Possiamo aggiungere, modificare o rimuovere funzionalità del servizio. Possiamo inoltre aggiornare periodicamente le presenti condizioni; la versione in vigore è sempre pubblicata su questa pagina insieme alla relativa data.</p>"
+   ],
+   [
+    "10. Legge applicabile",
+    "<p>Le presenti condizioni sono regolate dalle leggi della Repubblica di Türkiye. Restano salve le norme imperative a tutela dei consumatori del Paese in cui lei risiede.</p>"
+   ],
+   [
+    "11. Contatti",
+    "<p>Per qualsiasi domanda: <a href=\"mailto:info@mobilcv.com\">info@mobilcv.com</a></p>"
+   ]
+  ]
+ },
+ "privacy_add": "I pulsanti WhatsApp e LinkedIn nel riquadro per consigliare MobilCV aprono i rispettivi siti solo se li clicca e condividono unicamente l'indirizzo di MobilCV; i dati del suo CV non vengono mai condivisi."
+}
