@@ -361,6 +361,20 @@ def main():
             s = s[:idx] + link + s[idx:]
             links += 1
 
+        # 2-) Ust menuye "Motivasyon Mektubu" (TR) / "Motivation Letter" (EN)
+        for _li, _href, _lbl in (('<li><a href="cv-rehberi.html">CV Rehberi</a></li>', "motivasyon-mektubu-nasil-yazilir.html", "Motivasyon Mektubu"),
+                                 ('<li><a href="cv-guide.html">CV Guide</a></li>', "how-to-write-a-motivation-letter.html", "Motivation Letter"),
+                                 ('<li><a href="cv-rehberi.html" class="active">CV Rehberi</a></li>', "motivasyon-mektubu-nasil-yazilir.html", "Motivasyon Mektubu"),
+                                 ('<li><a href="cv-guide.html" class="active">CV Guide</a></li>', "how-to-write-a-motivation-letter.html", "Motivation Letter")):
+            if _li in s and f'<li><a href="{_href}"' not in s:
+                _act = ' class="active"' if rel.endswith(_href) else ""
+                s = s.replace(_li, _li + f'\n                <li><a href="{_href}"{_act}>{_lbl}</a></li>', 1)
+                links += 1
+
+        # 2-b) Menu tek satira sigsin (genis ekranda daha dar bosluk)
+        if ('motivasyon-mektubu-nasil-yazilir.html"' in s or 'how-to-write-a-motivation-letter.html"' in s) and "data-nav-fit" not in s and "</head>" in s:
+            s = s.replace("</head>", '    <style data-nav-fit>@media (min-width: 769px) { .nav-links { gap: 2px; } .nav-links a { padding: 10px 13px; } .nav-links .nav-cta { padding: 10px 18px; } }</style>\n</head>', 1)
+
         # 2a) Footer'a Hakkimizda / Kullanim Kosullari linkleri
         if "data-legal-links" not in s and "</footer>" in s:
             idx = s.rfind("</footer>")
