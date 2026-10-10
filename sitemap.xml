@@ -82,20 +82,8 @@
     </url>
 
     <!-- Haftalık ipuçları sayfası -->
-    <url>
-        <loc>https://mobilcv.net/haftalik-ipuclari.html</loc>
-        <lastmod>2026-09-27</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
 
     <!-- Blog makaleleri -->
-    <url>
-        <loc>https://mobilcv.net/girisimcilik-hikayeleri-sifirdan-basariya.html</loc>
-        <lastmod>2026-09-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
     <url>
         <loc>https://mobilcv.net/sektor-degistirmek-isteyenler-icin-rehber.html</loc>
         <lastmod>2026-08-25</lastmod>
@@ -105,12 +93,6 @@
     <url>
         <loc>https://mobilcv.net/kariyer-planlamasi-adim-adim-rehber.html</loc>
         <lastmod>2026-08-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://mobilcv.net/sektor-degistirerek-hayalindeki-ise-ulasanlar.html</loc>
-        <lastmod>2026-08-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -152,18 +134,6 @@
     </url>
     <url>
         <loc>https://mobilcv.net/yeni-mezunlar-icin-cv-hazirlama-rehberi.html</loc>
-        <lastmod>2026-07-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://mobilcv.net/cvde-dikkat-edilmesi-gereken-5-kritik-nokta.html</loc>
-        <lastmod>2026-07-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://mobilcv.net/yapay-zeka-is-dunyasini-nasil-donusturuyor.html</loc>
         <lastmod>2026-07-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
