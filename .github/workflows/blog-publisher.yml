@@ -51,6 +51,10 @@ jobs:
         if: steps.week.outputs.skip != 'true'
         run: python3 gizlilik_ve_bakim.py
 
+      - name: Uydurma kaynak satiri ve yer tutucu temizligi
+        if: steps.week.outputs.skip != 'true'
+        run: python3 kaynak_temizle.py .
+
       - name: Onay icin taslak olustur
         if: steps.week.outputs.skip != 'true'
         uses: peter-evans/create-pull-request@v7

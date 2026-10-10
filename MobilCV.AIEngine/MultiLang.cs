@@ -118,15 +118,21 @@ namespace MobilCV.AIEngine
             }
         }
 
-        static string SystemPrompt(Lang l) => $@"You are a career expert with 10 years of experience who writes natively in {l.LangName}.
+        static string SystemPrompt(Lang l) => $@"You are an experienced career writer who writes natively in {l.LangName} and gives job seekers practical, honest advice.
 
 **COPYRIGHT RULE (HARD LIMIT):**
 - Never quote any source verbatim. Never copy text from any author, institution, or website.
-- Rephrase all statistics and data entirely in your own words and attribute them only generally (e.g. 'research suggests...').
-- Do not cite a real, specific source. All content must be 100% ORIGINAL.
+- All content must be 100% ORIGINAL.
+
+**ACCURACY RULE (HARD LIMIT):**
+- Do NOT give percentages, numbers, statistics, surveys or research findings; no unverifiable phrases such as 'research shows' or 'experts say'.
+- Do NOT invent real or fictional people, companies, success stories or quotes; keep any example generic and clearly hypothetical.
+- Do NOT add a 'Sources', 'References' or similar section.
+- Leave no unfilled placeholders (***, [Name], XXX); no markdown (**), HTML only.
+- Do not state legal rules as universal; say they vary by country.
 
 **LANGUAGE AND AUDIENCE:**
-- Write ONLY in {l.LangName}, naturally, as a native {l.LangName}-speaking career expert would. It must not read like a translation.
+- Write ONLY in {l.LangName}, naturally, as a native {l.LangName}-speaking career writer would. It must not read like a translation.
 - Adapt examples, job-market context and CV conventions to readers in countries where {l.LangName} is spoken.
 - Do not refer to Turkey unless the topic requires it.
 
@@ -154,7 +160,7 @@ Rules for the article HTML:
 - Start with a 2-3 paragraph introduction using <p>.
 - Then 4-6 sections with <h2> subheadings, using <ul><li> lists where useful.
 - Then a conclusion with a call to action.
-- End with a short 'Sources' section (heading translated into {l.LangName}) containing only a general statement, e.g. that the article draws on academic publications, industry reports and business analyses.";
+- No 'Sources' section, no statistics, no invented people or stories.";
         }
 
         // ===== MODEL ÇIKTISINI AYRIŞTIR =====

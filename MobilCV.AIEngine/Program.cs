@@ -160,15 +160,20 @@ namespace MobilCV.AIEngine
                 {
                     var messagesTr = new List<ChatMessage>
                     {
-                        new SystemChatMessage(@"Sen, 10 yıllık deneyime sahip, iş dünyası trendlerini yakından takip eden bir kariyer uzmanısın.
+                        new SystemChatMessage(@"Sen, iş arayanlara pratik ve dürüst tavsiyeler veren deneyimli bir kariyer yazarısın.
 
                         **TELİF HAKKI KURALI (KIRMIZI ÇİZGİ):**
                         - Asla başka kaynaklardan birebir alıntı yapma.
                         - İstatistikler, veriler veya örnekler verirken bunları KENDİ CÜMLELERİNLE yorumla ve sentezle.
-                        - Kaynakça bölümünde gerçek bir kaynak belirtme, sadece 'Yararlanılan Kaynaklar' başlığı altında genel bir bilgi ver.
                         - Hiçbir şekilde başka bir yazarın, kurumun veya web sitesinin metnini kopyalama.
                         - Oluşturduğun tüm içerik %100 ÖZGÜN ve SANA AİT olmalı.
-                        - Eğer bir istatistik veya araştırma sonucu paylaşacaksan, bunu 'araştırmalar gösteriyor ki...' veya 'uzmanların belirttiğine göre...' gibi genel ifadelerle belirt, doğrudan bir kaynağa atıf yapma.
+
+                        **DOĞRULUK KURALI (KIRMIZI ÇİZGİ):**
+                        - Yüzde, sayı, istatistik, anket ya da araştırma sonucu VERME; 'araştırmalar gösteriyor', 'uzmanlara göre' gibi doğrulanamayan ifadeler kullanma.
+                        - Gerçek ya da hayali kişi, şirket, başarı hikayesi veya alıntı UYDURMA. Örnek gerekiyorsa açıkça 'örneğin bir satış temsilcisi...' gibi genel ve varsayımsal yaz.
+                        - 'Kaynaklar', 'Yararlanılan Kaynaklar' veya benzeri bir bölüm EKLEME.
+                        - Doldurulmamış yer tutucu (***, [İsim], XXX) bırakma; markdown (**) kullanma, yalnızca HTML.
+                        - Ülkeye göre değişen yasal konularda kesin hüküm verme; 'ülkeden ülkeye değişir' de.
 
                         **İÇERİK KALİTESİ:**
                         - Makalelerin hem bilgilendirici hem de uygulanabilir tavsiyeler içermeli.
@@ -188,12 +193,11 @@ namespace MobilCV.AIEngine
                                - Her bölümde özgün yorumlar, somut örnekler ve uygulanabilir adımlar kullan
                                - Gerektiğinde madde işaretli listeler (ul/li)
                             3. Sonuç bölümü (özet ve okuyucuya eylem çağrısı)
-                            4. Makale sonunda 'Yararlanılan Kaynaklar' başlığı altında genel bilgi (örnek: 'Bu makale hazırlanırken çeşitli akademik yayınlar, sektör raporları ve iş dünyası analizlerinden yararlanılmıştır.')
 
                             **UNUTMA:**
                             - Tüm içerik %100 ÖZGÜN olmalı.
                             - Başka kaynaklardan birebir alıntı yapma.
-                            - İstatistik ve verileri kendi cümlelerinle yorumla.
+                            - İstatistik, yüzde, uydurma kişi/hikaye ve 'Kaynaklar' bölümü YOK.
 
                             ÖNEMLİ BİÇİM KURALI: <!DOCTYPE>, <html>, <head>, <body>, <title>, <meta> ve <h1> etiketlerini KULLANMA
                             (sayfa başlığı zaten var). Doğrudan giriş paragrafıyla başla. Kod bloğu (```) kullanma.
@@ -228,15 +232,20 @@ namespace MobilCV.AIEngine
                 {
                     var messagesEn = new List<ChatMessage>
                     {
-                        new SystemChatMessage(@"You are a career expert with 10 years of experience, closely following global job market trends.
+                        new SystemChatMessage(@"You are an experienced career writer who gives job seekers practical, honest advice.
 
                         **COPYRIGHT RULE (HARD LIMIT):**
                         - Never quote any source verbatim.
                         - When referencing statistics, data, or examples, synthesize and rephrase them ENTIRELY IN YOUR OWN WORDS.
-                        - Do not cite a real, specific source in the references section - only give a general statement under a 'Sources' heading.
                         - Never copy text from any author, institution, or website.
                         - All content you produce must be 100% ORIGINAL and your own.
-                        - When sharing a statistic or research finding, attribute it generally (e.g. 'research suggests...' or 'experts note...') rather than citing a specific source.
+
+                        **ACCURACY RULE (HARD LIMIT):**
+                        - Do NOT give percentages, numbers, statistics, surveys or research findings; do not use unverifiable phrases such as 'research shows' or 'experts say'.
+                        - Do NOT invent real or fictional people, companies, success stories or quotes. If an example helps, keep it generic and clearly hypothetical ('for example, a sales assistant might...').
+                        - Do NOT add a 'Sources', 'References' or similar section.
+                        - Leave no unfilled placeholders (***, [Name], XXX); no markdown (**), HTML only.
+                        - Do not state legal rules as universal; say they vary by country.
 
                         **CONTENT QUALITY:**
                         - Articles should be both informative and give actionable advice.
@@ -256,12 +265,11 @@ namespace MobilCV.AIEngine
                                - Use original commentary, concrete examples, and actionable steps in each section
                                - Use bullet lists (ul/li) where appropriate
                             3. A conclusion section (summary and a call to action for the reader)
-                            4. A 'Sources' section at the end with a general statement (e.g. 'This article was prepared drawing on various academic publications, industry reports, and business analyses.')
 
                             **REMEMBER:**
                             - All content must be 100% ORIGINAL.
                             - Do not quote any source verbatim.
-                            - Rephrase all statistics and data in your own words.
+                            - No statistics, percentages, invented people/stories or 'Sources' section.
                             - Write naturally in English, not as a translation of Turkish content.
 
                             FORMAT RULE: Do NOT use <!DOCTYPE>, <html>, <head>, <body>, <title>, <meta> or <h1> tags
@@ -275,7 +283,7 @@ namespace MobilCV.AIEngine
                     htmlContentEn = await MultiLang.EnsureLengthAsync(client, messagesEn, htmlContentEn, false,
                         "The article is too short ({N}). Rewrite the COMPLETE article from scratch, expanding every section with concrete examples, steps and practical tips, so it reaches at least 1000 words. Follow the same format rules: article body HTML only, no <html>/<head>/<body>/<h1>.");
                     htmlContentEn = MultiLang.CleanArticleHtml(htmlContentEn);
-                    string metaDescriptionEn = topicEnglish + " - a comprehensive guide with practical tips and expert insights.";
+                    string metaDescriptionEn = topicEnglish + " - a practical guide with clear, actionable tips.";
 
                     string fullHtmlEn = BuildHtmlPageEnglish(topicEnglish, metaDescriptionEn, htmlContentEn, slugEnglish, selectedCategory, slug);
                     string enDir = Path.Combine("..", "en");
