@@ -170,6 +170,7 @@ TEXT = {
 # metinler/ klasorundeki JSON dosyalarindan okunur.
 # ---------------------------------------------------------------------------
 import json as _json
+json = _json
 _K = Path(__file__).parent / "metinler"
 TEXT["ja"] = [tuple(x) for x in _json.loads((_K / "privacy_ja.json").read_text(encoding="utf-8"))]
 KURUMSAL = {c: _json.loads((_K / "kurumsal" / f"{c}.json").read_text(encoding="utf-8")) for c in LANGS}
@@ -187,6 +188,92 @@ for _c, (_old, _new, _addt) in GA_FIX.items():
     if _addt.strip() not in _b:
         _i = _b.index("</li>"); _b = _b[:_i] + _addt + _b[_i:]
     TEXT[_c][3] = (_h, _b)
+# Analytics artik iki sitede (onayla). Kapsam ve cerez bolumu guncellemesi
+GA_SCOPE = {"tr": ["(yalnızca mobilcv.com ve <strong>", "(mobilcv.com ve mobilcv.net'te, <strong>"], "en": ["(mobilcv.com only, and <strong>", "(mobilcv.com and mobilcv.net, and <strong>"], "de": ["(nur mobilcv.com und <strong>", "(mobilcv.com und mobilcv.net, <strong>"], "fr": ["(mobilcv.com uniquement, et <strong>", "(mobilcv.com et mobilcv.net, et <strong>"], "es": ["(solo mobilcv.com y <strong>", "(mobilcv.com y mobilcv.net, y <strong>"], "it": ["(solo mobilcv.com e <strong>", "(mobilcv.com e mobilcv.net, e <strong>"], "pt": ["(somente mobilcv.com e <strong>", "(mobilcv.com e mobilcv.net, e <strong>"], "ru": ["(только mobilcv.com и <strong>", "(mobilcv.com и mobilcv.net, и <strong>"], "ar": ["(في mobilcv.com فقط و<strong>", "(في mobilcv.com وmobilcv.net، و<strong>"], "zh": ["（仅 mobilcv.com，且<strong>", "（mobilcv.com 和 mobilcv.net，且<strong>"], "ja": ["（mobilcv.comのみ、<strong>", "（mobilcv.comとmobilcv.netで、<strong>"]}
+COOKIE_TEXT = {"tr": "<p>mobilcv.com ve mobilcv.net çerezleri yalnızca Google Analytics için ve <strong>yalnızca onay verirseniz</strong> kullanır. Sayfanın altındaki bantta \"Reddet\" derseniz Analytics hiç yüklenmez. Kararınızı istediğiniz zaman sayfanın en altındaki <strong>Çerez ayarları</strong> linkinden değiştirebilirsiniz. Onayınız her site için ayrıca sorulur. CV aracının çalışması için çerez gerekmez; CV bilgileriniz tarayıcınızın yerel depolama alanında tutulur.</p>", "en": "<p>mobilcv.com and mobilcv.net use cookies only for Google Analytics, and <strong>only if you consent</strong>. If you choose \"Reject\" in the banner at the bottom of the page, Analytics is never loaded. You can change your choice at any time with the <strong>Cookie settings</strong> link at the very bottom of the page. Each site asks for your consent separately. The CV tool does not need cookies to work; your CV details are kept in your browser's local storage.</p>", "de": "<p>mobilcv.com und mobilcv.net verwenden Cookies nur für Google Analytics und <strong>nur mit Ihrer Einwilligung</strong>. Wenn Sie im Banner unten auf der Seite \"Ablehnen\" wählen, wird Analytics nicht geladen. Sie können Ihre Entscheidung jederzeit über den Link <strong>Cookie-Einstellungen</strong> ganz unten auf der Seite ändern. Jede Website fragt separat nach Ihrer Einwilligung. Das Lebenslauf-Tool benötigt keine Cookies; Ihre Lebenslaufdaten werden im lokalen Speicher Ihres Browsers gespeichert.</p>", "fr": "<p>mobilcv.com et mobilcv.net utilisent des cookies uniquement pour Google Analytics, et <strong>seulement avec votre consentement</strong>. Si vous choisissez \"Refuser\" dans le bandeau en bas de page, Analytics n'est jamais chargé. Vous pouvez modifier votre choix à tout moment via le lien <strong>Paramètres des cookies</strong> tout en bas de la page. Chaque site demande votre consentement séparément. L'outil de CV n'a pas besoin de cookies pour fonctionner ; les données de votre CV sont conservées dans le stockage local de votre navigateur.</p>", "es": "<p>mobilcv.com y mobilcv.net usan cookies solo para Google Analytics, y <strong>solo si das tu consentimiento</strong>. Si eliges \"Rechazar\" en el aviso de la parte inferior, Analytics no se carga. Puedes cambiar tu decisión en cualquier momento con el enlace <strong>Configuración de cookies</strong> al final de la página. Cada sitio pide tu consentimiento por separado. La herramienta de currículum no necesita cookies para funcionar; los datos de tu currículum se guardan en el almacenamiento local de tu navegador.</p>", "it": "<p>mobilcv.com e mobilcv.net usano i cookie solo per Google Analytics, e <strong>solo con il tuo consenso</strong>. Se scegli \"Rifiuta\" nel banner in fondo alla pagina, Analytics non viene caricato. Puoi cambiare la tua scelta in qualsiasi momento con il link <strong>Impostazioni cookie</strong> in fondo alla pagina. Ogni sito chiede il consenso separatamente. Lo strumento CV non ha bisogno di cookie per funzionare; i dati del CV restano nella memoria locale del browser.</p>", "pt": "<p>O mobilcv.com e o mobilcv.net usam cookies apenas para o Google Analytics, e <strong>somente com o seu consentimento</strong>. Se você escolher \"Recusar\" no aviso na parte inferior da página, o Analytics não é carregado. Você pode mudar sua escolha a qualquer momento pelo link <strong>Configurações de cookies</strong> no final da página. Cada site pede o seu consentimento separadamente. A ferramenta de currículo não precisa de cookies para funcionar; os dados do seu currículo ficam no armazenamento local do navegador.</p>", "ru": "<p>mobilcv.com и mobilcv.net используют cookie только для Google Analytics и <strong>только с вашего согласия</strong>. Если вы выберете «Отклонить» в баннере внизу страницы, Analytics не загружается. Изменить решение можно в любой момент по ссылке <strong>Настройки cookie</strong> в самом низу страницы. Каждый сайт запрашивает согласие отдельно. Конструктору резюме cookie не нужны: данные резюме хранятся в локальном хранилище вашего браузера.</p>", "ar": "<p>يستخدم mobilcv.com وmobilcv.net ملفات تعريف الارتباط لـ Google Analytics فقط، و<strong>بموافقتك فقط</strong>. إذا اخترت \"رفض\" في الشريط أسفل الصفحة فلن يتم تحميل Analytics. يمكنك تغيير اختيارك في أي وقت عبر رابط <strong>إعدادات ملفات تعريف الارتباط</strong> في أسفل الصفحة. يطلب كل موقع موافقتك بشكل منفصل. لا تحتاج أداة السيرة الذاتية إلى ملفات تعريف الارتباط؛ إذ تُحفظ بيانات سيرتك في التخزين المحلي لمتصفحك.</p>", "zh": "<p>mobilcv.com 和 mobilcv.net 仅为 Google Analytics 使用 Cookie，并且<strong>仅在您同意后</strong>使用。如果您在页面底部的横幅中选择“拒绝”，Analytics 将不会加载。您可以随时通过页面最底部的<strong>Cookie 设置</strong>链接更改选择。每个网站会分别征求您的同意。简历工具运行不需要 Cookie；您的简历数据保存在浏览器的本地存储中。</p>", "ja": "<p>mobilcv.comとmobilcv.netでは、Google Analyticsのためにのみ、<strong>同意いただいた場合に限り</strong>Cookieを使用します。ページ下部のバナーで「拒否する」を選択した場合、Google Analyticsは読み込まれません。選択内容は、ページ最下部の<strong>Cookie設定</strong>リンクからいつでも変更できます。同意はサイトごとに個別にお伺いします。履歴書作成ツールの動作にCookieは不要で、履歴書のデータはブラウザのローカルストレージに保存されます。</p>"}
+for _c, (_o, _n) in GA_SCOPE.items():
+    _h, _b = TEXT[_c][3]; TEXT[_c][3] = (_h, _b.replace(_o, _n))
+    TEXT[_c][4] = (TEXT[_c][4][0], COOKIE_TEXT[_c])
+GA_ID = "G-4W6V8KX8D8"
+CONSENT_T = {"tr": {"msg": "Ziyaret istatistikleri için Google Analytics çerezlerini kullanmak istiyoruz. CV bilgileriniz bundan etkilenmez ve cihazınızda kalır.", "ok": "Kabul et", "no": "Reddet", "more": "Ayrıntılar", "set": "Çerez ayarları", "url": "https://mobilcv.net/gizlilik-politikasi.html"}, "en": {"msg": "We'd like to use Google Analytics cookies to count visits. Your CV data is not affected and stays on your device.", "ok": "Accept", "no": "Reject", "more": "Details", "set": "Cookie settings", "url": "https://mobilcv.net/en/privacy-policy.html"}, "de": {"msg": "Wir möchten Google-Analytics-Cookies verwenden, um Besuche zu zählen. Ihre Lebenslaufdaten sind davon nicht betroffen und bleiben auf Ihrem Gerät.", "ok": "Akzeptieren", "no": "Ablehnen", "more": "Details", "set": "Cookie-Einstellungen", "url": "https://mobilcv.net/de/privacy-policy.html"}, "fr": {"msg": "Nous souhaitons utiliser des cookies Google Analytics pour mesurer les visites. Les données de votre CV ne sont pas concernées et restent sur votre appareil.", "ok": "Accepter", "no": "Refuser", "more": "Détails", "set": "Paramètres des cookies", "url": "https://mobilcv.net/fr/privacy-policy.html"}, "es": {"msg": "Queremos usar cookies de Google Analytics para contar las visitas. Los datos de tu currículum no se ven afectados y se quedan en tu dispositivo.", "ok": "Aceptar", "no": "Rechazar", "more": "Detalles", "set": "Configuración de cookies", "url": "https://mobilcv.net/es/privacy-policy.html"}, "it": {"msg": "Vorremmo usare i cookie di Google Analytics per contare le visite. I dati del tuo CV non sono coinvolti e restano sul tuo dispositivo.", "ok": "Accetta", "no": "Rifiuta", "more": "Dettagli", "set": "Impostazioni cookie", "url": "https://mobilcv.net/it/privacy-policy.html"}, "pt": {"msg": "Gostaríamos de usar cookies do Google Analytics para contar as visitas. Os dados do seu currículo não são afetados e ficam no seu dispositivo.", "ok": "Aceitar", "no": "Recusar", "more": "Detalhes", "set": "Configurações de cookies", "url": "https://mobilcv.net/pt/privacy-policy.html"}, "ru": {"msg": "Мы хотим использовать файлы cookie Google Analytics для подсчёта посещений. Данные вашего резюме это не затрагивает — они остаются на вашем устройстве.", "ok": "Принять", "no": "Отклонить", "more": "Подробнее", "set": "Настройки cookie", "url": "https://mobilcv.net/ru/privacy-policy.html"}, "ar": {"msg": "نود استخدام ملفات تعريف الارتباط من Google Analytics لإحصاء الزيارات. لا يتأثر محتوى سيرتك الذاتية ويبقى على جهازك.", "ok": "قبول", "no": "رفض", "more": "التفاصيل", "set": "إعدادات ملفات تعريف الارتباط", "url": "https://mobilcv.net/ar/privacy-policy.html"}, "zh": {"msg": "我们希望使用 Google Analytics Cookie 统计访问量。您的简历数据不受影响，仍只保存在您的设备上。", "ok": "接受", "no": "拒绝", "more": "详情", "set": "Cookie 设置", "url": "https://mobilcv.net/zh/privacy-policy.html"}, "ja": {"msg": "訪問数を集計するためにGoogle AnalyticsのCookieを使用したいと考えています。履歴書のデータには影響せず、お使いの端末内に保存されたままです。", "ok": "同意する", "no": "拒否する", "more": "詳細", "set": "Cookie設定", "url": "https://mobilcv.net/ja/privacy-policy.html"}}
+CONSENT_CSS = """        #cookie-consent { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 2147483000; max-width: 640px; margin: 0 auto;
+            background: #fff; color: #1f2937; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,0.25); padding: 14px 16px;
+            font: 14px/1.5 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: none; }
+        #cookie-consent.show { display: block; }
+        #cookie-consent p { margin: 0 0 10px; }
+        #cookie-consent a { color: #2563eb; }
+        #cookie-consent .cc-btns { display: flex; gap: 10px; }
+        #cookie-consent button { flex: 1; padding: 10px 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer;
+            border: 2px solid #2563eb; }
+        #cookie-consent .cc-accept { background: #2563eb; color: #fff; }
+        #cookie-consent .cc-reject { background: #fff; color: #2563eb; }
+        @media print { #cookie-consent { display: none !important; } }
+"""
+
+
+def consent_block(code):
+    js = ("""<style data-consent-css>""" + CONSENT_CSS + """</style>
+<script data-consent>
+// Google Analytics YALNIZCA ziyaretci "Kabul et" derse yuklenir (KVKK / GDPR).
+(function () {
+    var GA = '""" + GA_ID + """', KEY = 'mobilcv_consent', L = '""" + code + """';
+    var T = """ + json.dumps(CONSENT_T, ensure_ascii=False) + """;
+    var t = T[L] || T.en;
+    function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function put(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function loadGA() {
+        if (window.__gaLoaded) return; window.__gaLoaded = true;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date()); gtag('config', GA);
+        var s = document.createElement('script'); s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA; document.head.appendChild(s);
+    }
+    function clearGA() {
+        var host = location.hostname.replace(/^www\\./, '');
+        document.cookie.split(';').forEach(function (c) {
+            var n = c.split('=')[0].trim();
+            if (n === '_ga' || n.indexOf('_ga_') === 0 || n === '_gid') {
+                ['', '.' + host, location.hostname].forEach(function (d) { document.cookie = n + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : ''); });
+            }
+        });
+    }
+    var box;
+    function render() {
+        box.setAttribute('dir', L === 'ar' ? 'rtl' : 'ltr');
+        box.innerHTML = '<p>' + t.msg + ' <a href="' + t.url + '">' + t.more + '</a></p>' +
+            '<div class="cc-btns"><button type="button" class="cc-reject">' + t.no + '</button>' +
+            '<button type="button" class="cc-accept">' + t.ok + '</button></div>';
+        box.querySelector('.cc-accept').onclick = function () { put('granted'); box.classList.remove('show'); loadGA(); };
+        box.querySelector('.cc-reject').onclick = function () { var was = window.__gaLoaded; put('denied'); clearGA(); box.classList.remove('show'); if (was) location.reload(); };
+    }
+    function init() {
+        box = document.createElement('div'); box.id = 'cookie-consent'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-live', 'polite');
+        document.body.appendChild(box); render();
+        var v = get();
+        if (v === 'granted') loadGA(); else if (v !== 'denied') box.classList.add('show');
+        document.querySelectorAll('[data-cookie-settings]').forEach(function (a) {
+            a.textContent = t.set;
+            a.addEventListener('click', function (e) { e.preventDefault(); render(); box.classList.add('show'); });
+        });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+""")
+    return js
+
+
+CONSENT_RE = re.compile(r'<style data-consent-css>[\s\S]*?</style>\s*<script data-consent>[\s\S]*?</script>\n?')
+
+
+def put_consent(s, code):
+    if "</body>" not in s:
+        return s
+    s = CONSENT_RE.sub("", s)
+    return s.replace("</body>", consent_block(code) + "</body>", 1)
+
+
 LEGAL_PATHS = {c: (("hakkimizda.html", "kullanim-kosullari.html") if c == "tr" else (f"{c}/about.html", f"{c}/terms.html")) for c in LANGS}
 
 
@@ -194,7 +281,8 @@ def legal_links(code):
     k = KURUMSAL[code]["labels"]
     a, t = LEGAL_PATHS[code]
     return (f'<p data-legal-links style="margin-top:6px;font-size:0.85em;"><a href="{NET}/{a}">{k["about"]}</a> &middot; '
-            f'<a href="{NET}/{t}">{k["terms"]}</a> &middot; <a href="{LANGS[code]["url"]}">{LANGS[code]["label"]}</a></p>')
+            f'<a href="{NET}/{t}">{k["terms"]}</a> &middot; <a href="{LANGS[code]["url"]}">{LANGS[code]["label"]}</a> &middot; '
+            f'<a href="#" data-cookie-settings>{CONSENT_T.get(code, CONSENT_T["en"])["set"]}</a></p>')
 
 
 # Hakkimizda / Kosullar metinlerinin son degistigi tarih (gizlilikten bagimsiz)
@@ -339,7 +427,7 @@ def main():
     for code, d in LANGS.items():
         p = root / d["path"]
         p.parent.mkdir(parents=True, exist_ok=True)
-        html = build_page(code)
+        html = put_consent(build_page(code), code)
         if not p.exists() or p.read_text(encoding="utf-8") != html:
             p.write_text(html, encoding="utf-8")
             written += 1
@@ -350,7 +438,7 @@ def main():
         for i, kind in enumerate(("about", "terms")):
             p = root / LEGAL_PATHS[code][i]
             p.parent.mkdir(parents=True, exist_ok=True)
-            html = build_legal(code, kind)
+            html = put_consent(build_legal(code, kind), code)
             if not p.exists() or p.read_text(encoding="utf-8") != html:
                 p.write_text(html, encoding="utf-8")
                 written += 1
@@ -387,7 +475,9 @@ def main():
         if ('motivasyon-mektubu-nasil-yazilir.html"' in s or 'how-to-write-a-motivation-letter.html"' in s) and "data-nav-fit" not in s and "</head>" in s:
             s = s.replace("</head>", '    <style data-nav-fit>@media (min-width: 769px) { .nav-links { gap: 2px; } .nav-links a { padding: 10px 13px; } .nav-links .nav-cta { padding: 10px 18px; } }</style>\n</head>', 1)
 
-        # 2a) Footer'a Hakkimizda / Kullanim Kosullari linkleri
+        # 2a) Footer'a Hakkimizda / Kullanim Kosullari / Cerez ayarlari linkleri
+        if "data-legal-links" in s:
+            s = re.sub(r'<p data-legal-links[^>]*>.*?</p>', lambda m_: legal_links(lang_of(rel)), s, count=1)
         if "data-legal-links" not in s and "</footer>" in s:
             idx = s.rfind("</footer>")
             s = s[:idx] + "    " + legal_links(lang_of(rel)) + "\n    " + s[idx:]
@@ -431,6 +521,17 @@ def main():
                 added += 1
         sm.write_text(content, encoding="utf-8")
 
+    # 6) Cerez onayi + Analytics (yalnizca onayla) tum sayfalara
+    consent = 0
+    for f in sorted(root.rglob("*.html")):
+        rel = f.as_posix()
+        if rel.startswith("MobilCV.AIEngine/") or f.name.startswith("google") or f.name == "404.html":
+            continue
+        s = f.read_text(encoding="utf-8")
+        t = put_consent(s, lang_of(rel))
+        if t != s:
+            f.write_text(t, encoding="utf-8"); consent += 1
+    print(f"Cerez onayi eklenen/guncellenen sayfa : {consent}")
     print(f"Gizlilik sayfası yazıldı/güncellendi : {written}")
     print(f"Footer'a gizlilik linki eklenen sayfa: {links}")
     print(f"Instagram/Threads linki eklenen sayfa: {social}")

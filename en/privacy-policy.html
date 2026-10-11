@@ -61,9 +61,9 @@
         <h2>Your CV information</h2>
         <p>Everything you enter in your CV (name, contact details, photo, experience, etc.) is kept <strong>only on your own device, in your browser's local storage</strong>, so you can continue where you left off. The PDF is also created entirely in your browser. We cannot access this information.</p><ul><li>To delete your information, use the <strong>Clear All</strong> button in the tool or clear your browser's site data.</li><li>If you are using a shared computer, we recommend deleting your information when you are done.</li><li>The <strong>Download Backup</strong> button saves your data as a file on your own device; this file is not sent to us.</li><li>The <strong>Share</strong> button passes your PDF to your device's own share menu; you decide where it goes.</li></ul>
         <h2>Third-party services we use</h2>
-        <ul><li><strong>Google Analytics</strong> (mobilcv.com only, and <strong>only if you consent</strong>): collects usage statistics (e.g. device type, approximate location, pages visited) to help us understand how the site is used. It uses cookies. Your CV content is never sent to Google Analytics. It also counts which features are used (e.g. PDF downloads, template and language choices); your CV content is not included.</li><li><strong>Formspree</strong>: messages you send through our feedback and contact forms, together with the name and email address you optionally provide, are delivered to our inbox through this service.</li><li><strong>GitHub Pages</strong>: our websites are hosted here. The hosting provider may keep access logs (e.g. IP addresses) for security purposes.</li><li><strong>Content delivery networks</strong> (cdnjs, flagcdn): code files and flag images needed by the page are loaded from these servers, which technically receive your IP address.</li></ul><p>These providers may process data on servers outside your country.</p><p>The WhatsApp and LinkedIn buttons in the recommendation box open those websites only if you click them, and share only MobilCV's address; your CV information is never shared.</p>
+        <ul><li><strong>Google Analytics</strong> (mobilcv.com and mobilcv.net, and <strong>only if you consent</strong>): collects usage statistics (e.g. device type, approximate location, pages visited) to help us understand how the site is used. It uses cookies. Your CV content is never sent to Google Analytics. It also counts which features are used (e.g. PDF downloads, template and language choices); your CV content is not included.</li><li><strong>Formspree</strong>: messages you send through our feedback and contact forms, together with the name and email address you optionally provide, are delivered to our inbox through this service.</li><li><strong>GitHub Pages</strong>: our websites are hosted here. The hosting provider may keep access logs (e.g. IP addresses) for security purposes.</li><li><strong>Content delivery networks</strong> (cdnjs, flagcdn): code files and flag images needed by the page are loaded from these servers, which technically receive your IP address.</li></ul><p>These providers may process data on servers outside your country.</p><p>The WhatsApp and LinkedIn buttons in the recommendation box open those websites only if you click them, and share only MobilCV's address; your CV information is never shared.</p>
         <h2>Cookies</h2>
-        <p>mobilcv.com uses cookies only for Google Analytics, and <strong>only if you consent</strong>. If you choose "Reject" in the banner at the bottom of the page, Analytics is never loaded. You can change your choice at any time with the <strong>Cookie settings</strong> link at the very bottom of the page. The CV tool itself and mobilcv.net do not use cookies.</p>
+        <p>mobilcv.com and mobilcv.net use cookies only for Google Analytics, and <strong>only if you consent</strong>. If you choose "Reject" in the banner at the bottom of the page, Analytics is never loaded. You can change your choice at any time with the <strong>Cookie settings</strong> link at the very bottom of the page. Each site asks for your consent separately. The CV tool does not need cookies to work; your CV details are kept in your browser's local storage.</p>
         <h2>How long data is kept</h2>
         <p>Your CV information stays only on your device until you delete it. Messages you send us by email or form are kept only as long as needed to reply. Usage statistics are kept for a limited period according to Google Analytics retention settings.</p>
         <h2>Your rights</h2>
@@ -73,9 +73,69 @@
     </div>
     <footer class="footer">
         <p>&copy; 2026 MobilCV &mdash; <a href="https://www.mobilcv.com/en/">mobilcv.com</a></p>
-        <p data-legal-links style="margin-top:6px;font-size:0.85em;"><a href="https://mobilcv.net/en/about.html">About Us</a> &middot; <a href="https://mobilcv.net/en/terms.html">Terms of Use</a> &middot; <a href="https://mobilcv.net/en/privacy-policy.html">Privacy Policy</a></p>
+        <p data-legal-links style="margin-top:6px;font-size:0.85em;"><a href="https://mobilcv.net/en/about.html">About Us</a> &middot; <a href="https://mobilcv.net/en/terms.html">Terms of Use</a> &middot; <a href="https://mobilcv.net/en/privacy-policy.html">Privacy Policy</a> &middot; <a href="#" data-cookie-settings>Cookie settings</a></p>
         <p data-social-link style="margin-top:6px;font-size:0.85em;"><a href="https://www.instagram.com/mobilcvcom/" target="_blank" rel="noopener me">Instagram</a> · <a href="https://www.threads.com/@mobilcvcom" target="_blank" rel="noopener me">Threads</a></p>
     </footer>
 </div>
+<style data-consent-css>        #cookie-consent { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 2147483000; max-width: 640px; margin: 0 auto;
+            background: #fff; color: #1f2937; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,0.25); padding: 14px 16px;
+            font: 14px/1.5 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: none; }
+        #cookie-consent.show { display: block; }
+        #cookie-consent p { margin: 0 0 10px; }
+        #cookie-consent a { color: #2563eb; }
+        #cookie-consent .cc-btns { display: flex; gap: 10px; }
+        #cookie-consent button { flex: 1; padding: 10px 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer;
+            border: 2px solid #2563eb; }
+        #cookie-consent .cc-accept { background: #2563eb; color: #fff; }
+        #cookie-consent .cc-reject { background: #fff; color: #2563eb; }
+        @media print { #cookie-consent { display: none !important; } }
+</style>
+<script data-consent>
+// Google Analytics YALNIZCA ziyaretci "Kabul et" derse yuklenir (KVKK / GDPR).
+(function () {
+    var GA = 'G-4W6V8KX8D8', KEY = 'mobilcv_consent', L = 'en';
+    var T = {"tr": {"msg": "Ziyaret istatistikleri için Google Analytics çerezlerini kullanmak istiyoruz. CV bilgileriniz bundan etkilenmez ve cihazınızda kalır.", "ok": "Kabul et", "no": "Reddet", "more": "Ayrıntılar", "set": "Çerez ayarları", "url": "https://mobilcv.net/gizlilik-politikasi.html"}, "en": {"msg": "We'd like to use Google Analytics cookies to count visits. Your CV data is not affected and stays on your device.", "ok": "Accept", "no": "Reject", "more": "Details", "set": "Cookie settings", "url": "https://mobilcv.net/en/privacy-policy.html"}, "de": {"msg": "Wir möchten Google-Analytics-Cookies verwenden, um Besuche zu zählen. Ihre Lebenslaufdaten sind davon nicht betroffen und bleiben auf Ihrem Gerät.", "ok": "Akzeptieren", "no": "Ablehnen", "more": "Details", "set": "Cookie-Einstellungen", "url": "https://mobilcv.net/de/privacy-policy.html"}, "fr": {"msg": "Nous souhaitons utiliser des cookies Google Analytics pour mesurer les visites. Les données de votre CV ne sont pas concernées et restent sur votre appareil.", "ok": "Accepter", "no": "Refuser", "more": "Détails", "set": "Paramètres des cookies", "url": "https://mobilcv.net/fr/privacy-policy.html"}, "es": {"msg": "Queremos usar cookies de Google Analytics para contar las visitas. Los datos de tu currículum no se ven afectados y se quedan en tu dispositivo.", "ok": "Aceptar", "no": "Rechazar", "more": "Detalles", "set": "Configuración de cookies", "url": "https://mobilcv.net/es/privacy-policy.html"}, "it": {"msg": "Vorremmo usare i cookie di Google Analytics per contare le visite. I dati del tuo CV non sono coinvolti e restano sul tuo dispositivo.", "ok": "Accetta", "no": "Rifiuta", "more": "Dettagli", "set": "Impostazioni cookie", "url": "https://mobilcv.net/it/privacy-policy.html"}, "pt": {"msg": "Gostaríamos de usar cookies do Google Analytics para contar as visitas. Os dados do seu currículo não são afetados e ficam no seu dispositivo.", "ok": "Aceitar", "no": "Recusar", "more": "Detalhes", "set": "Configurações de cookies", "url": "https://mobilcv.net/pt/privacy-policy.html"}, "ru": {"msg": "Мы хотим использовать файлы cookie Google Analytics для подсчёта посещений. Данные вашего резюме это не затрагивает — они остаются на вашем устройстве.", "ok": "Принять", "no": "Отклонить", "more": "Подробнее", "set": "Настройки cookie", "url": "https://mobilcv.net/ru/privacy-policy.html"}, "ar": {"msg": "نود استخدام ملفات تعريف الارتباط من Google Analytics لإحصاء الزيارات. لا يتأثر محتوى سيرتك الذاتية ويبقى على جهازك.", "ok": "قبول", "no": "رفض", "more": "التفاصيل", "set": "إعدادات ملفات تعريف الارتباط", "url": "https://mobilcv.net/ar/privacy-policy.html"}, "zh": {"msg": "我们希望使用 Google Analytics Cookie 统计访问量。您的简历数据不受影响，仍只保存在您的设备上。", "ok": "接受", "no": "拒绝", "more": "详情", "set": "Cookie 设置", "url": "https://mobilcv.net/zh/privacy-policy.html"}, "ja": {"msg": "訪問数を集計するためにGoogle AnalyticsのCookieを使用したいと考えています。履歴書のデータには影響せず、お使いの端末内に保存されたままです。", "ok": "同意する", "no": "拒否する", "more": "詳細", "set": "Cookie設定", "url": "https://mobilcv.net/ja/privacy-policy.html"}};
+    var t = T[L] || T.en;
+    function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function put(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function loadGA() {
+        if (window.__gaLoaded) return; window.__gaLoaded = true;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date()); gtag('config', GA);
+        var s = document.createElement('script'); s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA; document.head.appendChild(s);
+    }
+    function clearGA() {
+        var host = location.hostname.replace(/^www\./, '');
+        document.cookie.split(';').forEach(function (c) {
+            var n = c.split('=')[0].trim();
+            if (n === '_ga' || n.indexOf('_ga_') === 0 || n === '_gid') {
+                ['', '.' + host, location.hostname].forEach(function (d) { document.cookie = n + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : ''); });
+            }
+        });
+    }
+    var box;
+    function render() {
+        box.setAttribute('dir', L === 'ar' ? 'rtl' : 'ltr');
+        box.innerHTML = '<p>' + t.msg + ' <a href="' + t.url + '">' + t.more + '</a></p>' +
+            '<div class="cc-btns"><button type="button" class="cc-reject">' + t.no + '</button>' +
+            '<button type="button" class="cc-accept">' + t.ok + '</button></div>';
+        box.querySelector('.cc-accept').onclick = function () { put('granted'); box.classList.remove('show'); loadGA(); };
+        box.querySelector('.cc-reject').onclick = function () { var was = window.__gaLoaded; put('denied'); clearGA(); box.classList.remove('show'); if (was) location.reload(); };
+    }
+    function init() {
+        box = document.createElement('div'); box.id = 'cookie-consent'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-live', 'polite');
+        document.body.appendChild(box); render();
+        var v = get();
+        if (v === 'granted') loadGA(); else if (v !== 'denied') box.classList.add('show');
+        document.querySelectorAll('[data-cookie-settings]').forEach(function (a) {
+            a.textContent = t.set;
+            a.addEventListener('click', function (e) { e.preventDefault(); render(); box.classList.add('show'); });
+        });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
 </body>
 </html>
