@@ -29,13 +29,13 @@ jobs:
 
       - name: Kodu indir
         if: steps.week.outputs.skip != 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: .NET 8 kur
+      - name: .NET 9 kur
         if: steps.week.outputs.skip != 'true'
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '9.0.x'
 
       - name: Makale taslagi uret (yalnizca Turkce + Ingilizce)
         if: steps.week.outputs.skip != 'true'

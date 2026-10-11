@@ -26,32 +26,32 @@ THREADS = "https://www.threads.com/@mobilcvcom"
 SOCIAL = (f'<p data-social-link style="margin-top:6px;font-size:0.85em;">'
           f'<a href="{INSTAGRAM}" target="_blank" rel="noopener me">Instagram</a> · '
           f'<a href="{THREADS}" target="_blank" rel="noopener me">Threads</a></p>')
-UPDATED = date(2026, 10, 10)
+UPDATED = date(2026, 10, 11)
 
 # Dil -> (sayfa yolu, link etiketi, ana site etiketi, blog etiketi, başlık, son güncelleme etiketi, tarih formatı)
 LANGS = {
     "tr": dict(path="gizlilik-politikasi.html", label="Gizlilik Politikası", home="Ana Site", blog="Blog",
-               updated="Son güncelleme", date="10 Ekim 2026", rtl=False, com=f"{COM}/", net=f"{NET}/"),
+               updated="Son güncelleme", date="11 Ekim 2026", rtl=False, com=f"{COM}/", net=f"{NET}/"),
     "en": dict(path="en/privacy-policy.html", label="Privacy Policy", home="Homepage", blog="Blog",
-               updated="Last updated", date="10 October 2026", rtl=False),
+               updated="Last updated", date="11 October 2026", rtl=False),
     "de": dict(path="de/privacy-policy.html", label="Datenschutzerklärung", home="Startseite", blog="Blog",
-               updated="Zuletzt aktualisiert", date="10. Oktober 2026", rtl=False),
+               updated="Zuletzt aktualisiert", date="11. Oktober 2026", rtl=False),
     "fr": dict(path="fr/privacy-policy.html", label="Politique de confidentialité", home="Accueil", blog="Blog",
-               updated="Dernière mise à jour", date="10 octobre 2026", rtl=False),
+               updated="Dernière mise à jour", date="11 octobre 2026", rtl=False),
     "es": dict(path="es/privacy-policy.html", label="Política de privacidad", home="Inicio", blog="Blog",
-               updated="Última actualización", date="10 de octubre de 2026", rtl=False),
+               updated="Última actualización", date="11 de octubre de 2026", rtl=False),
     "it": dict(path="it/privacy-policy.html", label="Informativa sulla privacy", home="Home", blog="Blog",
-               updated="Ultimo aggiornamento", date="10 ottobre 2026", rtl=False),
+               updated="Ultimo aggiornamento", date="11 ottobre 2026", rtl=False),
     "pt": dict(path="pt/privacy-policy.html", label="Política de privacidade", home="Início", blog="Blog",
-               updated="Última atualização", date="10 de outubro de 2026", rtl=False),
+               updated="Última atualização", date="11 de outubro de 2026", rtl=False),
     "ru": dict(path="ru/privacy-policy.html", label="Политика конфиденциальности", home="Главная", blog="Блог",
-               updated="Последнее обновление", date="10 октября 2026 г.", rtl=False),
+               updated="Последнее обновление", date="11 октября 2026 г.", rtl=False),
     "ar": dict(path="ar/privacy-policy.html", label="سياسة الخصوصية", home="الرئيسية", blog="المدونة",
-               updated="آخر تحديث", date="10 أكتوبر 2026", rtl=True),
+               updated="آخر تحديث", date="11 أكتوبر 2026", rtl=True),
     "zh": dict(path="zh/privacy-policy.html", label="隐私政策", home="首页", blog="博客",
-               updated="最后更新", date="2026年10月10日", rtl=False),
+               updated="最后更新", date="2026年10月11日", rtl=False),
     "ja": dict(path="ja/privacy-policy.html", label="プライバシーポリシー", home="ホーム", blog="ブログ",
-               updated="最終更新日", date="2026年10月10日", rtl=False, net=f"{NET}/en/"),
+               updated="最終更新日", date="2026年10月11日", rtl=False, net=f"{NET}/en/"),
 }
 for code, d in LANGS.items():
     d.setdefault("com", f"{COM}/{code}/")
@@ -179,6 +179,14 @@ for _c in LANGS:  # Tavsiye kutusu notu: "ucuncu taraf hizmetler" bolumune
     _add = KURUMSAL[_c]["privacy_add"]
     if _add not in _b:
         TEXT[_c][3] = (_h, _b + f"<p>{_add}</p>")
+# Analytics: 'anonim' ifadesi kaldirildi (GA cerez kimligi kullanir), ozellik sayimlari aciklandi
+GA_FIX = {"tr": ["anonim kullanım istatistikleri", "kullanım istatistikleri", " Ayrıca hangi özelliklerin kullanıldığını sayar (ör. PDF indirme, şablon ve dil seçimi); bu sayımlara CV içeriğiniz eklenmez."], "en": ["collects anonymous usage statistics", "collects usage statistics", " It also counts which features are used (e.g. PDF downloads, template and language choices); your CV content is not included."], "de": ["anonyme Nutzungsstatistiken", "Nutzungsstatistiken", " Außerdem wird gezählt, welche Funktionen genutzt werden (z. B. PDF-Download, Vorlagen- und Sprachwahl); Ihre Lebenslaufinhalte sind darin nicht enthalten."], "fr": ["statistiques d'utilisation anonymes", "statistiques d'utilisation", " Il compte aussi les fonctions utilisées (téléchargement du PDF, choix du modèle et de la langue) ; le contenu de votre CV n'en fait pas partie."], "es": ["estadísticas de uso anónimas", "estadísticas de uso", " También cuenta qué funciones se usan (descarga del PDF, elección de plantilla e idioma); el contenido de tu currículum no se incluye."], "it": ["statistiche d'uso anonime", "statistiche d'uso", " Conta anche quali funzioni vengono usate (download del PDF, scelta del modello e della lingua); il contenuto del CV non è incluso."], "pt": ["estatísticas de uso anônimas", "estatísticas de uso", " Também conta quais recursos são usados (download do PDF, escolha de modelo e idioma); o conteúdo do seu currículo não é incluído."], "ru": ["анонимную статистику использования", "статистику использования", " Также подсчитывается, какие функции используются (скачивание PDF, выбор шаблона и языка); содержимое резюме при этом не передаётся."], "ar": ["إحصاءات استخدام مجهولة الهوية", "إحصاءات الاستخدام", " كما يحصي الميزات المستخدمة (تنزيل PDF، واختيار القالب واللغة)، دون إرسال محتوى سيرتك الذاتية."], "zh": ["匿名使用统计", "使用统计", " 它还会统计使用了哪些功能（如下载PDF、选择模板和语言），但不包含您的简历内容。"], "ja": ["匿名の利用統計", "利用統計", " また、どの機能が使われたか（PDFのダウンロード、テンプレートや言語の選択など）も集計しますが、履歴書の内容は含まれません。"]}
+for _c, (_old, _new, _addt) in GA_FIX.items():
+    _h, _b = TEXT[_c][3]
+    _b = _b.replace(_old, _new)
+    if _addt.strip() not in _b:
+        _i = _b.index("</li>"); _b = _b[:_i] + _addt + _b[_i:]
+    TEXT[_c][3] = (_h, _b)
 LEGAL_PATHS = {c: (("hakkimizda.html", "kullanim-kosullari.html") if c == "tr" else (f"{c}/about.html", f"{c}/terms.html")) for c in LANGS}
 
 
@@ -187,6 +195,10 @@ def legal_links(code):
     a, t = LEGAL_PATHS[code]
     return (f'<p data-legal-links style="margin-top:6px;font-size:0.85em;"><a href="{NET}/{a}">{k["about"]}</a> &middot; '
             f'<a href="{NET}/{t}">{k["terms"]}</a> &middot; <a href="{LANGS[code]["url"]}">{LANGS[code]["label"]}</a></p>')
+
+
+# Hakkimizda / Kosullar metinlerinin son degistigi tarih (gizlilikten bagimsiz)
+LEGAL_DATE = {"tr": "10 Ekim 2026", "en": "10 October 2026", "de": "10. Oktober 2026", "fr": "10 octobre 2026", "es": "10 de octubre de 2026", "it": "10 ottobre 2026", "pt": "10 de outubro de 2026", "ru": "10 октября 2026 г.", "ar": "10 أكتوبر 2026", "zh": "2026年10月10日", "ja": "2026年10月10日"}
 
 
 def build_legal(code, kind):
@@ -229,7 +241,7 @@ def build_legal(code, kind):
     </header>
     <div class="page-content">
         <h1>{title}</h1>
-        <p class="updated">{d['updated']}: {d['date']}</p>
+        <p class="updated">{d['updated']}: {LEGAL_DATE[code]}</p>
         <p class="lead">{page['lead']}</p>
 {sections}
     </div>
