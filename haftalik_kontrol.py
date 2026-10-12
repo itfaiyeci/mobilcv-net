@@ -3,7 +3,7 @@
 Kullanim: python3 haftalik_kontrol.py <cv-olusturucu klasoru> <mobilcv-net klasoru> [rapor.md]
 Kontroller: yasak/yaniltici ifadeler, canonical, kirik ic baglantilar, site haritasi, robots.txt,
 cerez onayi + Analytics, www'suz mobilcv.com baglantilari, son 8 gunde degisen sayfalar."""
-import re, sys, subprocess
+import os, re, sys, subprocess
 from pathlib import Path
 from html import unescape
 
@@ -144,3 +144,6 @@ report = "\n".join(lines)
 if OUT:
     OUT.write_text(report, encoding="utf-8")
 print(report)
+# STRICT=1 ortam degiskeniyle bulgu varsa hata koduyla cik (GitHub Actions icin)
+if os.environ.get("STRICT") and total:
+    sys.exit(1)

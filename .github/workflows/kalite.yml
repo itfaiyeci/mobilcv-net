@@ -1,0 +1,28 @@
+name: Kalite kontrol
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '27 3 * * *'   # her gece 06:27 (Turkiye)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  icerik:
+    name: Icerik ve dogruluk kontrolu (iki site)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - run: git clone --depth 1 https://github.com/itfaiyeci/cv-olusturucu /tmp/com
+      - name: Kontrol
+        run: |
+          set +e
+          STRICT=1 python3 haftalik_kontrol.py /tmp/com . /tmp/rapor.md > /dev/null
+          code=$?
+          cat /tmp/rapor.md >> "$GITHUB_STEP_SUMMARY"
+          exit $code

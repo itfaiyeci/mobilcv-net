@@ -55,6 +55,33 @@ jobs:
         if: steps.week.outputs.skip != 'true'
         run: python3 kaynak_temizle.py .
 
+      - name: Kalite kontrolu (sonuc PR aciklamasina eklenir)
+        id: kalite_raporu
+        if: steps.week.outputs.skip != 'true'
+        run: |
+          git clone --depth 1 https://github.com/itfaiyeci/cv-olusturucu /tmp/com
+          python3 haftalik_kontrol.py /tmp/com . /tmp/rapor.md > /dev/null || true
+          {
+            echo "Bot yeni bir makale taslağı hazırladı. Henüz **yayında değil**."
+            echo
+            echo "**Nasıl kontrol edilir?**"
+            echo "1. Yukarıdaki **Files changed** sekmesinde yeni \`.html\` dosyalarını açıp metni okuyun."
+            echo "2. Uygunsa en alttaki yeşil **Merge pull request** → **Confirm merge** düğmelerine basın."
+            echo "3. Uygun değilse **Close pull request** deyin; hiçbir şey yayınlanmaz."
+            echo
+            echo "Kontrol listesi:"
+            echo "- [ ] Bilgiler doğru, abartılı ya da uydurma iddia yok"
+            echo "- [ ] Metin akıcı, tekrar yok"
+            echo
+            echo "---"
+            echo
+            echo "<details><summary>Otomatik kalite kontrolü sonucu</summary>"
+            echo
+            cat /tmp/rapor.md
+            echo
+            echo "</details>"
+          } > /tmp/pr_body.md
+
       - name: Onay icin taslak olustur
         if: steps.week.outputs.skip != 'true'
         uses: peter-evans/create-pull-request@v7
@@ -65,15 +92,4 @@ jobs:
           committer: MobilCV Bot <bot@mobilcv.net>
           author: MobilCV Bot <bot@mobilcv.net>
           title: "📝 Yeni makale taslağı – onayınızı bekliyor"
-          body: |
-            Bot yeni bir makale taslağı hazırladı. Henüz **yayında değil**.
-
-            **Nasıl kontrol edilir?**
-            1. Yukarıdaki **Files changed** sekmesinde yeni `.html` dosyalarını açıp metni okuyun.
-            2. Uygunsa en alttaki yeşil **Merge pull request** → **Confirm merge** düğmelerine basın. Birkaç dakika içinde yayına çıkar.
-            3. Uygun değilse **Close pull request** deyin; hiçbir şey yayınlanmaz.
-
-            Kontrol listesi:
-            - [ ] Bilgiler doğru, abartılı ya da uydurma iddia yok
-            - [ ] Metin akıcı, tekrar yok
-            - [ ] Yaklaşık 1000 kelime (çok kısa değil)
+          body-path: /tmp/pr_body.md
