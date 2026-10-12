@@ -489,6 +489,12 @@ def main():
             s = s[:idx] + "    " + SOCIAL + "\n    " + s[idx:]
             social += 1
 
+        # 2c) mobilcv.com linkleri dogrudan standart adrese (www) gitsin.
+        #     Yonlendirmeli adres (https://mobilcv.com) Search Console'da "kopya / alternatif sayfa" uyarisi uretir.
+        #     en/ altindaki linkleri bot zaten /en/ sayfasina ceviriyor; onlara dokunulmaz.
+        if not rel.startswith("en/"):
+            s = s.replace('href="https://mobilcv.com"', 'href="https://www.mobilcv.com/"').replace('href="https://mobilcv.com/"', 'href="https://www.mobilcv.com/"')
+
         # 3) İletişim formları
         if f.name in ("iletisim.html", "contact.html"):
             s2 = re.sub(r'<!-- İLETİŞİM FORMU -->\s*<div[\s\S]*?sadece görseldir[\s\S]*?</p>\s*</div>', "", s)
