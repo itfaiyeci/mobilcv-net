@@ -23,9 +23,11 @@ FORMSPREE = "https://formspree.io/f/movkoozp"
 CONTACT = "info@mobilcv.com"
 INSTAGRAM = "https://www.instagram.com/mobilcvcom/"
 THREADS = "https://www.threads.com/@mobilcvcom"
+TIKTOK = "https://www.tiktok.com/@mobilcv.com"
 SOCIAL = (f'<p data-social-link style="margin-top:6px;font-size:0.85em;">'
           f'<a href="{INSTAGRAM}" target="_blank" rel="noopener me">Instagram</a> · '
-          f'<a href="{THREADS}" target="_blank" rel="noopener me">Threads</a></p>')
+          f'<a href="{THREADS}" target="_blank" rel="noopener me">Threads</a> · '
+          f'<a href="{TIKTOK}" target="_blank" rel="noopener me">TikTok</a></p>')
 UPDATED = date(2026, 10, 11)
 
 # Dil -> (sayfa yolu, link etiketi, ana site etiketi, blog etiketi, başlık, son güncelleme etiketi, tarih formatı)
