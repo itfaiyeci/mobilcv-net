@@ -27,7 +27,7 @@ YASAK = [
 def html_files(root):
     for f in sorted(root.rglob("*.html")):
         rel = f.relative_to(root).as_posix()
-        if any(rel.startswith(d) or ("/" + d) in rel for d in SKIP_DIRS) or f.name.startswith("google"):
+        if any(rel.startswith(d) or ("/" + d) in rel for d in SKIP_DIRS) or re.fullmatch(r"google[0-9a-f]+\.html", f.name):
             continue
         yield f, rel
 

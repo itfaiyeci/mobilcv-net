@@ -449,14 +449,14 @@ def main():
     links = forms = news = social = 0
     for f in sorted(root.rglob("*.html")):
         rel = f.as_posix()
-        if rel.startswith("MobilCV.AIEngine/") or f.name.startswith("google") or rel in privacy_files:
+        if rel.startswith("MobilCV.AIEngine/") or re.fullmatch(r"google[0-9a-f]+\.html", f.name) or rel in privacy_files:
             continue
         s = f.read_text(encoding="utf-8")
         orig = s
         d = LANGS[lang_of(rel)]
 
         # 2) Footer'a gizlilik linki
-        if "data-privacy-link" not in s and "</footer>" in s:
+        if "data-privacy-link" not in s and "data-legal-links" not in s and "</footer>" in s:
             link = (f'        <p data-privacy-link style="margin-top:6px;font-size:0.85em;">'
                     f'<a href="{d["url"]}">{d["label"]}</a></p>\n    ')
             idx = s.rfind("</footer>")
@@ -484,6 +484,10 @@ def main():
             idx = s.rfind("</footer>")
             s = s[:idx] + "    " + legal_links(lang_of(rel)) + "\n    " + s[idx:]
             links += 1
+
+        # 2a-2) Ayri "Gizlilik Politikasi" satiri artik gereksiz (legal satirinda zaten var): tekrar etmesin
+        if "data-legal-links" in s:
+            s = re.sub(r'\s*<p data-privacy-link[^>]*>[\s\S]*?</p>', "", s)
 
         # 2b) Footer'a Instagram / Threads linki
         if "data-social-link" not in s and "</footer>" in s:
@@ -533,7 +537,7 @@ def main():
     consent = 0
     for f in sorted(root.rglob("*.html")):
         rel = f.as_posix()
-        if rel.startswith("MobilCV.AIEngine/") or f.name.startswith("google") or f.name == "404.html":
+        if rel.startswith("MobilCV.AIEngine/") or re.fullmatch(r"google[0-9a-f]+\.html", f.name) or f.name == "404.html":
             continue
         s = f.read_text(encoding="utf-8")
         t = put_consent(s, lang_of(rel))
