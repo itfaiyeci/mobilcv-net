@@ -58,19 +58,13 @@ namespace MobilCV.AIEngine
                 },
                 ["İş-Dünyası-Trendleri"] = new List<string>
                 {
-                    "2026'nın En Popüler 10 Mesleği",
                     "Uzaktan Çalışmanın Geleceği ve Trendler",
                     "Yapay Zeka Hangi Meslekleri Dönüştürecek?",
                     "Hibrit Çalışma Modeli Kariyerini Nasıl Etkiler?",
                     "Freelance Çalışmaya Geçiş Rehberi"
-                },
-                ["Başarı-Hikayeleri"] = new List<string>
-                {
-                    "Sektör Değiştirerek Hayalindeki İşe Ulaşanlar",
-                    "Girişimcilik Hikayeleri Sıfırdan Başarıya",
-                    "Kadın Girişimcilerin Başarı Hikayeleri",
-                    "Küçük Bir Fikirden Büyük Bir Şirkete Uzanan Yolculuklar"
                 }
+                // "Başarı-Hikayeleri" kategorisi kaldırıldı (13.10.2026): gerçek kişi/şirket hikayesi
+                // doğrulanamaz; model uydurmaya zorlanıyordu (icerik-dogruluk-kurallari.md).
             };
 
             // ===== AYNI KONULARIN İNGİLİZCE BAŞLIKLARI =====
@@ -101,11 +95,7 @@ namespace MobilCV.AIEngine
                 ["Uzaktan Çalışmanın Geleceği ve Trendler"] = "The Future of Remote Work and Emerging Trends",
                 ["Yapay Zeka Hangi Meslekleri Dönüştürecek?"] = "Which Professions Will AI Transform?",
                 ["Hibrit Çalışma Modeli Kariyerini Nasıl Etkiler?"] = "How Does the Hybrid Work Model Affect Your Career?",
-                ["Freelance Çalışmaya Geçiş Rehberi"] = "A Guide to Transitioning to Freelance Work",
-                ["Sektör Değiştirerek Hayalindeki İşe Ulaşanlar"] = "Success Stories: Changing Industries to Land a Dream Job",
-                ["Girişimcilik Hikayeleri Sıfırdan Başarıya"] = "Entrepreneurship Stories: From Zero to Success",
-                ["Kadın Girişimcilerin Başarı Hikayeleri"] = "Success Stories of Women Entrepreneurs",
-                ["Küçük Bir Fikirden Büyük Bir Şirkete Uzanan Yolculuklar"] = "From a Small Idea to a Big Company: Growth Journeys"
+                ["Freelance Çalışmaya Geçiş Rehberi"] = "A Guide to Transitioning to Freelance Work"
             };
 
             // ===== DAHA ÖNCE YAZILMIŞ KONULARI HAVUZDAN ÇIKAR =====
