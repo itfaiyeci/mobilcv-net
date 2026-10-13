@@ -28,32 +28,32 @@ SOCIAL = (f'<p data-social-link style="margin-top:6px;font-size:0.85em;">'
           f'<a href="{INSTAGRAM}" target="_blank" rel="noopener me">Instagram</a> · '
           f'<a href="{THREADS}" target="_blank" rel="noopener me">Threads</a> · '
           f'<a href="{TIKTOK}" target="_blank" rel="noopener me">TikTok</a></p>')
-UPDATED = date(2026, 10, 11)
+UPDATED = date(2026, 10, 13)
 
 # Dil -> (sayfa yolu, link etiketi, ana site etiketi, blog etiketi, başlık, son güncelleme etiketi, tarih formatı)
 LANGS = {
     "tr": dict(path="gizlilik-politikasi.html", label="Gizlilik Politikası", home="Ana Site", blog="Blog",
-               updated="Son güncelleme", date="11 Ekim 2026", rtl=False, com=f"{COM}/", net=f"{NET}/"),
+               updated="Son güncelleme", date="13 Ekim 2026", rtl=False, com=f"{COM}/", net=f"{NET}/"),
     "en": dict(path="en/privacy-policy.html", label="Privacy Policy", home="Homepage", blog="Blog",
-               updated="Last updated", date="11 October 2026", rtl=False),
+               updated="Last updated", date="13 October 2026", rtl=False),
     "de": dict(path="de/privacy-policy.html", label="Datenschutzerklärung", home="Startseite", blog="Blog",
-               updated="Zuletzt aktualisiert", date="11. Oktober 2026", rtl=False),
+               updated="Zuletzt aktualisiert", date="13. Oktober 2026", rtl=False),
     "fr": dict(path="fr/privacy-policy.html", label="Politique de confidentialité", home="Accueil", blog="Blog",
-               updated="Dernière mise à jour", date="11 octobre 2026", rtl=False),
+               updated="Dernière mise à jour", date="13 octobre 2026", rtl=False),
     "es": dict(path="es/privacy-policy.html", label="Política de privacidad", home="Inicio", blog="Blog",
-               updated="Última actualización", date="11 de octubre de 2026", rtl=False),
+               updated="Última actualización", date="13 de octubre de 2026", rtl=False),
     "it": dict(path="it/privacy-policy.html", label="Informativa sulla privacy", home="Home", blog="Blog",
-               updated="Ultimo aggiornamento", date="11 ottobre 2026", rtl=False),
+               updated="Ultimo aggiornamento", date="13 ottobre 2026", rtl=False),
     "pt": dict(path="pt/privacy-policy.html", label="Política de privacidade", home="Início", blog="Blog",
-               updated="Última atualização", date="11 de outubro de 2026", rtl=False),
+               updated="Última atualização", date="13 de outubro de 2026", rtl=False),
     "ru": dict(path="ru/privacy-policy.html", label="Политика конфиденциальности", home="Главная", blog="Блог",
-               updated="Последнее обновление", date="11 октября 2026 г.", rtl=False),
+               updated="Последнее обновление", date="13 октября 2026 г.", rtl=False),
     "ar": dict(path="ar/privacy-policy.html", label="سياسة الخصوصية", home="الرئيسية", blog="المدونة",
-               updated="آخر تحديث", date="11 أكتوبر 2026", rtl=True),
+               updated="آخر تحديث", date="13 أكتوبر 2026", rtl=True),
     "zh": dict(path="zh/privacy-policy.html", label="隐私政策", home="首页", blog="博客",
-               updated="最后更新", date="2026年10月11日", rtl=False),
+               updated="最后更新", date="2026年10月13日", rtl=False),
     "ja": dict(path="ja/privacy-policy.html", label="プライバシーポリシー", home="ホーム", blog="ブログ",
-               updated="最終更新日", date="2026年10月11日", rtl=False, net=f"{NET}/en/"),
+               updated="最終更新日", date="2026年10月13日", rtl=False, net=f"{NET}/en/"),
 }
 for code, d in LANGS.items():
     d.setdefault("com", f"{COM}/{code}/")
@@ -196,8 +196,24 @@ COOKIE_TEXT = {"tr": "<p>mobilcv.com ve mobilcv.net çerezleri yalnızca Google 
 for _c, (_o, _n) in GA_SCOPE.items():
     _h, _b = TEXT[_c][3]; TEXT[_c][3] = (_h, _b.replace(_o, _n))
     TEXT[_c][4] = (TEXT[_c][4][0], COOKIE_TEXT[_c])
+
+# 13 Ekim 2026 ekleri: hukuki sebep, toplama yontemi, yurt disina aktarim, cocuklar/otomatik karar,
+# tam haklar listesi; CDN maddesi kaldirildi (dosyalar artik kendi sunucumuzda); hata bildirimi.
+import importlib.util as _ilu
+_spec = _ilu.spec_from_file_location("gizlilik_ek", str(_K / "gizlilik_ek.py"))
+_ek = _ilu.module_from_spec(_spec); _spec.loader.exec_module(_ek)
+for _c, _e in _ek.EK.items():
+    _secs = TEXT[_c]
+    _h, _b = _secs[3]
+    _b = re.sub(r"<li>(?:(?!</li>).)*?(?:cdnjs|flagcdn)(?:(?!</li>).)*?</li>", "<li>" + _e["cdn"] + "</li>", _b, count=1, flags=re.S)
+    _i = _b.find("</li>")
+    if _e["ga_add"].strip() not in _b and _i != -1:
+        _b = _b[:_i] + _e["ga_add"] + _b[_i:]
+    _secs[3] = (_h, _b)
+    _rights_h = _secs[6][0]
+    TEXT[_c] = _secs[:4] + list(_e["sections"][:2]) + _secs[4:6] + [_e["sections"][2], (_rights_h, _e["rights"])] + _secs[7:]
 GA_ID = "G-4W6V8KX8D8"
-CONSENT_T = {"tr": {"msg": "Ziyaret istatistikleri için Google Analytics çerezlerini kullanmak istiyoruz. CV bilgileriniz bundan etkilenmez ve cihazınızda kalır.", "ok": "Kabul et", "no": "Reddet", "more": "Ayrıntılar", "set": "Çerez ayarları", "url": "https://mobilcv.net/gizlilik-politikasi.html"}, "en": {"msg": "We'd like to use Google Analytics cookies to count visits. Your CV data is not affected and stays on your device.", "ok": "Accept", "no": "Reject", "more": "Details", "set": "Cookie settings", "url": "https://mobilcv.net/en/privacy-policy.html"}, "de": {"msg": "Wir möchten Google-Analytics-Cookies verwenden, um Besuche zu zählen. Ihre Lebenslaufdaten sind davon nicht betroffen und bleiben auf Ihrem Gerät.", "ok": "Akzeptieren", "no": "Ablehnen", "more": "Details", "set": "Cookie-Einstellungen", "url": "https://mobilcv.net/de/privacy-policy.html"}, "fr": {"msg": "Nous souhaitons utiliser des cookies Google Analytics pour mesurer les visites. Les données de votre CV ne sont pas concernées et restent sur votre appareil.", "ok": "Accepter", "no": "Refuser", "more": "Détails", "set": "Paramètres des cookies", "url": "https://mobilcv.net/fr/privacy-policy.html"}, "es": {"msg": "Queremos usar cookies de Google Analytics para contar las visitas. Los datos de tu currículum no se ven afectados y se quedan en tu dispositivo.", "ok": "Aceptar", "no": "Rechazar", "more": "Detalles", "set": "Configuración de cookies", "url": "https://mobilcv.net/es/privacy-policy.html"}, "it": {"msg": "Vorremmo usare i cookie di Google Analytics per contare le visite. I dati del tuo CV non sono coinvolti e restano sul tuo dispositivo.", "ok": "Accetta", "no": "Rifiuta", "more": "Dettagli", "set": "Impostazioni cookie", "url": "https://mobilcv.net/it/privacy-policy.html"}, "pt": {"msg": "Gostaríamos de usar cookies do Google Analytics para contar as visitas. Os dados do seu currículo não são afetados e ficam no seu dispositivo.", "ok": "Aceitar", "no": "Recusar", "more": "Detalhes", "set": "Configurações de cookies", "url": "https://mobilcv.net/pt/privacy-policy.html"}, "ru": {"msg": "Мы хотим использовать файлы cookie Google Analytics для подсчёта посещений. Данные вашего резюме это не затрагивает — они остаются на вашем устройстве.", "ok": "Принять", "no": "Отклонить", "more": "Подробнее", "set": "Настройки cookie", "url": "https://mobilcv.net/ru/privacy-policy.html"}, "ar": {"msg": "نود استخدام ملفات تعريف الارتباط من Google Analytics لإحصاء الزيارات. لا يتأثر محتوى سيرتك الذاتية ويبقى على جهازك.", "ok": "قبول", "no": "رفض", "more": "التفاصيل", "set": "إعدادات ملفات تعريف الارتباط", "url": "https://mobilcv.net/ar/privacy-policy.html"}, "zh": {"msg": "我们希望使用 Google Analytics Cookie 统计访问量。您的简历数据不受影响，仍只保存在您的设备上。", "ok": "接受", "no": "拒绝", "more": "详情", "set": "Cookie 设置", "url": "https://mobilcv.net/zh/privacy-policy.html"}, "ja": {"msg": "訪問数を集計するためにGoogle AnalyticsのCookieを使用したいと考えています。履歴書のデータには影響せず、お使いの端末内に保存されたままです。", "ok": "同意する", "no": "拒否する", "more": "詳細", "set": "Cookie設定", "url": "https://mobilcv.net/ja/privacy-policy.html"}}
+CONSENT_T = {"tr": {"msg": "Ziyaret istatistikleri için Google Analytics çerezlerini kullanmak istiyoruz. CV bilgileriniz bundan etkilenmez ve cihazınızda kalır. Analytics verileri ABD dahil yurt dışındaki sunucularda işlenebilir.", "ok": "Kabul et", "no": "Reddet", "more": "Ayrıntılar", "set": "Çerez ayarları", "url": "https://mobilcv.net/gizlilik-politikasi.html"}, "en": {"msg": "We'd like to use Google Analytics cookies to count visits. Your CV data is not affected and stays on your device. Analytics data may be processed on servers abroad, including in the US.", "ok": "Accept", "no": "Reject", "more": "Details", "set": "Cookie settings", "url": "https://mobilcv.net/en/privacy-policy.html"}, "de": {"msg": "Wir möchten Google-Analytics-Cookies verwenden, um Besuche zu zählen. Ihre Lebenslaufdaten sind davon nicht betroffen und bleiben auf Ihrem Gerät. Analytics-Daten können auf Servern im Ausland, auch in den USA, verarbeitet werden.", "ok": "Akzeptieren", "no": "Ablehnen", "more": "Details", "set": "Cookie-Einstellungen", "url": "https://mobilcv.net/de/privacy-policy.html"}, "fr": {"msg": "Nous souhaitons utiliser des cookies Google Analytics pour mesurer les visites. Les données de votre CV ne sont pas concernées et restent sur votre appareil. Les données d'Analytics peuvent être traitées sur des serveurs à l'étranger, notamment aux États-Unis.", "ok": "Accepter", "no": "Refuser", "more": "Détails", "set": "Paramètres des cookies", "url": "https://mobilcv.net/fr/privacy-policy.html"}, "es": {"msg": "Queremos usar cookies de Google Analytics para contar las visitas. Los datos de tu currículum no se ven afectados y se quedan en tu dispositivo. Los datos de Analytics pueden tratarse en servidores en el extranjero, incluido Estados Unidos.", "ok": "Aceptar", "no": "Rechazar", "more": "Detalles", "set": "Configuración de cookies", "url": "https://mobilcv.net/es/privacy-policy.html"}, "it": {"msg": "Vorremmo usare i cookie di Google Analytics per contare le visite. I dati del tuo CV non sono coinvolti e restano sul tuo dispositivo. I dati di Analytics possono essere trattati su server all'estero, anche negli Stati Uniti.", "ok": "Accetta", "no": "Rifiuta", "more": "Dettagli", "set": "Impostazioni cookie", "url": "https://mobilcv.net/it/privacy-policy.html"}, "pt": {"msg": "Gostaríamos de usar cookies do Google Analytics para contar as visitas. Os dados do seu currículo não são afetados e ficam no seu dispositivo. Os dados do Analytics podem ser tratados em servidores no exterior, inclusive nos EUA.", "ok": "Aceitar", "no": "Recusar", "more": "Detalhes", "set": "Configurações de cookies", "url": "https://mobilcv.net/pt/privacy-policy.html"}, "ru": {"msg": "Мы хотим использовать файлы cookie Google Analytics для подсчёта посещений. Данные вашего резюме это не затрагивает — они остаются на вашем устройстве. Данные Analytics могут обрабатываться на серверах за рубежом, в том числе в США.", "ok": "Принять", "no": "Отклонить", "more": "Подробнее", "set": "Настройки cookie", "url": "https://mobilcv.net/ru/privacy-policy.html"}, "ar": {"msg": "نود استخدام ملفات تعريف الارتباط من Google Analytics لإحصاء الزيارات. لا يتأثر محتوى سيرتك الذاتية ويبقى على جهازك. قد تُعالج بيانات Analytics على خوادم خارج بلدك، بما في ذلك الولايات المتحدة.", "ok": "قبول", "no": "رفض", "more": "التفاصيل", "set": "إعدادات ملفات تعريف الارتباط", "url": "https://mobilcv.net/ar/privacy-policy.html"}, "zh": {"msg": "我们希望使用 Google Analytics Cookie 统计访问量。您的简历数据不受影响，仍只保存在您的设备上。Analytics 数据可能在境外（包括美国）的服务器上处理。", "ok": "接受", "no": "拒绝", "more": "详情", "set": "Cookie 设置", "url": "https://mobilcv.net/zh/privacy-policy.html"}, "ja": {"msg": "訪問数を集計するためにGoogle AnalyticsのCookieを使用したいと考えています。履歴書のデータには影響せず、お使いの端末内に保存されたままです。Analyticsのデータは米国を含む国外のサーバーで処理される場合があります。", "ok": "同意する", "no": "拒否する", "more": "詳細", "set": "Cookie設定", "url": "https://mobilcv.net/ja/privacy-policy.html"}}
 CONSENT_CSS = """        #cookie-consent { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 2147483000; max-width: 640px; margin: 0 auto;
             background: #fff; color: #1f2937; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,0.25); padding: 14px 16px;
             font: 14px/1.5 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: none; }
