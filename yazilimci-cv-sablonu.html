@@ -114,6 +114,14 @@
             .cta-button { padding: 12px 24px; font-size: 1em; }
             .example-cv-section { padding: 20px; }
         }
+
+        .example-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .example-pair figure { margin: 0; }
+        .example-pair figcaption { text-align: center; font-weight: 700; color: #334155; margin-bottom: 8px; }
+        .example-pair .example-cv-image { width: 100%; height: auto; }
+        @media (max-width: 640px) { .example-pair { grid-template-columns: 1fr; } }
+        .related-grid a.rel-thumb { display: flex; align-items: center; gap: 12px; }
+        .related-grid a.rel-thumb img { width: 44px; height: 62px; object-fit: cover; object-position: top; border: 1px solid #e2e8f0; border-radius: 4px; background: #fff; flex: 0 0 auto; }
     </style>
     <style data-nav-fit>@media (min-width: 769px) { .nav-links { gap: 2px; } .nav-links a { padding: 10px 13px; } .nav-links .nav-cta { padding: 10px 18px; } }</style>
 </head>
@@ -129,20 +137,20 @@
                 <li><a href="cv-rehberi.html">CV Rehberi</a></li>
                 <li><a href="motivasyon-mektubu-nasil-yazilir.html">Motivasyon Mektubu</a></li>
                 <li><a href="iletisim.html">İletişim</a></li>
-                <li><a href="https://www.mobilcv.com/" class="nav-cta">🚀 Hemen Oluştur</a></li>
+                <li><a href="https://www.mobilcv.com/" class="nav-cta">Hemen Oluştur</a></li>
                 <li><a href="https://mobilcv.net/en/software-developer-cv-template.html" class="lang-switch">🇬🇧 English</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="page-content">
-        <span class="category-tag">📂 CV Rehberi - Yazılım ve Teknoloji</span>
+        <span class="category-tag">CV Rehberi - Yazılım ve Teknoloji</span>
         <article>
             <h1>Yazılımcı CV Örneği ve Hazırlama Rehberi</h1>
 
             <div class="top-cta-box">
-                <p>✨ Bu şablonu MobilCV'de düzenle - ücretsiz, üyeliksiz!</p>
-                <a href="https://www.mobilcv.com/" class="top-cta-button">🚀 Bu Şablonu MobilCV'de Düzenle</a>
+                <p>Bu şablonu MobilCV'de düzenle - ücretsiz, üyeliksiz!</p>
+                <a href="https://www.mobilcv.com/" class="top-cta-button">Bu Şablonu MobilCV'de Düzenle</a>
             </div>
 
 <p>Yazılım geliştirme pozisyonlarına başvururken CV'niz, kullandığınız teknolojileri ve somut proje çıktılarınızı net bir şekilde sunmalıdır. Teknoloji şirketleri bu alandaki CV'lerde GitHub profili ve gerçek proje deneyimine özellikle önem verir.</p>
@@ -170,11 +178,14 @@
 <p>Yazılımcı CV'nizde teknoloji yığınınızı ve somut proje çıktılarınızı net bir şekilde sunmak işe alım sürecinde büyük fark yaratır. Aşağıdaki butona tıklayarak ücretsiz CV şablonunu doldurmaya başlayabilirsiniz.</p>
 
             <div class="example-cv-section">
-                <h2>📄 Doldurulmuş Örnek CV</h2>
-                <p class="example-note">Yukarıdaki ipuçlarına göre hazırlanmış, Yazılımcı pozisyonu için doldurulmuş örnek bir CV. Kendi bilgilerinle aynı şekilde doldurabilirsin.</p>
-                <img src="yazilimci-cv-sablonu.png" alt="Yazılımcı için doldurulmuş örnek CV" class="example-cv-image" loading="lazy">
+                <h2>Doldurulmuş Örnek CV</h2>
+                <p class="example-note">Yukarıdaki ipuçlarına göre hazırlanmış, Yazılımcı pozisyonu için doldurulmuş örnek bir CV. Kendi bilgilerinle aynı şekilde doldurabilirsin. Kişi ve şirket bilgileri hayalidir; fotoğraflı örnekteki portre yapay zekâ ile üretilmiştir, gerçek bir kişiye ait değildir. Fotoğraf eklemek isteğe bağlıdır; başvurduğun ülkenin teamülü için <a href="cvde-fotograf-kullanmali-misiniz.html">CV'de fotoğraf rehberine</a> bak.</p>
+                <div class="example-pair">
+                    <figure><figcaption>Fotoğrafsız</figcaption><img src="yazilimci-cv-sablonu.png" alt="Yazılımcı için doldurulmuş örnek CV (fotoğrafsız)" class="example-cv-image" loading="lazy" width="993" height="1404"></figure>
+                    <figure><figcaption>Fotoğraflı</figcaption><img src="yazilimci-cv-sablonu-fotografli.png" alt="Yazılımcı için doldurulmuş örnek CV (fotoğraflı)" class="example-cv-image" loading="lazy" width="993" height="1404"></figure>
+                </div>
                 <div class="example-cv-cta">
-                    <a href="https://www.mobilcv.com/">🚀 Kendi CV'ni Bu Şablonla Oluştur</a>
+                    <a href="https://www.mobilcv.com/">Kendi CV'ni Bu Şablonla Oluştur</a>
                 </div>
             </div>
         </article>
@@ -182,17 +193,17 @@
         <section class="related" data-related>
             <h2>Diğer CV Örnekleri</h2>
             <div class="related-grid">
-                <a href="ogrenci-cv-sablonu.html">📚 Öğrenci (Part-time) CV Örneği</a>
-                <a href="depo-elemani-cv-sablonu.html">📦 Depo Elemanı CV Örneği</a>
-                <a href="barista-cv-sablonu.html">☕ Barista CV Örneği</a>
-                <a href="temizlik-gorevlisi-cv-sablonu.html">🧹 Temizlik Görevlisi CV Örneği</a>
-                <a href="cagri-merkezi-cv-sablonu.html">🎧 Çağrı Merkezi Temsilcisi CV Örneği</a>
-                <a href="makine-muhendisi-cv-sablonu.html">⚙️ Makine Mühendisi CV Örneği</a>
+                <a class="rel-thumb" href="ogrenci-cv-sablonu.html"><img src="ogrenci-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Öğrenci (Part-time) CV Örneği</span></a>
+                <a class="rel-thumb" href="depo-elemani-cv-sablonu.html"><img src="depo-elemani-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Depo Elemanı CV Örneği</span></a>
+                <a class="rel-thumb" href="barista-cv-sablonu.html"><img src="barista-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Barista CV Örneği</span></a>
+                <a class="rel-thumb" href="temizlik-gorevlisi-cv-sablonu.html"><img src="temizlik-gorevlisi-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Temizlik Görevlisi CV Örneği</span></a>
+                <a class="rel-thumb" href="cagri-merkezi-cv-sablonu.html"><img src="cagri-merkezi-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Çağrı Merkezi Temsilcisi CV Örneği</span></a>
+                <a class="rel-thumb" href="makine-muhendisi-cv-sablonu.html"><img src="makine-muhendisi-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Makine Mühendisi CV Örneği</span></a>
             </div>
             <a class="related-all" href="https://mobilcv.net/">→ 60 mesleğin tüm CV örnekleri</a>
         </section>
         <div class="share-box">
-            <p>📤 Bu makaleyi paylaş:</p>
+            <p>Bu makaleyi paylaş:</p>
             <div class="share-buttons">
                 <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mobilcv.net/yazilimci-cv-sablonu.html" target="_blank" class="share-btn share-linkedin">LinkedIn</a>
                 <a href="https://twitter.com/intent/tweet?url=https://mobilcv.net/yazilimci-cv-sablonu.html&text=Yazılımcı CV Örneği ve Hazırlama Rehberi" target="_blank" class="share-btn share-twitter">X (Twitter)</a>
@@ -201,8 +212,8 @@
         </div>
 
         <div class="cta-box">
-            <p>✨ CV'ni hemen oluştur!</p>
-            <a href="https://www.mobilcv.com/" class="cta-button">🚀 MobilCV ile CV Oluştur</a>
+            <p>CV'ni hemen oluştur!</p>
+            <a href="https://www.mobilcv.com/" class="cta-button">MobilCV ile CV Oluştur</a>
         </div>
     </div>
 

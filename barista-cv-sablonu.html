@@ -131,6 +131,14 @@
         .related-grid a { display: block; padding: 14px 16px; border: 1px solid #e2e8f0; border-radius: 12px; text-decoration: none; color: #0f172a; font-weight: 600; background: #f8fafc; }
         .related-grid a:hover { border-color: #2563eb; color: #2563eb; }
         .related-all { display: inline-block; margin-top: 14px; color: #2563eb; font-weight: 700; text-decoration: none; }
+
+        .example-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .example-pair figure { margin: 0; }
+        .example-pair figcaption { text-align: center; font-weight: 700; color: #334155; margin-bottom: 8px; }
+        .example-pair .example-cv-image { width: 100%; height: auto; }
+        @media (max-width: 640px) { .example-pair { grid-template-columns: 1fr; } }
+        .related-grid a.rel-thumb { display: flex; align-items: center; gap: 12px; }
+        .related-grid a.rel-thumb img { width: 44px; height: 62px; object-fit: cover; object-position: top; border: 1px solid #e2e8f0; border-radius: 4px; background: #fff; flex: 0 0 auto; }
     </style>
     <style data-nav-fit>@media (min-width: 769px) { .nav-links { gap: 2px; } .nav-links a { padding: 10px 13px; } .nav-links .nav-cta { padding: 10px 18px; } }</style>
 </head>
@@ -146,18 +154,18 @@
                 <li><a href="cv-rehberi.html">CV Rehberi</a></li>
                 <li><a href="motivasyon-mektubu-nasil-yazilir.html">Motivasyon Mektubu</a></li>
                 <li><a href="iletisim.html">İletişim</a></li>
-                <li><a href="https://www.mobilcv.com/" class="nav-cta">🚀 Hemen Oluştur</a></li>
+                <li><a href="https://www.mobilcv.com/" class="nav-cta">Hemen Oluştur</a></li>
                 <li><a href="https://mobilcv.net/en/barista-cv-template.html" class="lang-switch">🇬🇧 English</a></li>
             </ul>
         </nav>
     </header>
     <div class="page-content">
-        <span class="category-tag">📂 Hizmet - Kafe</span>
+        <span class="category-tag">Hizmet - Kafe</span>
         <article>
             <h1>Barista CV Örneği ve Hazırlama Rehberi</h1>
             <div class="top-cta-box">
-                <p>✨ Bu örneği MobilCV'de kendi bilgilerinle doldur: ücretsiz, üyeliksiz, telefondan.</p>
-                <a href="https://www.mobilcv.com/" class="top-cta-button">🚀 Barista CV'mi Oluştur</a>
+                <p>Bu örneği MobilCV'de kendi bilgilerinle doldur: ücretsiz, üyeliksiz, telefondan.</p>
+                <a href="https://www.mobilcv.com/" class="top-cta-button">Barista CV'mi Oluştur</a>
             </div>
             <p>Kahve zincirleri ve butik kafeler barista adaylarında kahve bilgisinin yanında hız, temizlik ve güler yüz arar. Barista CV'nizde bu becerileri somut örneklerle göstermelisiniz.</p>
             <h2>Kahve bilginizi somutlaştırın</h2>
@@ -174,28 +182,31 @@
             <h2>CV'nizde Öne Çıkarabileceğiniz Beceriler</h2>
             <div class="skill-tags"><span>Espresso hazırlama</span><span>Süt köpürtme</span><span>Latte art</span><span>Filtre kahve (V60, Chemex)</span><span>Kasa işlemleri</span><span>Hijyen</span></div>
             <div class="example-cv-section">
-                <h2>📄 Doldurulmuş Barista CV Örneği</h2>
-                <p class="example-note">Bu örnek, MobilCV ile hazırlanmış gerçek bir PDF çıktısıdır. Kişi ve şirket bilgileri tamamen hayalidir; kendi bilgilerinle aynı şekilde doldurabilirsin.</p>
-                <img src="barista-cv-sablonu.png" alt="Barista için doldurulmuş örnek CV" class="example-cv-image" loading="lazy" width="993" height="1404">
+                <h2>Doldurulmuş Barista CV Örneği</h2>
+                <p class="example-note">Bu örnek, MobilCV ile hazırlanmış gerçek bir PDF çıktısıdır. Kişi ve şirket bilgileri tamamen hayalidir; fotoğraflı örnekteki portre yapay zekâ ile üretilmiştir, gerçek bir kişiye ait değildir. Fotoğraf eklemek isteğe bağlıdır; başvurduğun ülkenin teamülü için <a href="cvde-fotograf-kullanmali-misiniz.html">CV'de fotoğraf rehberine</a> bak.</p>
+                <div class="example-pair">
+                    <figure><figcaption>Fotoğrafsız</figcaption><img src="barista-cv-sablonu.png" alt="Barista için doldurulmuş örnek CV (fotoğrafsız)" class="example-cv-image" loading="lazy" width="993" height="1404"></figure>
+                    <figure><figcaption>Fotoğraflı</figcaption><img src="barista-cv-sablonu-fotografli.png" alt="Barista için doldurulmuş örnek CV (fotoğraflı)" class="example-cv-image" loading="lazy" width="993" height="1404"></figure>
+                </div>
                 <div class="example-cv-cta">
-                    <a href="https://www.mobilcv.com/">🚀 Kendi CV'ni Bu Örnekteki Gibi Oluştur</a>
+                    <a href="https://www.mobilcv.com/">Kendi CV'ni Bu Örnekteki Gibi Oluştur</a>
                 </div>
             </div>
         </article>
         <section class="related" data-related>
             <h2>Diğer CV Örnekleri</h2>
             <div class="related-grid">
-                <a href="depo-elemani-cv-sablonu.html">📦 Depo Elemanı CV Örneği</a>
-                <a href="yazilimci-cv-sablonu.html">💻 Yazılımcı CV Örneği</a>
-                <a href="temizlik-gorevlisi-cv-sablonu.html">🧹 Temizlik Görevlisi CV Örneği</a>
-                <a href="cagri-merkezi-cv-sablonu.html">🎧 Çağrı Merkezi Temsilcisi CV Örneği</a>
-                <a href="makine-muhendisi-cv-sablonu.html">⚙️ Makine Mühendisi CV Örneği</a>
-                <a href="insan-kaynaklari-uzmani-cv-sablonu.html">🤝 İnsan Kaynakları Uzmanı CV Örneği</a>
+                <a class="rel-thumb" href="depo-elemani-cv-sablonu.html"><img src="depo-elemani-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Depo Elemanı CV Örneği</span></a>
+                <a class="rel-thumb" href="yazilimci-cv-sablonu.html"><img src="yazilimci-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Yazılımcı CV Örneği</span></a>
+                <a class="rel-thumb" href="temizlik-gorevlisi-cv-sablonu.html"><img src="temizlik-gorevlisi-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Temizlik Görevlisi CV Örneği</span></a>
+                <a class="rel-thumb" href="cagri-merkezi-cv-sablonu.html"><img src="cagri-merkezi-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Çağrı Merkezi Temsilcisi CV Örneği</span></a>
+                <a class="rel-thumb" href="makine-muhendisi-cv-sablonu.html"><img src="makine-muhendisi-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>Makine Mühendisi CV Örneği</span></a>
+                <a class="rel-thumb" href="insan-kaynaklari-uzmani-cv-sablonu.html"><img src="insan-kaynaklari-uzmani-cv-kucuk.png" alt="" width="44" height="62" loading="lazy"><span>İnsan Kaynakları Uzmanı CV Örneği</span></a>
             </div>
             <a class="related-all" href="https://mobilcv.net/">→ 60 mesleğin tüm CV örnekleri</a>
         </section>
         <div class="share-box">
-            <p>📤 Bu rehberi paylaş:</p>
+            <p>Bu rehberi paylaş:</p>
             <div class="share-buttons">
                 <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mobilcv.net/barista-cv-sablonu.html" target="_blank" rel="noopener" class="share-btn share-linkedin">LinkedIn</a>
                 <a href="https://twitter.com/intent/tweet?url=https://mobilcv.net/barista-cv-sablonu.html&amp;text=Barista CV Örneği ve Hazırlama Rehberi" target="_blank" rel="noopener" class="share-btn share-twitter">X (Twitter)</a>
@@ -203,8 +214,8 @@
             </div>
         </div>
         <div class="cta-box">
-            <p>✨ CV'ni hemen oluştur!</p>
-            <a href="https://www.mobilcv.com/" class="cta-button">🚀 MobilCV ile CV Oluştur</a>
+            <p>CV'ni hemen oluştur!</p>
+            <a href="https://www.mobilcv.com/" class="cta-button">MobilCV ile CV Oluştur</a>
         </div>
     </div>
     <footer class="footer">
