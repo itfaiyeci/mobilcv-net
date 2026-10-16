@@ -126,6 +126,31 @@
         .example-card .icon-thumb { display: block; width: 64px; height: 90px; object-fit: cover; object-position: top; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff; margin-bottom: 10px; }
     </style>
     <style data-nav-fit>@media (min-width: 769px) { .nav-links { gap: 2px; } .nav-links a { padding: 10px 13px; } .nav-links .nav-cta { padding: 10px 18px; } }</style>
+
+<style data-tasarim-v1>
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;text-align:left;padding:48px 48px 40px;background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+.hero h1{margin-bottom:14px}.hero p{margin:0;max-width:none}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.hero-cta a{display:inline-block;padding:13px 24px;border-radius:40px;font-weight:700;text-decoration:none}
+.hero-cta .p{background:#fff;color:#1e3a8a}.hero-cta .s{color:#fff;border:1px solid rgba(255,255,255,.6)}
+.hero-note{margin-top:14px !important;font-size:.92em !important;opacity:.8}
+.hero-visual{position:relative;height:300px}
+.hero-visual img{position:absolute;width:190px;height:auto;border-radius:6px;box-shadow:0 18px 40px rgba(15,23,42,.35);background:#fff}
+.hero-visual img.a{left:8%;top:18px;transform:rotate(-6deg)}.hero-visual img.b{right:8%;top:0;transform:rotate(5deg)}
+.example-card{display:grid;grid-template-columns:56px 1fr;column-gap:14px;align-items:start}
+.example-card .icon-thumb{grid-row:1 / span 2;width:56px;height:79px;margin:0}
+.example-card .title{margin-bottom:4px}
+@media (max-width:900px){.hero{grid-template-columns:1fr;text-align:center;padding:36px 24px}.hero-cta{justify-content:center}.hero-visual{height:200px;max-width:360px;margin:0 auto;width:100%}.hero-visual img{width:130px}}
+@media (max-width:640px){
+ .site-header{gap:10px;padding:14px 12px}
+ .site-header nav{width:100%}
+ .nav-links{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+ .nav-links::-webkit-scrollbar{display:none}
+ .nav-links li{flex:0 0 auto}.nav-links a{white-space:nowrap}
+ .hero-visual{height:170px}.hero-visual img{width:110px}
+ .example-card{padding:14px 16px}
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -139,17 +164,21 @@
                 <li><a href="cv-rehberi.html">CV Rehberi</a></li>
                 <li><a href="motivasyon-mektubu-nasil-yazilir.html">Motivasyon Mektubu</a></li>
                 <li><a href="iletisim.html">İletişim</a></li>
-                <li><a href="https://www.mobilcv.com/" class="nav-cta">🚀 Hemen Oluştur</a></li>
+                <li><a href="https://www.mobilcv.com/" class="nav-cta">Hemen Oluştur</a></li>
             </ul>
         </nav>
     </header>
     <section class="hero">
-        <h1>📁 CV Örnekleri</h1>
+        <div class="hero-text"><h1>CV Örnekleri</h1>
         <p>60 meslek için doldurulmuş, ücretsiz CV örnekleri ve hazırlama rehberleri. Mesleğini seç, örneği incele, kendi CV'ni MobilCV'de telefondan oluştur.</p>
+            <div class="hero-cta"><a class="p" href="https://www.mobilcv.com/">Ücretsiz CV Oluştur</a><a class="s" href="#job-list">Örneklere göz at</a></div>
+            <p class="hero-note">Hesap gerekmez · PDF ücretsiz · CV bilgilerin sunucumuza gönderilmez</p>
+        </div>
+        <div class="hero-visual" aria-hidden="true"><img class="a" src="garson-cv-sablonu.png" alt="" width="190" height="269"><img class="b" src="garson-cv-sablonu-fotografli.png" alt="" width="190" height="269"></div>
     </section>
     <section class="examples-section">
         <h2>Mesleğe Göre CV Örnekleri</h2>
-        <p class="subtitle">En çok aranan meslekler en başta. Aradığın mesleği aşağıdaki kutuya yazabilirsin.</p>
+        <p class="subtitle">Aradığın mesleği aşağıdaki kutuya yazarak bulabilirsin.</p>
         <input type="search" id="meslek-ara" class="search-box" placeholder="Meslek ara: garson, mühendis, öğretmen..." aria-label="Meslek ara">
         <div class="example-grid" id="meslek-listesi">
             <a href="ogretmen-cv-sablonu.html" class="example-card" data-name="öğretmen">
@@ -456,7 +485,7 @@
         <p class="search-empty" id="arama-yok">Bu meslek henüz listede yok. Genel bir CV için <a href="yeni-mezun-cv-sablonu.html">Yeni Mezun</a> ya da <a href="ogrenci-cv-sablonu.html">Öğrenci</a> örneğine bakabilirsin.</p>
     </section>
     <section class="blog-posts" id="blog-yazilari">
-        <h2>📝 Blog Yazıları</h2>
+        <h2>Blog Yazıları</h2>
         <ul class="post-list" id="postList">
             <!-- BLOG_POSTS -->
 <li>
@@ -554,7 +583,7 @@
     <section class="org-callout" data-org-callout style="margin:30px 20px 0;padding:20px 22px;border:1px dashed #2563eb;border-radius:16px;background:#eff6ff;"><b>🏢 Kurum musunuz?</b> İş bulma merkezi, dernek, belediye ya da okulsanız danışanlarınız MobilCV'yi ücretsiz kullanabilir. <a href="kurumlar-icin.html">QR afişi indirin ve sitenize link ekleyin →</a></section>
     <div class="cta-box">
         <p>✨ Mesleğine uygun CV'ni hemen oluştur!</p>
-        <a href="https://www.mobilcv.com/" class="cta-button">🚀 MobilCV ile CV Oluştur</a>
+        <a href="https://www.mobilcv.com/" class="cta-button">MobilCV ile CV Oluştur</a>
     </div>
     <footer class="footer">
         <p>&copy; 2026 MobilCV &mdash; <a href="https://www.mobilcv.com/">mobilcv.com</a></p>

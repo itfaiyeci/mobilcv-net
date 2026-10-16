@@ -175,6 +175,8 @@ import json as _json
 json = _json
 _K = Path(__file__).parent / "metinler"
 TEXT["ja"] = [tuple(x) for x in _json.loads((_K / "privacy_ja.json").read_text(encoding="utf-8"))]
+MOBIL_MENU = '<style data-mobil-menu>@media (max-width:640px){.site-header nav{width:100%}.nav-links{flex-wrap:nowrap !important;overflow-x:auto;justify-content:flex-start !important;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}.nav-links::-webkit-scrollbar{display:none}.nav-links li{flex:0 0 auto}.nav-links a{white-space:nowrap}}</style>'
+
 KURUMSAL = {c: _json.loads((_K / "kurumsal" / f"{c}.json").read_text(encoding="utf-8")) for c in LANGS}
 for _c in LANGS:  # Tavsiye kutusu notu: "ucuncu taraf hizmetler" bolumune
     _h, _b = TEXT[_c][3]
@@ -335,6 +337,7 @@ def build_legal(code, kind):
     <style>{CSS}
         .lead {{ font-size: 1.1em; color: #1e293b; margin-bottom: 8px; }}
     </style>
+    {MOBIL_MENU}
 </head>
 <body>
 <div class="container">
@@ -404,6 +407,7 @@ def build_page(code):
     <link rel="alternate" hreflang="x-default" href="{LANGS['en']['url']}">
     <style>{CSS}
     </style>
+    {MOBIL_MENU}
 </head>
 <body>
 <div class="container">
