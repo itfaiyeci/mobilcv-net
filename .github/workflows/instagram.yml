@@ -1,0 +1,39 @@
+name: Instagram paylasim
+on:
+  workflow_dispatch:
+    inputs:
+      islem:
+        description: "kontrol (paylasim yok) ya da paylas"
+        required: true
+        default: kontrol
+        type: choice
+        options: [kontrol, paylas]
+  push:
+    branches: [main]
+    paths: ["sosyal/kuyruk.json"]
+permissions:
+  contents: write
+concurrency:
+  group: instagram
+  cancel-in-progress: false
+jobs:
+  calis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Calistir
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: |
+          ISLEM="${{ github.event.inputs.islem }}"
+          if [ -z "$ISLEM" ]; then ISLEM=paylas; fi
+          python3 scripts/ig_paylas.py "$ISLEM"
+      - name: Kuyrugu kaydet
+        if: github.event.inputs.islem != 'kontrol'
+        run: |
+          if ! git diff --quiet sosyal/kuyruk.json; then
+            git config user.name itfaiyeci
+            git config user.email 53007622+itfaiyeci@users.noreply.github.com
+            git commit -m "Instagram: paylasilan gonderiler kayda gecti [skip ci]" sosyal/kuyruk.json
+            git push
+          fi
