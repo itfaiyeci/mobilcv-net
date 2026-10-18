@@ -45,10 +45,13 @@ jobs:
           if [ -z "$ISLEM" ]; then ISLEM=paylas; fi
           python3 scripts/th_paylas.py "$ISLEM"
       - name: Facebook sayfa
-        if: always() && github.event.inputs.islem != 'kontrol'
+        if: always()
         env:
           FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
-        run: python3 scripts/fb_paylas.py paylas
+        run: |
+          ISLEM="${{ github.event.inputs.islem }}"
+          if [ -z "$ISLEM" ]; then ISLEM=paylas; fi
+          python3 scripts/fb_paylas.py "$ISLEM"
       - name: Kuyrugu kaydet
         if: always() && github.event.inputs.islem != 'kontrol'
         run: |

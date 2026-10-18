@@ -36,6 +36,15 @@ def sayfa():
 def kontrol():
     me = sayfa()
     print(f"Facebook sayfa anahtarı çalışıyor. Sayfa: {me['name']} | id: {me['id']}")
+    # Anahtarın süresi: 0 = süresiz. 7 günden kısa kaldıysa hata ver (kısa süreli anahtar kaydedilmiş olabilir).
+    try:
+        d = istek("debug_token", {"input_token": TOKEN}).get("data", {})
+    except SystemExit as e:
+        print(f"Süre bilgisi okunamadı: {e}"); return
+    bitis = int(d.get("expires_at") or 0)
+    if bitis and bitis - time.time() < 7 * 86400:
+        raise SystemExit(f"Anahtar kısa süreli görünüyor (bitiş: {datetime.fromtimestamp(bitis, timezone.utc):%Y-%m-%d %H:%M} UTC). Uzun süreli anahtarla yenileyin.")
+    print("Süre: " + ("süresiz" if not bitis else f"{datetime.fromtimestamp(bitis, timezone.utc):%Y-%m-%d}"))
 
 def paylas():
     me = sayfa(); pid = me["id"]
