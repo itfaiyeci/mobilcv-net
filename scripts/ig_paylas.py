@@ -39,7 +39,7 @@ def kontrol():
 def paylas():
     me = hesap(); uid = me["user_id"]
     kuyruk = json.loads(KUYRUK.read_text(encoding="utf-8")) if KUYRUK.exists() else []
-    bekleyen = [g for g in kuyruk if g.get("onay") is True and not g.get("paylasildi")]
+    bekleyen = [g for g in kuyruk if g.get("onay") is True and "instagram" in g.get("platformlar", ["instagram"]) and not g.get("paylasildi")]
     if not bekleyen:
         print("Onayli ve paylasilmamis gonderi yok."); return
     for g in bekleyen[:2]:  # bir calismada en fazla 2 gonderi

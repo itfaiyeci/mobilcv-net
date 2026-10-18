@@ -1,4 +1,4 @@
-name: Instagram paylasim
+name: Instagram ve Threads paylasim
 on:
   workflow_dispatch:
     inputs:
@@ -28,12 +28,20 @@ jobs:
           ISLEM="${{ github.event.inputs.islem }}"
           if [ -z "$ISLEM" ]; then ISLEM=paylas; fi
           python3 scripts/ig_paylas.py "$ISLEM"
+      - name: Threads
+        if: always()
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+        run: |
+          ISLEM="${{ github.event.inputs.islem }}"
+          if [ -z "$ISLEM" ]; then ISLEM=paylas; fi
+          python3 scripts/th_paylas.py "$ISLEM"
       - name: Kuyrugu kaydet
-        if: github.event.inputs.islem != 'kontrol'
+        if: always() && github.event.inputs.islem != 'kontrol'
         run: |
           if ! git diff --quiet sosyal/kuyruk.json; then
             git config user.name itfaiyeci
             git config user.email 53007622+itfaiyeci@users.noreply.github.com
-            git commit -m "Instagram: paylasilan gonderiler kayda gecti [skip ci]" sosyal/kuyruk.json
+            git commit -m "Sosyal: paylasilan gonderiler kayda gecti [skip ci]" sosyal/kuyruk.json
             git push
           fi
