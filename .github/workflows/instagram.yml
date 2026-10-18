@@ -28,6 +28,14 @@ jobs:
           ISLEM="${{ github.event.inputs.islem }}"
           if [ -z "$ISLEM" ]; then ISLEM=paylas; fi
           python3 scripts/ig_paylas.py "$ISLEM"
+      - name: Instagram EN
+        if: always()
+        env:
+          IG_TOKEN_EN: ${{ secrets.IG_TOKEN_EN }}
+        run: |
+          ISLEM="${{ github.event.inputs.islem }}"
+          if [ -z "$ISLEM" ]; then ISLEM=paylas; fi
+          python3 scripts/ig_paylas.py "$ISLEM" en
       - name: Threads
         if: always()
         env:
