@@ -64,6 +64,8 @@ def paylas():
     KUYRUK.write_text(json.dumps(kuyruk, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 if __name__ == "__main__":
+    islem = sys.argv[1] if len(sys.argv) > 1 else "kontrol"
     if not TOKEN:
+        if islem == "kontrol": raise SystemExit("THREADS_TOKEN tanimli degil.")  # kontrolde eksik anahtar hata sayilir
         print("THREADS_TOKEN tanimli degil; Threads adimi atlandi."); sys.exit(0)
-    {"kontrol": kontrol, "paylas": paylas}[sys.argv[1] if len(sys.argv) > 1 else "kontrol"]()
+    {"kontrol": kontrol, "paylas": paylas}[islem]()
