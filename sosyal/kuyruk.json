@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "id": "2026-10-tanitim",
+    "gorsel_url": "https://mobilcv.net/sosyal/tanitim-tr.jpg",
+    "gorsel_url_en": "https://mobilcv.net/sosyal/tanitim-en.jpg",
+    "aciklama": "Telefondan CV hazırla, PDF olarak indir. 📄\n\n✔️ Üyelik yok, e-posta ya da şifre istemez\n✔️ Ücret ve filigran yok\n✔️ 11 dil, 4 şablon\n✔️ CV bilgilerin kendi cihazında kalır\n\nUygulama indirmene gerek yok: tarayıcıdan mobilcv.com adresine gir, doldur, indir.\n\n#cv #özgeçmiş #cvhazırlama #işarıyorum #kariyer #iş",
+    "aciklama_en": "Build your CV on your phone and download it as a PDF. 📄\n\n✔️ No sign-up, no email or password\n✔️ No fees, no watermark\n✔️ 11 languages, 4 templates\n✔️ Your CV details stay on your own device\n\nNo app to install: open mobilcv.com in your browser, fill it in, download.\n\n#cv #resume #jobsearch #career #resumetips",
+    "aciklama_threads": "Telefondan CV hazırlayıp PDF olarak indirebileceğin ücretsiz bir araç yaptık: mobilcv.com\n\nÜyelik yok, filigran yok, ödeme ekranı yok. 11 dil, 4 şablon. CV bilgilerin kendi cihazında kalıyor.\n\nDeneyip ne eksik olduğunu yazarsan sevinirim.",
+    "platformlar": [
+      "instagram",
+      "instagram_en",
+      "threads",
+      "facebook"
+    ],
+    "onay": true
+  },
+  {
+    "id": "2026-10-xyz",
+    "gorsel_url": "https://mobilcv.net/sosyal/xyz-tr.jpg",
+    "gorsel_url_en": "https://mobilcv.net/sosyal/xyz-en.jpg",
+    "aciklama": "CV'de en sık yapılan hata: ne iş yaptığını yazıp ne başardığını yazmamak.\n\nGoogle'ın önerdiği XYZ formülü:\nX'i başardım, Y ile ölçülür, Z'yi yaparak.\n\n❌ Paket dağıttım.\n✅ Rotamı mahalle sırasına göre planlayarak günde ortalama 60 teslimatı zamanında tamamladım.\n\nHer meslekten örnekler: mobilcv.net'teki XYZ formülü rehberi.\n\n#cv #özgeçmiş #cvipuçları #kariyer #mülakat",
+    "aciklama_en": "The most common CV mistake: listing what you did instead of what you achieved.\n\nThe XYZ formula Google recommends:\nAccomplished X, as measured by Y, by doing Z.\n\n❌ Delivered packages.\n✅ Completed an average of 60 on-time deliveries a day by planning my route street by street.\n\n#cv #resume #resumetips #career #jobsearch",
+    "aciklama_threads": "CV'de görevini değil sonucunu yaz.\n\n❌ Paket dağıttım.\n✅ Rotamı mahalle sırasına göre planlayarak günde ortalama 60 teslimatı zamanında tamamladım.\n\nFormül: X'i başardım, Y ile ölçülür, Z'yi yaparak. Senin mesleğin için bir örnek ister misin? Yaz.",
+    "platformlar": [
+      "instagram",
+      "instagram_en",
+      "threads",
+      "facebook"
+    ],
+    "onay": false
+  },
+  {
+    "id": "2026-10-rakam",
+    "gorsel_url": "https://mobilcv.net/sosyal/rakam-tr.jpg",
+    "gorsel_url_en": "https://mobilcv.net/sosyal/rakam-en.jpg",
+    "aciklama": "Her işin sayısı olmaz. Sayı uydurmak ise CV'yi zayıflatmanın en hızlı yolu.\n\nRakam yerine şunları yazabilirsin:\n1️⃣ Sıklık ya da ölçek: \"Günde 40 kişilik öğle servisi\"\n2️⃣ Verilen sorumluluk: \"Yeni çalışanların eğitimiyle görevlendirildim\"\n3️⃣ Somut sonuç: \"Şef yöntemimi tüm vardiyalara uyguladı\"\n\nUydurma bir sayı, mülakatta ilk sorulan şey olur.\n\n#cv #özgeçmiş #cvipuçları #mülakat #kariyer",
+    "aciklama_en": "Not every job comes with numbers, and making them up is the fastest way to weaken a CV.\n\nInstead of a number, write:\n1️⃣ Frequency or scale: \"Lunch service for 40 people a day\"\n2️⃣ Responsibility given: \"Assigned to train new staff\"\n3️⃣ A concrete result: \"The chef adopted my method for every shift\"\n\nA made-up number is the first thing an interviewer asks about.\n\n#cv #resume #resumetips #interview #career",
+    "aciklama_threads": "CV'de rakamın yoksa uydurma. Mülakatta ilk o sorulur.\n\nYerine: sıklık (\"günde 40 kişilik servis\"), verilen sorumluluk (\"yeni çalışanların eğitimiyle görevlendirildim\") ya da somut sonuç (\"şef yöntemimi tüm vardiyalara uyguladı\").",
+    "platformlar": [
+      "instagram",
+      "instagram_en",
+      "threads",
+      "facebook"
+    ],
+    "onay": false
+  }
+]
