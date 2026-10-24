@@ -4,16 +4,26 @@ Kullanim:
   python3 scripts/th_paylas.py kontrol   -> anahtar ve hesap kontrolu (paylasim YOK)
   python3 scripts/th_paylas.py paylas    -> sosyal/kuyruk.json'da onay=true, platformlarda "threads" olan
                                             ve th_paylasildi bos olanlari paylasir
-Anahtar: THREADS_TOKEN ortam degiskeni (GitHub Secrets). Tanimli degilse sessizce atlar (hata vermez).
-Metin: kayitta "aciklama_threads" varsa o, yoksa "aciklama" kullanilir (Threads siniri 500 karakter)."""
+  python3 scripts/th_paylas.py kontrol en / paylas en
+                                         -> Ingilizce hesap @mobilcv.en (THREADS_TOKEN_EN, platform "threads_en",
+                                            metin "aciklama_threads_en", gorsel "gorsel_url_en", alanlar th_en_*)
+Anahtar: THREADS_TOKEN (TR) / THREADS_TOKEN_EN (EN) ortam degiskeni (GitHub Secrets). Tanimli degilse paylasimda sessizce atlar.
+Metin: TR'de "aciklama_threads" yoksa "aciklama"; EN'de "aciklama_threads_en" zorunlu (Threads siniri 500 karakter)."""
 import json, os, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
 API = "https://graph.threads.net/v1.0"
-BEKLENEN_KULLANICI = "mobilcvcom"
+DIL = sys.argv[2] if len(sys.argv) > 2 else "tr"
+if DIL not in ("tr", "en"):
+    raise SystemExit("Dil 'tr' ya da 'en' olmali.")
+EN = DIL == "en"
+BEKLENEN_KULLANICI = "mobilcv.en" if EN else "mobilcvcom"
 KUYRUK = Path("sosyal/kuyruk.json")
-TOKEN = os.environ.get("THREADS_TOKEN", "").strip()
+ANAHTAR_ADI = "THREADS_TOKEN_EN" if EN else "THREADS_TOKEN"
+TOKEN = os.environ.get(ANAHTAR_ADI, "").strip()
+PLATFORM = "threads_en" if EN else "threads"
+ALAN = "th_en_" if EN else "th_"
 
 def istek(yol, veri=None, yontem="GET"):
     params = dict(veri or {}); params["access_token"] = TOKEN
@@ -36,19 +46,26 @@ def hesap():
 
 def kontrol():
     me = hesap()
-    print(f"Threads anahtari calisiyor. Hesap: @{me['username']} | id: {me.get('id')}")
+    print(f"Threads ({DIL}) anahtari calisiyor. Hesap: @{me['username']} | id: {me.get('id')}")
 
 def paylas():
     me = hesap(); uid = me["id"]
     kuyruk = json.loads(KUYRUK.read_text(encoding="utf-8")) if KUYRUK.exists() else []
-    bekleyen = [g for g in kuyruk if g.get("onay") is True and "threads" in g.get("platformlar", ["instagram"]) and not g.get("th_paylasildi")]
+    bekleyen = [g for g in kuyruk if g.get("onay") is True and PLATFORM in g.get("platformlar", ["instagram"]) and not g.get(ALAN + "paylasildi")]
     if not bekleyen:
-        print("Threads icin onayli ve paylasilmamis gonderi yok."); return
+        print(f"Threads ({DIL}) icin onayli ve paylasilmamis gonderi yok."); return
     for g in bekleyen[:2]:  # bir calismada en fazla 2 gonderi
-        metin = (g.get("aciklama_threads") or g.get("aciklama") or "").strip()
+        if EN:
+            metin = (g.get("aciklama_threads_en") or "").strip()
+            if not metin:
+                raise SystemExit(f"EN Threads metni yok ({g['id']}): aciklama_threads_en gerekli. Durduruldu.")
+            gorsel = g.get("gorsel_url_en") or g.get("gorsel_url")
+        else:
+            metin = (g.get("aciklama_threads") or g.get("aciklama") or "").strip()
+            gorsel = g.get("gorsel_url")
         if len(metin) > 500:
             raise SystemExit(f"Threads metni 500 karakteri asiyor ({g['id']}: {len(metin)}). Durduruldu.")
-        veri = {"media_type": "IMAGE", "image_url": g["gorsel_url"], "text": metin} if g.get("gorsel_url") else {"media_type": "TEXT", "text": metin}
+        veri = {"media_type": "IMAGE", "image_url": gorsel, "text": metin} if gorsel else {"media_type": "TEXT", "text": metin}
         cid = istek(f"{uid}/threads", veri, "POST")["id"]
         for _ in range(24):
             time.sleep(5)
@@ -58,14 +75,14 @@ def paylas():
                 raise SystemExit(f"Threads gorseli islenemedi ({g['id']}): {durum}")
         mid = istek(f"{uid}/threads_publish", {"creation_id": cid}, "POST")["id"]
         link = istek(mid, {"fields": "permalink"}).get("permalink", "")
-        g["th_paylasildi"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"); g["th_medya_id"] = mid; g["th_baglanti"] = link
-        print(f"Threads'te paylasildi: {g['id']} -> {link}")
+        g[ALAN + "paylasildi"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"); g[ALAN + "medya_id"] = mid; g[ALAN + "baglanti"] = link
+        print(f"Threads ({DIL}) paylasildi: {g['id']} -> {link}")
         time.sleep(10)
     KUYRUK.write_text(json.dumps(kuyruk, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 if __name__ == "__main__":
     islem = sys.argv[1] if len(sys.argv) > 1 else "kontrol"
     if not TOKEN:
-        if islem == "kontrol": raise SystemExit("THREADS_TOKEN tanimli degil.")  # kontrolde eksik anahtar hata sayilir
-        print("THREADS_TOKEN tanimli degil; Threads adimi atlandi."); sys.exit(0)
+        if islem == "kontrol": raise SystemExit(f"{ANAHTAR_ADI} tanimli degil.")  # kontrolde eksik anahtar hata sayilir
+        print(f"{ANAHTAR_ADI} tanimli degil; Threads ({DIL}) adimi atlandi."); sys.exit(0)
     {"kontrol": kontrol, "paylas": paylas}[islem]()

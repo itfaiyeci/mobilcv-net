@@ -44,6 +44,15 @@ jobs:
           ISLEM="${{ github.event.inputs.islem }}"
           if [ -z "$ISLEM" ]; then ISLEM=paylas; fi
           python3 scripts/th_paylas.py "$ISLEM"
+      - name: Threads EN
+        if: always()
+        env:
+          THREADS_TOKEN_EN: ${{ secrets.THREADS_TOKEN_EN }}
+        run: |
+          ISLEM="${{ github.event.inputs.islem }}"
+          if [ -z "$ISLEM" ]; then ISLEM=paylas; fi
+          if [ "$ISLEM" = "kontrol" ] && [ -z "$THREADS_TOKEN_EN" ]; then echo "THREADS_TOKEN_EN henuz eklenmedi; EN Threads kontrolu atlandi."; exit 0; fi
+          python3 scripts/th_paylas.py "$ISLEM" en
       - name: Facebook sayfa
         if: always()
         env:
