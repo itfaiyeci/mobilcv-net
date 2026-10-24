@@ -139,23 +139,23 @@ EK["it"] = mk(
  "Non vendiamo dati personali e non li condividiamo a fini pubblicitari (nessuna «vendita» o «condivisione» ai sensi del CCPA/CPRA della California).")
 
 EK["pt"] = mk(
- " Também informa erros técnicos da página (tipo de erro e uma mensagem curta); endereços de e-mail e números longos são removidos da mensagem e nenhum conteúdo do currículo é incluído.",
- "<b>Bibliotecas de código e imagens de bandeiras:</b> carregadas do próprio servidor do mobilcv.com; nenhum servidor de terceiros é contatado para isso.",
- "Bases legais e forma de coleta",
- "<b>Google Analytics:</b> somente com o seu consentimento. Os dados são coletados automaticamente por cookies depois que você escolhe «Aceitar» no aviso. Você pode retirar o consentimento a qualquer momento pelo link «Configurações de cookies» no rodapé; a retirada não afeta o tratamento feito antes.",
- "<b>Formulários de contato e feedback:</b> quando você envia um formulário, sua mensagem é tratada para que possamos responder, com base no nosso legítimo interesse em atender ao seu pedido.",
- "<b>Registros de acesso da hospedagem:</b> mantidos automaticamente pelo provedor de hospedagem para o funcionamento seguro dos sites; com base no legítimo interesse.",
- "<b>Sua escolha sobre cookies:</b> guardada apenas no seu navegador (chave: <code>mobilcv_consent</code>) para respeitar sua decisão; não é enviada para nós.",
+ " Também comunica erros técnicos da página (tipo de erro e uma mensagem curta); os endereços de e-mail e os números longos são removidos da mensagem e não é incluído qualquer conteúdo do currículo.",
+ "<b>Bibliotecas de código e imagens de bandeiras:</b> carregadas a partir do próprio servidor do mobilcv.com; não é contactado qualquer servidor de terceiros para esse efeito.",
+ "Fundamentos jurídicos e forma de recolha",
+ "<b>Google Analytics:</b> apenas com o seu consentimento. Os dados são recolhidos automaticamente através de cookies depois de escolher «Aceitar» no aviso. Pode retirar o consentimento a qualquer momento através da ligação «Definições de cookies» no rodapé; a retirada não afeta o tratamento efetuado anteriormente.",
+ "<b>Formulários de contacto e de comentários:</b> quando envia um formulário, a sua mensagem é tratada para que possamos responder, com base no nosso interesse legítimo em dar resposta ao seu pedido.",
+ "<b>Registos de acesso do alojamento:</b> mantidos automaticamente pelo fornecedor de alojamento para o funcionamento seguro dos sites; com base no interesse legítimo.",
+ "<b>A sua escolha sobre cookies:</b> guardada apenas no seu navegador (chave: <code>mobilcv_consent</code>) para respeitar a sua decisão; não nos é enviada.",
  "Transferência internacional",
- "Google (Analytics), Formspree (formulários de contato) e GitHub (hospedagem) podem tratar dados fora da Turquia e da União Europeia, em especial nos Estados Unidos. O nível de proteção de dados pessoais nesses países pode ser diferente do nível do seu país.",
- "O Google Analytics só funciona com o seu consentimento. Considere esta informação antes de consentir; sem consentimento, nenhum dado é transferido ao Google para essa finalidade.",
- "Se você usar o formulário de contato, sua mensagem é transferida pelo Formspree somente para aquela mensagem e a seu pedido.",
- "A transferência ao provedor de hospedagem é tecnicamente necessária para mostrar os sites a você.",
+ "A Google (Analytics), a Formspree (formulários de contacto) e o GitHub (alojamento) podem tratar dados fora da Turquia e da União Europeia, em especial nos Estados Unidos. O nível de proteção de dados pessoais nesses países pode ser diferente do nível do seu país.",
+ "O Google Analytics só funciona com o seu consentimento. Tenha esta informação em conta antes de consentir; sem consentimento, não são transferidos dados para a Google para essa finalidade.",
+ "Se utilizar o formulário de contacto, a sua mensagem é transferida através da Formspree apenas para essa mensagem e a seu pedido.",
+ "A transferência para o fornecedor de alojamento é tecnicamente necessária para lhe mostrar os sites.",
  "Crianças e decisões automatizadas",
- "As informações que você digita na ferramenta de currículo nunca chegam até nós. Se você tem menos de 16 anos, converse com seu responsável antes de consentir com o Google Analytics, ou escolha «Recusar». Nenhuma decisão sobre você é tomada apenas com base em tratamento automatizado, e não usamos as estatísticas de visita para publicidade.",
- f"Dependendo de onde você mora, você tem direito de saber se dados pessoais seus são tratados e de acessá-los, de conhecer as finalidades e os destinatários no seu país ou no exterior, à correção, à eliminação, à limitação, à oposição e à portabilidade, a que os destinatários sejam informados de correções ou eliminações, de se opor a decisões tomadas apenas com base em tratamento automatizado, de revogar o consentimento a qualquer momento e, quando cabível, de ser indenizado por danos causados por tratamento ilícito ({LAWS}).",
- f"Envie solicitações para {MAIL}. Respondemos gratuitamente em até 30 dias e podemos pedir informações para confirmar que a solicitação é sua. Como não temos acesso às informações do seu currículo, você mesmo pode apagá-las no seu dispositivo. Você tem o direito de apresentar reclamação à autoridade de proteção de dados do seu país (no Brasil, a ANPD).",
- "Não vendemos dados pessoais nem os compartilhamos para publicidade (não há «venda» nem «compartilhamento» nos termos da CCPA/CPRA da Califórnia).")
+ "As informações que escreve na ferramenta de currículo nunca chegam até nós. Se tiver menos de 16 anos, fale com o seu encarregado de educação antes de consentir o Google Analytics, ou escolha «Recusar». Não é tomada qualquer decisão sobre si exclusivamente com base em tratamento automatizado, e não utilizamos as estatísticas de visitas para publicidade.",
+ f"Consoante o local onde reside, tem o direito de saber se os seus dados pessoais são tratados e de lhes aceder, de conhecer as finalidades e os destinatários no seu país ou no estrangeiro, à retificação, ao apagamento, à limitação, à oposição e à portabilidade, a que os destinatários sejam informados das retificações ou apagamentos, de se opor a decisões tomadas exclusivamente com base em tratamento automatizado, de retirar o consentimento a qualquer momento e, quando aplicável, de ser indemnizado por danos causados por tratamento ilícito ({LAWS}).",
+ f"Envie os seus pedidos para {MAIL}. Respondemos gratuitamente no prazo máximo de 30 dias e podemos pedir informações para confirmar que o pedido é seu. Como não temos acesso às informações do seu currículo, pode apagá-las diretamente no seu dispositivo. Tem o direito de apresentar reclamação à autoridade de proteção de dados do seu país (em Portugal, a CNPD; no Brasil, a ANPD).",
+ "Não vendemos dados pessoais nem os partilhamos para publicidade (não há «venda» nem «partilha» na aceção da CCPA/CPRA da Califórnia).")
 
 EK["ru"] = mk(
  " Кроме того, он сообщает о технических ошибках на странице (тип ошибки и короткое сообщение); адреса электронной почты и длинные числа удаляются из сообщения, содержимое резюме не передаётся.",
