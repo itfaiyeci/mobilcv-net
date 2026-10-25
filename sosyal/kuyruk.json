@@ -104,11 +104,11 @@
  {
   "id": "2026-10-24-pdf-kontrol",
   "gorsel_url": "https://mobilcv.net/sosyal/2026-10-24-pdf-kontrol.jpg",
-  "aciklama": "MobilCV, PDF'i indirmeden önce CV'ni kısaca kontrol eder: boş unvan, e-postada yazım hatası (gmial.com gibi), ters yazılmış tarih, açıklaması olmayan deneyim ya da doldurulmamış örnek cümle varsa gösterir.\n\nBunlar yalnızca öneri; maddeye dokununca ilgili alana gidersin, istersen \"Yine de PDF indir\" dersin. CV bilgileri sunucumuza gönderilmez, tarayıcıda saklanır.\n\nBağlantı profilde.\n\n#cv #özgeçmiş #cvhazırlama #cvipuçları #kariyer",
+  "aciklama": "MobilCV, PDF'i indirmeden önce CV'ni kısaca kontrol eder: boş unvan, Gmail ya da Hotmail adresinde sık yapılan yazım hatası, ters yazılmış tarih, açıklaması olmayan deneyim ya da doldurulmamış örnek cümle varsa gösterir.\n\nBunlar yalnızca öneri; maddeye dokununca ilgili alana gidersin, istersen \"Yine de PDF indir\" dersin. CV bilgileri sunucumuza gönderilmez, tarayıcıda saklanır.\n\nBağlantı profilde.\n\n#cv #özgeçmiş #cvhazırlama #cvipuçları #kariyer",
   "aciklama_threads": "PDF'i indirmeden önce MobilCV, CV'ni kısaca kontrol ediyor: boş unvan, e-postada yazım hatası (gmial.com gibi), ters yazılmış tarih, açıklaması olmayan deneyim, doldurulmamış örnek cümle.\n\nHepsi yalnızca öneri; istersen düzeltirsin, istersen \"Yine de PDF indir\" dersin. CV bilgileri sunucumuza gönderilmez, tarayıcıda saklanır.\n\nmobilcv.com",
-  "aciklama_facebook": "PDF'i indirmeden önce MobilCV, CV'ni kısaca kontrol ediyor: boş unvan, e-postada yazım hatası (gmial.com gibi), ters yazılmış tarih, açıklaması olmayan deneyim, doldurulmamış örnek cümle.\n\nHepsi yalnızca öneri; istersen düzeltirsin, istersen \"Yine de PDF indir\" dersin. CV bilgileri sunucumuza gönderilmez, tarayıcıda saklanır.\n\nhttps://www.mobilcv.com",
+  "aciklama_facebook": "PDF'i indirmeden önce MobilCV, CV'ni kısaca kontrol ediyor: boş unvan, Gmail ya da Hotmail adresinde sık yapılan yazım hatası, ters yazılmış tarih, açıklaması olmayan deneyim, doldurulmamış örnek cümle.\n\nHepsi yalnızca öneri; istersen düzeltirsin, istersen \"Yine de PDF indir\" dersin. CV bilgileri sunucumuza gönderilmez, tarayıcıda saklanır.\n\nhttps://www.mobilcv.com",
   "gorsel_url_en": "https://mobilcv.net/sosyal/2026-10-24-pdf-kontrol-en.jpg",
-  "aciklama_en": "Before you download your PDF, MobilCV checks your CV for a few easy-to-miss things: an empty job title, a typo in your email (like gmial.com), dates in the wrong order, a job with no description or an example sentence you haven't filled in.\n\nThey're only suggestions: tap one to jump to the field, or choose \"Download PDF anyway\". Your CV data is not sent to our servers; it's stored in your browser.\n\nLink in bio.\n\n#cv #resume #resumetips #jobsearch #career",
+  "aciklama_en": "Before you download your PDF, MobilCV checks your CV for a few easy-to-miss things: an empty job title, a common typo in a Gmail or Hotmail address, dates in the wrong order, a job with no description or an example sentence you haven't filled in.\n\nThey're only suggestions: tap one to jump to the field, or choose \"Download PDF anyway\". Your CV data is not sent to our servers; it's stored in your browser.\n\nLink in bio.\n\n#cv #resume #resumetips #jobsearch #career",
   "platformlar": [
    "instagram",
    "instagram_en",
@@ -132,6 +132,20 @@
   "aciklama_threads_en": "Before you download your PDF, MobilCV checks your CV for a few easy-to-miss things: an empty job title, a typo in your email (like gmial.com), dates in the wrong order, a job with no description, an example sentence you haven't filled in.\n\nThey're only suggestions; fix them or choose \"Download PDF anyway\". Your CV data is not sent to our servers; it's stored in your browser.\n\nmobilcv.com/en",
   "th_en_paylasildi": "2026-10-25T08:31:55Z",
   "th_en_medya_id": "18485809801129367",
-  "th_en_baglanti": "https://www.threads.com/@mobilcv.en/post/De6SOQrkSeR"
+  "th_en_baglanti": "https://www.threads.com/@mobilcv.en/post/De6SOQrkSeR",
+  "not": "25.10: 'gmial.com' örneği Threads/Facebook'ta bağlantıya dönüştüğü için metinler düzeltildi. IG ve FB metni yerinde düzenlendi; Threads gönderileri (düzenleme süresi geçtiği için) arşivlendi ve 2026-10-25-pdf-kontrol-duzeltme kaydıyla yeniden paylaşıldı."
+ },
+ {
+  "id": "2026-10-25-pdf-kontrol-duzeltme",
+  "gorsel_url": "https://mobilcv.net/sosyal/2026-10-24-pdf-kontrol.jpg",
+  "gorsel_url_en": "https://mobilcv.net/sosyal/2026-10-24-pdf-kontrol-en.jpg",
+  "aciklama_threads": "PDF'i indirmeden önce MobilCV, CV'ni kısaca kontrol ediyor: boş unvan, Gmail ya da Hotmail adresinde sık yapılan yazım hatası, ters yazılmış tarih, açıklaması olmayan deneyim, doldurulmamış örnek cümle.\n\nHepsi yalnızca öneri; istersen düzeltirsin, istersen \"Yine de PDF indir\" dersin. CV bilgileri sunucumuza gönderilmez, tarayıcıda saklanır.\n\nmobilcv.com",
+  "aciklama_threads_en": "Before you download your PDF, MobilCV checks your CV for a few easy-to-miss things: an empty job title, a common typo in a Gmail or Hotmail address, dates in the wrong order, a job with no description, an example sentence you haven't filled in.\n\nThey're only suggestions; fix them or choose \"Download PDF anyway\". Your CV data is not sent to our servers; it's stored in your browser.\n\nmobilcv.com/en",
+  "platformlar": [
+   "threads",
+   "threads_en"
+  ],
+  "onay": true,
+  "paylasildi": null
  }
 ]
