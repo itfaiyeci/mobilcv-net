@@ -2,9 +2,9 @@ name: Blog Publisher
 
 # Iki haftada bir (cift haftalarin pazartesisi) yeni makale TASLAGI uretir.
 # Taslak dogrudan yayina cikmaz: "Pull request" olarak gelir; okuyup onaylarsaniz (Merge) yayinlanir.
+# 31.10.2026: Otomatik zamanlama kapatildi (kurucu karari). Yalnizca elle calistirilabilir.
+# Yeniden acmak icin asagiya sunu ekleyin:  schedule: [{cron: '0 9 * * 1'}]
 on:
-  schedule:
-    - cron: '0 9 * * 1'   # Her pazartesi 09:00 UTC calisir, tek haftalarda hemen durur
   workflow_dispatch:      # Elle calistirildiginda hafta kontrolu yapilmaz
 
 permissions:
