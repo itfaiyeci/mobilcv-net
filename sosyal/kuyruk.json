@@ -220,5 +220,23 @@
   "fb_paylasildi": "2026-11-06T11:42:16Z",
   "fb_medya_id": "1316925834842152_122118963849491062",
   "fb_baglanti": "https://www.facebook.com/122114783529491062/posts/122118963849491062"
+ },
+ {
+  "id": "2026-10-28-yedek",
+  "gorsel_url": "https://mobilcv.net/sosyal/2026-10-28-yedek.jpg",
+  "gorsel_url_en": "https://mobilcv.net/sosyal/2026-10-28-yedek-en.jpg",
+  "aciklama": "MobilCV'de CV bilgileri sunucumuza gönderilmez, tarayıcıda saklanır. Bu yüzden tarayıcı verilerini silersen CV'n de silinebilir; başka bir cihazda da görünmez.\n\n\"Yedekle\" düğmesi CV'ni bir dosya olarak cihazına indirir. \"Yedeği Yükle\" ile bu dosyayı seçince yazdıkların, fotoğrafın ve şablonun geri gelir.\n\nBağlantı profilde.\n\n#cv #özgeçmiş #cvhazırlama #cvipuçları #kariyer",
+  "aciklama_threads": "MobilCV'de CV bilgileri sunucumuza gönderilmez, tarayıcıda saklanır. Bu yüzden tarayıcı verilerini silersen CV'n de silinebilir; başka bir cihazda da görünmez.\n\n\"Yedekle\" ile CV'ni bir dosya olarak cihazına indir. Gerektiğinde \"Yedeği Yükle\" ile o dosyayı seç; yazdıkların, fotoğrafın ve şablonun geri gelir.\n\nmobilcv.com",
+  "aciklama_facebook": "MobilCV'de CV bilgileri sunucumuza gönderilmez, tarayıcıda saklanır. Bu yüzden tarayıcı verilerini silersen CV'n de silinebilir; başka bir cihazda da görünmez.\n\n\"Yedekle\" ile CV'ni bir dosya olarak cihazına indir. Gerektiğinde \"Yedeği Yükle\" ile o dosyayı seç; yazdıkların, fotoğrafın ve şablonun geri gelir. Ücretsiz, üyelik yok.\n\nhttps://www.mobilcv.com",
+  "aciklama_en": "Your CV data is not sent to our servers; it's stored in your browser. So if you clear your browser data, your CV can be deleted too, and it won't appear on another device.\n\n\"Save Backup\" saves your CV to your device as a file. Choose that file with \"Load Backup\" and your details, photo and template come back.\n\nLink in bio.\n\n#cv #cvtips #jobsearch #careers #careeradvice",
+  "aciklama_threads_en": "Your CV data is not sent to our servers; it's stored in your browser. So if you clear your browser data, your CV can be deleted too, and it won't appear on another device.\n\n\"Save Backup\" saves your CV to your device as a file. When you need it, choose that file with \"Load Backup\" and your details, photo and template come back.\n\nmobilcv.com/en",
+  "platformlar": [
+   "instagram",
+   "instagram_en",
+   "threads",
+   "facebook",
+   "threads_en"
+  ],
+  "onay": true
  }
 ]
