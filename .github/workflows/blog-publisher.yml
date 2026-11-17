@@ -82,9 +82,14 @@ jobs:
             echo "</details>"
           } > /tmp/pr_body.md
 
+      - name: CSP ekle (yeni sayfa da guvenlik politikasiyla cikar)
+        if: steps.week.outputs.skip != 'true'
+        run: python3 .github/csp.py ekle
+
       - name: Onay icin taslak olustur
         if: steps.week.outputs.skip != 'true'
-        uses: peter-evans/create-pull-request@v7
+        # 17.11: surum etiketi degil sabit commit (v7.0.11) – sahibi etiketi tasirsa bize kendiliginden gecmesin
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
         with:
           branch: taslak/yeni-makale
           delete-branch: true

@@ -19,6 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - run: git clone --depth 1 https://github.com/itfaiyeci/cv-olusturucu /tmp/com
+      - name: CSP (her sayfada ayni guvenlik politikasi)
+        run: python3 .github/csp.py kontrol
       - name: Kontrol
         run: |
           set +e
