@@ -1,0 +1,61 @@
+name: Yorum okuma izni olcumu
+# 17.11: mevcut anahtarlarla yorum/yanit OKUNABILIYOR mu? Yalnizca SAYI ve izin durumu yazar; yorum metni ya da kisi adi
+# YAZMAZ (depo herkese acik). Hicbir sey paylasmaz, silmez, cevaplamaz.
+on: workflow_dispatch
+permissions: { contents: read }
+jobs:
+  olc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Olc
+        env:
+          IG: ${{ secrets.IG_TOKEN }}
+          IG_EN: ${{ secrets.IG_TOKEN_EN }}
+          TH: ${{ secrets.THREADS_TOKEN }}
+          TH_EN: ${{ secrets.THREADS_TOKEN_EN }}
+          FB: ${{ secrets.FB_PAGE_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import os, json, urllib.request, urllib.parse
+          def al(u):
+              try:
+                  with urllib.request.urlopen(u, timeout=30) as r: return json.load(r)
+              except urllib.error.HTTPError as e:
+                  try: j = json.load(e)
+                  except Exception: j = {}
+                  return {'HATA': e.code, 'mesaj': (j.get('error') or {}).get('message', '')[:120]}
+          def q(base, yol, tok, **p): p['access_token'] = tok; return al(f'{base}/{yol}?' + urllib.parse.urlencode(p))
+          for ad, var in (('Instagram TR', 'IG'), ('Instagram EN', 'IG_EN')):
+              t = os.environ.get(var)
+              if not t: print(ad, ': anahtar yok'); continue
+              m = q('https://graph.instagram.com/v21.0', 'me/media', t, fields='id,comments_count,timestamp', limit=8)
+              if 'HATA' in m: print(ad, ': medya okunamadi', m); continue
+              d = m.get('data', []); top = sum(x.get('comments_count', 0) for x in d)
+              print(f'{ad}: son {len(d)} gonderide toplam yorum sayisi {top}')
+              hedef = next((x for x in d if x.get('comments_count')), d[0] if d else None)
+              if hedef:
+                  c = q('https://graph.instagram.com/v21.0', f"{hedef['id']}/comments", t, fields='id')
+                  print(f'  yorum ICERIGI okunabiliyor mu: ' + ('EVET (' + str(len(c.get('data', []))) + ')' if 'HATA' not in c else f"HAYIR {c}"))
+          for ad, var in (('Threads TR', 'TH'), ('Threads EN', 'TH_EN')):
+              t = os.environ.get(var)
+              if not t: print(ad, ': anahtar yok'); continue
+              m = q('https://graph.threads.net/v1.0', 'me/threads', t, fields='id', limit=5)
+              if 'HATA' in m: print(ad, ': gonderi okunamadi', m); continue
+              d = m.get('data', []); n = 0; hata = None
+              for x in d:
+                  r = q('https://graph.threads.net/v1.0', f"{x['id']}/replies", t, fields='id')
+                  if 'HATA' in r: hata = r; break
+                  n += len(r.get('data', []))
+              print(f'{ad}: son {len(d)} gonderi; yanit okunabiliyor mu: ' + (f'EVET (toplam {n})' if not hata else f'HAYIR {hata}'))
+          t = os.environ.get('FB')
+          if t:
+              m = q('https://graph.facebook.com/v21.0', 'me/posts', t, limit=5)
+              if 'HATA' in m: print('Facebook: gonderi okunamadi', m)
+              else:
+                  d = m.get('data', []); n = 0; hata = None
+                  for x in d:
+                      r = q('https://graph.facebook.com/v21.0', f"{x['id']}/comments", t, summary='true', limit=0)
+                      if 'HATA' in r: hata = r; break
+                      n += (r.get('summary') or {}).get('total_count', 0)
+                  print(f'Facebook: son {len(d)} gonderi; yorum okunabiliyor mu: ' + (f'EVET (toplam {n})' if not hata else f'HAYIR {hata}'))
+          PY
