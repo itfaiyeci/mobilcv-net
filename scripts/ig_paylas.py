@@ -6,6 +6,8 @@ Kullanim:
 Hesaplar: tr = @mobilcvcom (IG_TOKEN, platform "instagram", alanlar paylasildi/medya_id/baglanti)
           en = @mobilcv.en (IG_TOKEN_EN, platform "instagram_en", alanlar en_paylasildi/en_medya_id/en_baglanti;
                metin "aciklama_en", gorsel "gorsel_url_en"; yoksa aciklama/gorsel_url)
+Karusel: gonderide "gorseller" (EN icin "gorseller_en") listesi varsa (2-10 JPEG adresi) Instagram'a
+kaydirmali gonderi olarak paylasilir; yoksa tek gorsel (gorsel_url). Threads/Facebook her zaman gorsel_url kullanir.
 EN anahtari tanimli degilse paylas sessizce atlar; kontrol hata verir. Gorseller herkese acik adresten (https://mobilcv.net/sosyal/...) cekilir."""
 import json, os, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
@@ -13,8 +15,8 @@ from pathlib import Path
 
 API = "https://graph.instagram.com"
 HESAPLAR = {
-    "tr": {"kullanici": "mobilcvcom", "anahtar": "IG_TOKEN", "platform": "instagram", "on": "", "metin": "aciklama", "gorsel": "gorsel_url"},
-    "en": {"kullanici": "mobilcv.en", "anahtar": "IG_TOKEN_EN", "platform": "instagram_en", "on": "en_", "metin": "aciklama_en", "gorsel": "gorsel_url_en"},
+    "tr": {"kullanici": "mobilcvcom", "anahtar": "IG_TOKEN", "platform": "instagram", "on": "", "metin": "aciklama", "gorsel": "gorsel_url", "liste": "gorseller"},
+    "en": {"kullanici": "mobilcv.en", "anahtar": "IG_TOKEN_EN", "platform": "instagram_en", "on": "en_", "metin": "aciklama_en", "gorsel": "gorsel_url_en", "liste": "gorseller_en"},
 }
 HESAP = HESAPLAR[sys.argv[2] if len(sys.argv) > 2 else "tr"]
 BEKLENEN_KULLANICI = HESAP["kullanici"]
@@ -44,6 +46,14 @@ def kontrol():
     me = hesap()
     print(f"Anahtar calisiyor. Hesap: @{me['username']} | tur: {me.get('account_type')} | id: {me.get('user_id')}")
 
+def bekle(cid, gid):
+    for _ in range(24):
+        durum = istek(cid, {"fields": "status_code"}).get("status_code")
+        if durum == "FINISHED": return
+        if durum in ("ERROR", "EXPIRED"): raise SystemExit(f"Gorsel islenemedi ({gid}): {durum}")
+        time.sleep(5)
+    raise SystemExit(f"Gorsel zamaninda islenmedi ({gid})")
+
 def paylas():
     me = hesap(); uid = me["user_id"]
     kuyruk = json.loads(KUYRUK.read_text(encoding="utf-8")) if KUYRUK.exists() else []
@@ -53,13 +63,17 @@ def paylas():
         print("Onayli ve paylasilmamis gonderi yok."); return
     for g in bekleyen[:2]:  # bir calismada en fazla 2 gonderi
         gorsel = g.get(HESAP["gorsel"]) or g["gorsel_url"]; metin = g.get(HESAP["metin"]) or g["aciklama"]
-        kap = istek(f"{uid}/media", {"image_url": gorsel, "caption": metin}, "POST")
-        cid = kap["id"]
-        for _ in range(20):
-            durum = istek(cid, {"fields": "status_code"}).get("status_code")
-            if durum == "FINISHED": break
-            if durum in ("ERROR", "EXPIRED"): raise SystemExit(f"Gorsel islenemedi ({g['id']}): {durum}")
-            time.sleep(5)
+        liste = g.get(HESAP["liste"])
+        if liste:
+            if not (2 <= len(liste) <= 10): raise SystemExit(f"Karusel 2-10 gorsel olmali ({g['id']}): {len(liste)}")
+            cocuklar = []
+            for u in liste:
+                c = istek(f"{uid}/media", {"image_url": u, "is_carousel_item": "true"}, "POST")["id"]
+                bekle(c, g["id"]); cocuklar.append(c)
+            cid = istek(f"{uid}/media", {"media_type": "CAROUSEL", "children": ",".join(cocuklar), "caption": metin}, "POST")["id"]
+        else:
+            cid = istek(f"{uid}/media", {"image_url": gorsel, "caption": metin}, "POST")["id"]
+        bekle(cid, g["id"])
         yay = istek(f"{uid}/media_publish", {"creation_id": cid}, "POST")
         mid = yay["id"]
         link = istek(mid, {"fields": "permalink"}).get("permalink", "")
